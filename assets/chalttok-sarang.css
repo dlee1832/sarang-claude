@@ -736,7 +736,12 @@
   }
   .ct-split--reversed { direction: ltr; }
 
-  .ct-split__img-wrap,
+  .ct-split__img-wrap { height: auto; }
+  .ct-split__img-wrap .ct-split__img {
+    height: auto;
+    object-fit: initial;
+  }
+
   .ct-birth__img-wrap,
   .ct-ingredients__img-wrap { height: 60vw; }
 
