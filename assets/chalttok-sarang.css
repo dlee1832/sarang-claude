@@ -522,8 +522,8 @@
   height: 100vh;
   overflow: hidden;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
 }
 .ct-meaning__img {
   position: absolute;
@@ -542,8 +542,9 @@
 .ct-meaning__center {
   position: relative;
   z-index: 5;
-  text-align: center;
-  padding: 0 48px;
+  text-align: left;
+  padding: 88px 64px;
+  max-width: 560px;
 }
 .ct-meaning__kr-bg {
   font-family: 'Noto Serif KR', 'Nanum Myeongjo', serif;
@@ -573,7 +574,7 @@
   width: 32px;
   height: 1px;
   background: rgba(237, 213, 200, 0.5);
-  margin: 32px auto;
+  margin: 28px 0;
 }
 .ct-meaning__kr {
   font-family: 'Noto Serif KR', 'Nanum Myeongjo', serif;
@@ -757,6 +758,7 @@
 
   .ct-overload__text { left: 32px; bottom: 56px; }
   .ct-drop__caption  { right: 32px; }
+  .ct-meaning__center { padding: 60px 28px; max-width: 100%; }
 
   .ct-manifesto { padding: 100px 32px; }
   .ct-future    { padding: 100px 32px; }
