@@ -54,7 +54,7 @@
       "type": "chalttok-split",
       "name": "CT · Philosophy Split",
       "settings": {
-        "image": "shopify://shop_images/sarang-theme-img-01.png",
+        "image": "shopify://shop_images/sarang-theme-img-02.png",
         "image_position": "left",
         "label": "A Different Beginning",
         "heading": "One step.\nDone with care.",
@@ -587,8 +587,8 @@
         "content_alignment": "center",
         "color_scheme": "",
         "full_width": true,
-        "padding_top": 40,
-        "padding_bottom": 52
+        "padding_top": 68,
+        "padding_bottom": 76
       }
     },
     "image_banner_HfTBjT": {
@@ -687,6 +687,7 @@
         "column_REfGyb",
         "column_YyniAL"
       ],
+      "disabled": true,
       "name": "t:sections.multicolumn.presets.name",
       "settings": {
         "title": "Why skin prefers Sarang",
