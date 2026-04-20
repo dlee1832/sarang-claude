@@ -30,8 +30,9 @@
   #ct-manifesto-{{ section.id }} .ct-manifesto__rule {
     display: block;
     width: {{ section.settings.rule_width }}px;
-    height: 1px;
+    height: {{ section.settings.rule_height }}px;
     background-color: {{ section.settings.rule_color | default: '#D9A99A' }};
+    border-radius: {{ section.settings.rule_height | divided_by: 2 }}px;
     opacity: 1;
     margin-top: 0;
     margin-bottom: {{ section.settings.gap_rule_tag }}px;
@@ -98,6 +99,16 @@
       "step": 4,
       "unit": "px",
       "default": 36
+    },
+    {
+      "type": "range",
+      "id": "rule_height",
+      "label": "구분선 두께",
+      "min": 1,
+      "max": 8,
+      "step": 1,
+      "unit": "px",
+      "default": 1
     },
     {
       "type": "color",

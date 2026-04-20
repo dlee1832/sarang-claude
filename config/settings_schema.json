@@ -1451,5 +1451,39 @@
         "default": "scheme-1"
       }
     ]
+  },
+  {
+    "name": "CHALTTOK 브랜드 섹션",
+    "settings": [
+      {
+        "type": "header",
+        "content": "텍스트 굵기"
+      },
+      {
+        "type": "select",
+        "id": "ct_heading_weight",
+        "label": "제목 굵기 (모든 CT 섹션)",
+        "info": "Hero, Manifesto, Split, Drop, Birth, Meaning, Future 등 모든 CT 섹션 제목에 적용됩니다.",
+        "options": [
+          { "value": "300", "label": "Light 300 (기본 — 세련된 가벼움)" },
+          { "value": "400", "label": "Regular 400" },
+          { "value": "600", "label": "Semibold 600" },
+          { "value": "700", "label": "Bold 700" }
+        ],
+        "default": "300"
+      },
+      {
+        "type": "select",
+        "id": "ct_body_weight",
+        "label": "본문 굵기 (모든 CT 섹션)",
+        "info": "캡션, 설명 텍스트, 성분 설명 등 본문에 적용됩니다.",
+        "options": [
+          { "value": "300", "label": "Light 300 (기본)" },
+          { "value": "400", "label": "Regular 400" },
+          { "value": "600", "label": "Semibold 600" }
+        ],
+        "default": "300"
+      }
+    ]
   }
 ]

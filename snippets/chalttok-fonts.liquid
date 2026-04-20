@@ -1,3 +1,38 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&family=DM+Sans:wght@300&family=Noto+Serif+KR:wght@200&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=DM+Sans:wght@300;400;600&family=Noto+Serif+KR:wght@200;300;400&display=swap" rel="stylesheet">
+
+{%- assign ct_hw = settings.ct_heading_weight | default: '300' -%}
+{%- assign ct_bw = settings.ct_body_weight | default: '300' -%}
+
+<style>
+  /* ── CHALTTOK global font-weight overrides ── */
+
+  /* Headings / display text */
+  .ct-hero__name,
+  .ct-statement-lg,
+  .ct-manifesto__quote,
+  .ct-split__heading,
+  .ct-drop__word,
+  .ct-birth__number,
+  .ct-birth__heading,
+  .ct-meaning__quote,
+  .ct-future__heading,
+  .ct-ing-name,
+  .ct-panel__label {
+    font-weight: {{ ct_hw }};
+  }
+
+  /* Body / supporting text */
+  .ct-caption-sm,
+  .ct-split__body,
+  .ct-birth__body,
+  .ct-ing-desc,
+  .ct-future__caption,
+  .ct-label-micro,
+  .ct-split__label,
+  .ct-manifesto__sub,
+  .ct-ingredients__section-label {
+    font-weight: {{ ct_bw }};
+  }
+</style>
