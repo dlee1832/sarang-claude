@@ -49,8 +49,21 @@
   #ct-overload-{{ section.id }} .ct-statement-lg  { color: {{ _heading_color }}; }
   #ct-overload-{{ section.id }} .ct-caption-sm    { color: {{ _caption_color }}; }
 
+  #ct-overload-{{ section.id }} {
+    height: calc(100vh + {{ section.settings.section_padding_bottom }}px);
+  }
+
+  #ct-overload-{{ section.id }} .ct-overload__img {
+    object-position: center {{ section.settings.image_focus_y }}%;
+  }
+
+  #ct-overload-{{ section.id }} .ct-overload__text {
+    bottom: {{ section.settings.text_bottom }}px;
+  }
+
   {% if section.settings.text_bg_enabled %}
   #ct-overload-{{ section.id }} .ct-overload__text {
+    bottom: {{ section.settings.text_bottom }}px;
     background: rgb({{ _bg_rgb }} / {{ section.settings.text_bg_opacity }}%);
     padding: 32px 40px;
     border-radius: 2px;
@@ -250,6 +263,43 @@
       "id": "caption",
       "label": "캡션",
       "default": "Twelve steps. Twenty products. Skin exhausted by the very things meant to help it."
+    },
+    {
+      "type": "header",
+      "content": "레이아웃"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "label": "섹션 하단 여백 (이미지 확장)",
+      "min": 0,
+      "max": 240,
+      "step": 20,
+      "unit": "px",
+      "default": 100,
+      "info": "섹션을 아래로 늘려 이미지 하단에 더 많은 공간을 만들고, 글자를 아래쪽 여백으로 내립니다."
+    },
+    {
+      "type": "range",
+      "id": "text_bottom",
+      "label": "텍스트 하단 위치",
+      "min": 24,
+      "max": 200,
+      "step": 8,
+      "unit": "px",
+      "default": 80,
+      "info": "텍스트 블록이 섹션 하단에서 얼마나 위에 위치할지 설정합니다."
+    },
+    {
+      "type": "range",
+      "id": "image_focus_y",
+      "label": "이미지 세로 초점",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 40,
+      "info": "값이 작을수록 이미지 위쪽이 기준이 되어 하단에 여백이 생깁니다."
     },
     {
       "type": "header",
