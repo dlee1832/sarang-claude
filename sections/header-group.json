@@ -65,13 +65,25 @@
       "settings": {
         "logo_text": "찰떡 · CHALTTOK",
         "tag_text": "사랑 · Sarang",
-        "solid_on_scroll": false
+        "scroll_behavior": "fill",
+        "scroll_threshold": 80
+      }
+    },
+    "chalttok_sense_scroll_rQxE6Q": {
+      "type": "chalttok-sense-scroll",
+      "name": "CT · Sense 헤더 스크롤",
+      "settings": {
+        "scroll_behavior": "clear",
+        "scroll_threshold": 30,
+        "bg_color": "#F8F4EE",
+        "enable_blur": true
       }
     }
   },
   "order": [
     "announcement-bar",
     "header",
-    "chalttok_header_4NVTtG"
+    "chalttok_header_4NVTtG",
+    "chalttok_sense_scroll_rQxE6Q"
   ]
 }
