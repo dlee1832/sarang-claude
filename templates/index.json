@@ -21,14 +21,14 @@
         "text_color": "ink",
         "label": "",
         "heading": "When did caring\nbecome so heavy?",
-        "heading_font": "serif",
+        "heading_font": "ny",
         "heading_size_min": 32,
         "heading_size_max": 52,
         "caption": "Twelve steps. Twenty products. Skin exhausted by the very things meant to help it.",
         "section_padding_bottom": 160,
         "text_bottom": 48,
         "image_focus_y": 40,
-        "font_weight_heading": "400",
+        "font_weight_heading": "300",
         "font_weight_body": "400"
       }
     },
@@ -45,7 +45,8 @@
         "gap_rule_tag": 40,
         "padding_top": 100,
         "padding_bottom": 100,
-        "font_weight_heading": "400",
+        "heading_font": "ny",
+        "font_weight_heading": "300",
         "font_weight_body": "300"
       }
     },
@@ -58,6 +59,7 @@
         "label": "A Different Beginning",
         "heading": "One step.\nDone with care.",
         "body_text": "We asked what skin truly needs — not what the industry decided. The answer was simple: moisture, rest, and a gentle beginning every day.",
+        "heading_font": "default",
         "font_weight_heading": "400",
         "font_weight_body": "400"
       }
