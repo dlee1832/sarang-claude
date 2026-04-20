@@ -48,14 +48,6 @@
   #ct-overload-{{ section.id }} .ct-label-micro   { color: {{ _label_color }}; }
   #ct-overload-{{ section.id }} .ct-statement-lg  { color: {{ _heading_color }}; }
   #ct-overload-{{ section.id }} .ct-caption-sm    { color: {{ _caption_color }}; }
-  #ct-overload-{{ section.id }} .ct-overload__accent {
-    {%- if section.settings.text_color == 'black' or section.settings.text_color == 'ink'
-        or (section.settings.text_bg_enabled and section.settings.text_bg_style == 'frosted') -%}
-    background: rgba(44, 36, 32, 0.25);
-    {%- else -%}
-    background: rgba(248, 244, 238, 0.38);
-    {%- endif -%}
-  }
 
   #ct-overload-{{ section.id }} {
     height: calc(100vh + {{ section.settings.section_padding_bottom }}px);
@@ -99,18 +91,17 @@
   <div class="ct-overload__overlay"></div>
 
   <div class="ct-overload__text">
-    <span class="ct-overload__accent ct-reveal" aria-hidden="true"></span>
     {% if section.settings.label != blank %}
-      <p class="ct-label-micro ct-reveal ct-reveal--d1">{{ section.settings.label }}</p>
+      <p class="ct-label-micro ct-reveal">{{ section.settings.label }}</p>
     {% endif %}
     <h2
-      class="ct-statement-lg ct-reveal ct-reveal--d2 ct-overload__heading--{{ section.settings.heading_font }}"
+      class="ct-statement-lg ct-reveal ct-reveal--d1 ct-overload__heading--{{ section.settings.heading_font }}"
       style="font-size: clamp({{ section.settings.heading_size_min }}px, 4vw, {{ section.settings.heading_size_max }}px);"
     >
       {{- section.settings.heading | newline_to_br -}}
     </h2>
     {% if section.settings.caption != blank %}
-      <p class="ct-caption-sm ct-reveal ct-reveal--d3">{{ section.settings.caption }}</p>
+      <p class="ct-caption-sm ct-reveal ct-reveal--d2">{{ section.settings.caption }}</p>
     {% endif %}
   </div>
 
