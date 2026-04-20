@@ -9,6 +9,23 @@
  */
 {
   "sections": {
+    "chalttok_overload_YNd7it": {
+      "type": "chalttok-overload",
+      "name": "CT · Overwhelm",
+      "settings": {
+        "image": "shopify://shop_images/Gemini_Generated_Image_2ifcjn2ifcjn2ifc.jpg",
+        "overlay_opacity": 45,
+        "text_bg_enabled": true,
+        "text_bg_style": "warm",
+        "text_bg_opacity": 40,
+        "label": "",
+        "heading": "When did caring\nbecome so heavy?",
+        "heading_font": "serif",
+        "heading_size_min": 32,
+        "heading_size_max": 52,
+        "caption": "Twelve steps. Twenty products. Skin exhausted by the very things meant to help it."
+      }
+    },
     "slideshow_nWeGFc": {
       "type": "slideshow",
       "blocks": {
@@ -818,16 +835,6 @@
         "full_width": true,
         "padding_top": 16,
         "padding_bottom": 20
-      }
-    },
-    "chalttok_overload_YNd7it": {
-      "type": "chalttok-overload",
-      "name": "CT · Overwhelm",
-      "settings": {
-        "image": "shopify://shop_images/Gemini_Generated_Image_2ifcjn2ifcjn2ifc.jpg",
-        "label": "The Familiar Fatigue",
-        "heading": "When did caring\nbecome so heavy?",
-        "caption": "Twelve steps. Twenty products. Skin exhausted by the very things meant to help it."
       }
     }
   },
