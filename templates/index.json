@@ -589,7 +589,7 @@
         "content_alignment": "center",
         "color_scheme": "scheme-716e9556-d6d5-4cd0-90da-7d2eff946383",
         "full_width": true,
-        "ct_bg_style": "grad-radial",
+        "ct_bg_style": "grad-whisper",
         "padding_top": 100,
         "padding_bottom": 100
       }
