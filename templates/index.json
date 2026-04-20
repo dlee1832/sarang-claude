@@ -24,7 +24,9 @@
         "heading_font": "serif",
         "heading_size_min": 32,
         "heading_size_max": 52,
-        "caption": "Twelve steps. Twenty products. Skin exhausted by the very things meant to help it."
+        "caption": "Twelve steps. Twenty products. Skin exhausted by the very things meant to help it.",
+        "font_weight_heading": "700",
+        "font_weight_body": "400"
       }
     },
     "chalttok_manifesto_iQMJLf": {
@@ -39,7 +41,9 @@
         "gap_quote_rule": 40,
         "gap_rule_tag": 40,
         "padding_top": 140,
-        "padding_bottom": 140
+        "padding_bottom": 140,
+        "font_weight_heading": "300",
+        "font_weight_body": "300"
       }
     },
     "chalttok_split_wtKLDj": {
@@ -50,7 +54,9 @@
         "image_position": "left",
         "label": "A Different Beginning",
         "heading": "One step.\nDone with care.",
-        "body_text": "We asked what skin truly needs — not what the industry decided. The answer was simple: moisture, rest, and a gentle beginning every day."
+        "body_text": "We asked what skin truly needs — not what the industry decided. The answer was simple: moisture, rest, and a gentle beginning every day.",
+        "font_weight_heading": "300",
+        "font_weight_body": "300"
       }
     },
     "slideshow_nWeGFc": {
