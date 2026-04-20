@@ -9,55 +9,6 @@
  */
 {
   "sections": {
-    "image_banner_LGqfC9": {
-      "type": "image-banner",
-      "name": "t:sections.image-banner.presets.name",
-      "settings": {
-        "image": "shopify://shop_images/Gemini_Generated_Image_2ifcjn2ifcjn2ifc.jpg",
-        "image_overlay_opacity": 0,
-        "image_height": "medium",
-        "image_behavior": "none",
-        "desktop_content_position": "middle-center",
-        "desktop_content_alignment": "center",
-        "show_text_box": true,
-        "color_scheme": "",
-        "heading": "",
-        "sub_text": "",
-        "heading_font": "assistant_n4",
-        "sub_text_font": "assistant_n4",
-        "heading_size_desktop": 48,
-        "heading_line_height_desktop": 11,
-        "heading_letter_spacing_desktop": 0,
-        "heading_color_desktop": "#000000",
-        "heading_top_desktop": 8,
-        "heading_left_desktop": 50,
-        "heading_width_desktop": 70,
-        "heading_size_mobile": 30,
-        "heading_line_height_mobile": 11,
-        "heading_letter_spacing_mobile": 0,
-        "heading_color_mobile": "#000000",
-        "heading_top_mobile": 8,
-        "heading_left_mobile": 50,
-        "heading_width_mobile": 80,
-        "sub_text_size_desktop": 20,
-        "sub_text_line_height_desktop": 14,
-        "sub_text_letter_spacing_desktop": 0,
-        "sub_text_color_desktop": "#000000",
-        "sub_text_top_desktop": 20,
-        "sub_text_left_desktop": 50,
-        "sub_text_width_desktop": 75,
-        "sub_text_size_mobile": 16,
-        "sub_text_line_height_mobile": 14,
-        "sub_text_letter_spacing_mobile": 0,
-        "sub_text_color_mobile": "#000000",
-        "sub_text_top_mobile": 18,
-        "sub_text_left_mobile": 50,
-        "sub_text_width_mobile": 85,
-        "stack_images_on_mobile": true,
-        "mobile_content_alignment": "center",
-        "show_text_below": true
-      }
-    },
     "slideshow_nWeGFc": {
       "type": "slideshow",
       "blocks": {
@@ -868,10 +819,20 @@
         "padding_top": 16,
         "padding_bottom": 20
       }
+    },
+    "chalttok_overload_YNd7it": {
+      "type": "chalttok-overload",
+      "name": "CT · Overwhelm",
+      "settings": {
+        "image": "shopify://shop_images/Gemini_Generated_Image_2ifcjn2ifcjn2ifc.jpg",
+        "label": "The Familiar Fatigue",
+        "heading": "When did caring\nbecome so heavy?",
+        "caption": "Twelve steps. Twenty products. Skin exhausted by the very things meant to help it."
+      }
     }
   },
   "order": [
-    "image_banner_LGqfC9",
+    "chalttok_overload_YNd7it",
     "slideshow_nWeGFc",
     "custom_liquid_UhVq6M",
     "rich_text_tnPcKU",
