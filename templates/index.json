@@ -29,11 +29,12 @@
         "text_bottom": 48,
         "image_focus_y": 40,
         "font_weight_heading": "400",
-        "font_weight_body": "400"
+        "font_weight_body": "300"
       }
     },
     "chalttok_manifesto_iQMJLf": {
       "type": "chalttok-manifesto",
+      "custom_css": [],
       "name": "CT · Manifesto",
       "settings": {
         "quote": "\"Skin does not need more.\nIt needs balance.\"",
@@ -45,19 +46,21 @@
         "gap_rule_tag": 40,
         "padding_top": 100,
         "padding_bottom": 100,
+        "heading_font": "cormorant",
         "font_weight_heading": "400",
-        "font_weight_body": "300"
+        "font_weight_body": "200"
       }
     },
     "chalttok_split_wtKLDj": {
       "type": "chalttok-split",
       "name": "CT · Philosophy Split",
       "settings": {
-        "image": "shopify://shop_images/sarang-theme-img-01.png",
+        "image": "shopify://shop_images/sarang-theme-img-02.png",
         "image_position": "left",
         "label": "A Different Beginning",
         "heading": "One step.\nDone with care.",
         "body_text": "We asked what skin truly needs — not what the industry decided. The answer was simple: moisture, rest, and a gentle beginning every day.",
+        "heading_font": "cormorant",
         "font_weight_heading": "400",
         "font_weight_body": "400"
       }
@@ -583,18 +586,34 @@
       "settings": {
         "desktop_content_position": "center",
         "content_alignment": "center",
-        "color_scheme": "",
+        "color_scheme": "scheme-1",
         "full_width": true,
-        "padding_top": 40,
-        "padding_bottom": 52
+        "padding_top": 100,
+        "padding_bottom": 100
+      }
+    },
+    "chalttok_birth_BL6gVm": {
+      "type": "chalttok-birth",
+      "name": "CT · Product Reveal",
+      "settings": {
+        "number": "01",
+        "heading": "Our first piece is SARANG",
+        "body_text": "Named for love. Formulated with restraint. A blush-pink serum that absorbs in silence and asks for nothing more.",
+        "cta_label": "Shop now",
+        "cta_url": "",
+        "image": "shopify://shop_images/sarang-theme-img-03.png",
+        "heading_font": "default",
+        "font_weight_heading": "300",
+        "font_weight_body": "300"
       }
     },
     "image_banner_HfTBjT": {
       "type": "image-banner",
+      "disabled": true,
       "custom_css": [],
       "name": "t:sections.image-banner.presets.name",
       "settings": {
-        "image": "shopify://shop_images/Gemini_Generated_Image_qgicfvqgicfvqgic.jpg",
+        "image": "shopify://shop_images/sarang-theme-img-03.png",
         "image_overlay_opacity": 0,
         "image_height": "large",
         "image_behavior": "none",
@@ -639,72 +658,9 @@
         "show_text_below": true
       }
     },
-    "multicolumn_dW4Cjz": {
-      "type": "multicolumn",
-      "blocks": {
-        "column_D6ayTe": {
-          "type": "column",
-          "settings": {
-            "title": "Balanced daily care",
-            "text": "",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "column_9jW6PV": {
-          "type": "column",
-          "settings": {
-            "title": "Lightweight comfort",
-            "text": "",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "column_REfGyb": {
-          "type": "column",
-          "settings": {
-            "title": "Clean absorption",
-            "text": "",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "column_YyniAL": {
-          "type": "column",
-          "settings": {
-            "title": "Thoughtfully formulated",
-            "text": "",
-            "link_label": "",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "column_D6ayTe",
-        "column_9jW6PV",
-        "column_REfGyb",
-        "column_YyniAL"
-      ],
-      "name": "t:sections.multicolumn.presets.name",
-      "settings": {
-        "title": "Why skin prefers Sarang",
-        "heading_size": "h1",
-        "image_width": "full",
-        "image_ratio": "adapt",
-        "button_label": "",
-        "button_link": "",
-        "columns_desktop": 4,
-        "column_alignment": "center",
-        "background_style": "primary",
-        "color_scheme": "",
-        "columns_mobile": "1",
-        "swipe_on_mobile": false,
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
     "image_banner_htdK9p": {
       "type": "image-banner",
+      "disabled": true,
       "custom_css": [],
       "name": "t:sections.image-banner.presets.name",
       "settings": {
@@ -755,6 +711,7 @@
     },
     "image_banner_dVMgcT": {
       "type": "image-banner",
+      "disabled": true,
       "name": "t:sections.image-banner.presets.name",
       "settings": {
         "image": "shopify://shop_images/Gemini_Generated_Image_l6uns6l6uns6l6un.jpg",
@@ -815,6 +772,7 @@
       "block_order": [
         "text_9cCpU9"
       ],
+      "disabled": true,
       "name": "t:sections.rich-text.presets.name",
       "settings": {
         "desktop_content_position": "center",
@@ -823,6 +781,60 @@
         "full_width": true,
         "padding_top": 16,
         "padding_bottom": 20
+      }
+    },
+    "chalttok_ingredients_JN9bRr": {
+      "type": "chalttok-ingredients",
+      "blocks": {
+        "ingredient_YHwXDR": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Niacinamide",
+            "description": "Calms, evens tone, restores barrier"
+          }
+        },
+        "ingredient_kULFKm": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Hyaluronic Acid",
+            "description": "Deep, lasting hydration without weight"
+          }
+        },
+        "ingredient_7haJW6": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Panthenol",
+            "description": "Soothes skin, seals in moisture"
+          }
+        },
+        "ingredient_cBL7GU": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Pomegranate Extract",
+            "description": "Antioxidant care, naturally derived"
+          }
+        }
+      },
+      "block_order": [
+        "ingredient_YHwXDR",
+        "ingredient_kULFKm",
+        "ingredient_7haJW6",
+        "ingredient_cBL7GU"
+      ],
+      "name": "CT · Ingredients",
+      "settings": {
+        "section_label": "What's inside"
+      }
+    },
+    "chalttok_future_EC8wf7": {
+      "type": "chalttok-future",
+      "name": "CT · Future Close",
+      "settings": {
+        "heading": "Sarang is only\nthe beginning.",
+        "caption": "We grow slowly. Each product we add will ask the same question: does this serve skin, or simply add to it?",
+        "heading_font": "default",
+        "font_weight_heading": "300",
+        "font_weight_body": "300"
       }
     }
   },
@@ -835,10 +847,12 @@
     "rich_text_tnPcKU",
     "featured_product_QNJXqL",
     "rich_text_a9hzrL",
+    "chalttok_birth_BL6gVm",
     "image_banner_HfTBjT",
-    "multicolumn_dW4Cjz",
     "image_banner_htdK9p",
     "image_banner_dVMgcT",
-    "rich_text_7DJ8Uq"
+    "rich_text_7DJ8Uq",
+    "chalttok_ingredients_JN9bRr",
+    "chalttok_future_EC8wf7"
   ]
 }
