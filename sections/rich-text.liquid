@@ -1,5 +1,26 @@
 {{ 'section-rich-text.css' | asset_url | stylesheet_tag }}
 
+{%- liquid
+  case section.settings.ct_bg_style
+    when 'ivory'
+      assign _ct_bg = '#F8F4EE'
+    when 'petal'
+      assign _ct_bg = '#F2E4DC'
+    when 'blush'
+      assign _ct_bg = '#EDD5C8'
+    when 'grad-whisper'
+      assign _ct_bg = 'linear-gradient(160deg, #FDFAF7 0%, #F2E4DC 100%)'
+    when 'grad-soft'
+      assign _ct_bg = 'linear-gradient(135deg, #F8F4EE 0%, #F2E4DC 55%, #EDD5C8 100%)'
+    when 'grad-blush'
+      assign _ct_bg = 'linear-gradient(160deg, #F2E4DC 0%, #EDD5C8 55%, #D9A99A 100%)'
+    when 'grad-radial'
+      assign _ct_bg = 'radial-gradient(ellipse 90% 75% at 50% 35%, #EDD5C8 0%, #F8F4EE 100%)'
+    else
+      assign _ct_bg = ''
+  endcase
+-%}
+
 {%- style -%}
   .section-{{ section.id }}-padding {
     padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
@@ -12,6 +33,12 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  {%- if _ct_bg != '' -%}
+  #shopify-section-{{ section.id }} .rich-text {
+    background: {{ _ct_bg }};
+  }
+  {%- endif -%}
 {%- endstyle -%}
 
 <div class="isolate{% unless section.settings.full_width %} page-width{% endunless %}">
@@ -154,6 +181,27 @@
       "id": "full_width",
       "default": true,
       "label": "t:sections.rich-text.settings.full_width.label"
+    },
+    {
+      "type": "header",
+      "content": "배경색 — CHALTTOK"
+    },
+    {
+      "type": "select",
+      "id": "ct_bg_style",
+      "label": "배경 스타일",
+      "options": [
+        { "value": "theme",        "label": "테마 기본값 (Color scheme 사용)" },
+        { "value": "ivory",        "label": "아이보리 — #F8F4EE (솔리드)" },
+        { "value": "petal",        "label": "페탈 핑크 — #F2E4DC (솔리드)" },
+        { "value": "blush",        "label": "블러시 — #EDD5C8 (솔리드)" },
+        { "value": "grad-whisper", "label": "위스퍼 그라디언트 (화이트 → 페탈)" },
+        { "value": "grad-soft",    "label": "소프트 그라디언트 (아이보리 → 블러시)" },
+        { "value": "grad-blush",   "label": "블러시 그라디언트 (페탈 → 블러시미드)" },
+        { "value": "grad-radial",  "label": "라디얼 블러시 (중앙 핑크 퍼짐)" }
+      ],
+      "default": "grad-soft",
+      "info": "테마 기본값 이외를 선택하면 Color scheme 배경을 덮어씁니다."
     },
     {
       "type": "header",
