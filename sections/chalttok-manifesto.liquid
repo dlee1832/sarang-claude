@@ -1,14 +1,39 @@
 {{ 'chalttok-sarang.css' | asset_url | stylesheet_tag }}
+{% render 'chalttok-fonts' %}
 
-<section class="ct-manifesto">
+<style>
+  /* Reset browser/theme blockquote defaults that add a left border or indent */
+  #ct-manifesto-{{ section.id }} blockquote {
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-left: none;
+    quotes: none;
+  }
+  #ct-manifesto-{{ section.id }} blockquote::before,
+  #ct-manifesto-{{ section.id }} blockquote::after {
+    content: none;
+  }
+
+  #ct-manifesto-{{ section.id }}.ct-manifesto {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+</style>
+
+<section class="ct-manifesto" id="ct-manifesto-{{ section.id }}">
   <div class="ct-manifesto__inner ct-reveal">
+
     <blockquote class="ct-manifesto__quote">
-      {{ section.settings.quote | newline_to_br }}
+      {{- section.settings.quote | newline_to_br -}}
     </blockquote>
-    <div class="ct-manifesto__rule"></div>
+
+    <div class="ct-manifesto__rule" role="separator"></div>
+
     {% if section.settings.brand_tag != blank %}
       <p class="ct-manifesto__sub">{{ section.settings.brand_tag }}</p>
     {% endif %}
+
   </div>
 </section>
 
@@ -23,14 +48,38 @@
     {
       "type": "textarea",
       "id": "quote",
-      "label": "Quote",
+      "label": "인용문",
       "default": "\"Skin does not need more.\nIt needs balance.\""
     },
     {
       "type": "text",
       "id": "brand_tag",
-      "label": "Brand tag below rule",
+      "label": "하단 브랜드 태그",
       "default": "찰떡 · CHALTTOK"
+    },
+    {
+      "type": "header",
+      "content": "레이아웃"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "상단 여백",
+      "min": 60,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 140
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "하단 여백",
+      "min": 60,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 140
     }
   ],
   "presets": [

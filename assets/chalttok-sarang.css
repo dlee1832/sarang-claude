@@ -209,31 +209,51 @@
   min-height: 50vh;
 }
 .ct-manifesto__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;    /* centres rule + brand tag horizontally */
   text-align: center;
   max-width: 640px;
+  width: 100%;
 }
 .ct-manifesto__quote {
+  /* blockquote resets — belt-and-suspenders alongside the section <style> block */
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-left: none;
+
   font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: clamp(28px, 4vw, 50px);
+  font-size: clamp(32px, 4.5vw, 52px);
   font-weight: 300;
   font-style: italic;
   color: var(--ct-ink);
-  line-height: 1.4;
+  line-height: 1.35;
   letter-spacing: -0.01em;
+  text-align: center;
+  width: 100%;
 }
 .ct-manifesto__rule {
+  display: block;
   width: 36px;
   height: 1px;
   background: var(--ct-blush-mid);
-  margin: 40px auto;
-  opacity: 0.6;
+  /* sits between the quote and the brand tag */
+  margin: 40px 0;         /* auto-left not needed — parent is flex + align-items:center */
+  opacity: 0.7;
+  border: none;
+  flex-shrink: 0;
 }
 .ct-manifesto__sub {
+  font-family: 'Noto Serif KR', 'Nanum Myeongjo', serif;
   font-size: 11px;
-  font-weight: 300;
-  letter-spacing: 0.3em;
+  font-weight: 200;
+  letter-spacing: 0.35em;
   color: var(--ct-taupe);
+  text-align: center;
   text-transform: uppercase;
+  margin: 0;
 }
 
 /* ── Split (S3) ── */
