@@ -1,0 +1,42 @@
+{{ 'chalttok-sarang.css' | asset_url | stylesheet_tag }}
+
+<section class="ct-manifesto">
+  <div class="ct-manifesto__inner ct-reveal">
+    <blockquote class="ct-manifesto__quote">
+      {{ section.settings.quote | newline_to_br }}
+    </blockquote>
+    <div class="ct-manifesto__rule"></div>
+    {% if section.settings.brand_tag != blank %}
+      <p class="ct-manifesto__sub">{{ section.settings.brand_tag }}</p>
+    {% endif %}
+  </div>
+</section>
+
+<script src="{{ 'chalttok-sarang.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "CT · Manifesto",
+  "tag": "div",
+  "class": "chalttok-section",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "quote",
+      "label": "Quote",
+      "default": "\"Skin does not need more.\nIt needs balance.\""
+    },
+    {
+      "type": "text",
+      "id": "brand_tag",
+      "label": "Brand tag below rule",
+      "default": "찰떡 · CHALTTOK"
+    }
+  ],
+  "presets": [
+    {
+      "name": "CT · Manifesto"
+    }
+  ]
+}
+{% endschema %}

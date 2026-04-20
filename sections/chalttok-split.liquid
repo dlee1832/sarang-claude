@@ -1,0 +1,80 @@
+{{ 'chalttok-sarang.css' | asset_url | stylesheet_tag }}
+
+<section class="ct-split{% if section.settings.image_position == 'right' %} ct-split--reversed{% endif %}">
+
+  <div class="ct-split__img-wrap ct-reveal">
+    {% if section.settings.image != blank %}
+      {{
+        section.settings.image
+        | image_url: width: 1200
+        | image_tag:
+          class: 'ct-split__img',
+          loading: 'lazy',
+          alt: section.settings.image.alt
+      }}
+    {% else %}
+      {{ 'lifestyle-1' | placeholder_svg_tag: 'ct-split__img placeholder-svg' }}
+    {% endif %}
+  </div>
+
+  <div class="ct-split__text ct-reveal ct-reveal--d1">
+    {% if section.settings.label != blank %}
+      <p class="ct-split__label">{{ section.settings.label }}</p>
+    {% endif %}
+    <h2 class="ct-split__heading">{{ section.settings.heading | newline_to_br }}</h2>
+    {% if section.settings.body_text != blank %}
+      <p class="ct-split__body">{{ section.settings.body_text }}</p>
+    {% endif %}
+  </div>
+
+</section>
+
+<script src="{{ 'chalttok-sarang.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "CT · Philosophy Split",
+  "tag": "div",
+  "class": "chalttok-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image position",
+      "options": [
+        { "value": "left",  "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Micro label",
+      "default": "A Different Beginning"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "One step.\nDone with care."
+    },
+    {
+      "type": "textarea",
+      "id": "body_text",
+      "label": "Body text",
+      "default": "We asked what skin truly needs — not what the industry decided. The answer was simple: moisture, rest, and a gentle beginning every day."
+    }
+  ],
+  "presets": [
+    {
+      "name": "CT · Philosophy Split"
+    }
+  ]
+}
+{% endschema %}

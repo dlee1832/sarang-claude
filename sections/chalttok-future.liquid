@@ -1,0 +1,42 @@
+{{ 'chalttok-sarang.css' | asset_url | stylesheet_tag }}
+
+<section class="ct-future">
+  <div class="ct-future__line ct-reveal" aria-hidden="true"></div>
+  <h2 class="ct-future__heading ct-reveal ct-reveal--d1">
+    {{ section.settings.heading | newline_to_br }}
+  </h2>
+  {% if section.settings.caption != blank %}
+    <p class="ct-future__caption ct-reveal ct-reveal--d2">
+      {{ section.settings.caption }}
+    </p>
+  {% endif %}
+</section>
+
+<script src="{{ 'chalttok-sarang.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "CT · Future Close",
+  "tag": "div",
+  "class": "chalttok-section",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Sarang is only\nthe beginning."
+    },
+    {
+      "type": "textarea",
+      "id": "caption",
+      "label": "Caption",
+      "default": "We grow slowly. Each product we add will ask the same question: does this serve skin, or simply add to it?"
+    }
+  ],
+  "presets": [
+    {
+      "name": "CT · Future Close"
+    }
+  ]
+}
+{% endschema %}

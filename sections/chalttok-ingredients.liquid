@@ -1,0 +1,112 @@
+{{ 'chalttok-sarang.css' | asset_url | stylesheet_tag }}
+
+<section class="ct-ingredients">
+
+  <div class="ct-ingredients__img-wrap ct-reveal">
+    {% if section.settings.image != blank %}
+      {{
+        section.settings.image
+        | image_url: width: 1200
+        | image_tag:
+          class: 'ct-ingredients__img',
+          loading: 'lazy',
+          alt: section.settings.image.alt
+      }}
+    {% else %}
+      {{ 'product-3' | placeholder_svg_tag: 'ct-ingredients__img placeholder-svg' }}
+    {% endif %}
+  </div>
+
+  <div class="ct-ingredients__text ct-reveal ct-reveal--d1">
+    <p class="ct-ingredients__section-label">{{ section.settings.section_label }}</p>
+    <div class="ct-ing-row">
+      {% for block in section.blocks %}
+        <div class="ct-ing-item" {{ block.shopify_attributes }}>
+          <div class="ct-ing-name">{{ block.settings.name }}</div>
+          <div class="ct-ing-desc">{{ block.settings.description }}</div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+</section>
+
+<script src="{{ 'chalttok-sarang.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "CT · Ingredients",
+  "tag": "div",
+  "class": "chalttok-section",
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "Close-up of ingredients or annotated drop shot"
+    },
+    {
+      "type": "text",
+      "id": "section_label",
+      "label": "Section label",
+      "default": "What's inside"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "ingredient",
+      "name": "Ingredient",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Ingredient name",
+          "default": "Niacinamide"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Benefit",
+          "default": "Calms, evens tone, restores barrier"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "CT · Ingredients",
+      "blocks": [
+        {
+          "type": "ingredient",
+          "settings": {
+            "name": "Niacinamide",
+            "description": "Calms, evens tone, restores barrier"
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "name": "Hyaluronic Acid",
+            "description": "Deep, lasting hydration without weight"
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "name": "Panthenol",
+            "description": "Soothes skin, seals in moisture"
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "name": "Pomegranate Extract",
+            "description": "Antioxidant care, naturally derived"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,71 @@
+{{ 'chalttok-sarang.css' | asset_url | stylesheet_tag }}
+
+<section class="ct-overload ct-reveal">
+
+  {% if section.settings.image != blank %}
+    {{
+      section.settings.image
+      | image_url: width: 2000
+      | image_tag:
+        class: 'ct-overload__img',
+        loading: 'lazy',
+        alt: section.settings.image.alt
+    }}
+  {% else %}
+    {{ 'lifestyle-2' | placeholder_svg_tag: 'ct-overload__img placeholder-svg' }}
+  {% endif %}
+
+  <div class="ct-overload__overlay"></div>
+
+  <div class="ct-overload__text">
+    {% if section.settings.label != blank %}
+      <p class="ct-label-micro ct-reveal ct-reveal--d1">{{ section.settings.label }}</p>
+    {% endif %}
+    <h2 class="ct-statement-lg ct-reveal ct-reveal--d1">{{ section.settings.heading }}</h2>
+    {% if section.settings.caption != blank %}
+      <p class="ct-caption-sm ct-reveal ct-reveal--d2">{{ section.settings.caption }}</p>
+    {% endif %}
+  </div>
+
+</section>
+
+<script src="{{ 'chalttok-sarang.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "CT · Overwhelm",
+  "tag": "div",
+  "class": "chalttok-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background image",
+      "info": "Full-bleed. Use a photo with many products for the 'overwhelm' narrative."
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Micro label",
+      "default": "The Familiar Fatigue"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "When did caring\nbecome so heavy?"
+    },
+    {
+      "type": "textarea",
+      "id": "caption",
+      "label": "Caption",
+      "default": "Twelve steps. Twenty products. Skin exhausted by the very things meant to help it."
+    }
+  ],
+  "presets": [
+    {
+      "name": "CT · Overwhelm"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,73 @@
+{{ 'chalttok-sarang.css' | asset_url | stylesheet_tag }}
+
+<section class="ct-panels">
+  {% for block in section.blocks %}
+    <div class="ct-panel ct-reveal{% if forloop.index > 1 %} ct-reveal--d{{ forloop.index | minus: 1 }}{% endif %}"
+         {{ block.shopify_attributes }}>
+      {% if block.settings.image != blank %}
+        {{
+          block.settings.image
+          | image_url: width: 900
+          | image_tag:
+            class: 'ct-panel__img',
+            loading: 'lazy',
+            alt: block.settings.image.alt
+        }}
+      {% else %}
+        {{ 'lifestyle-1' | placeholder_svg_tag: 'ct-panel__img placeholder-svg' }}
+      {% endif %}
+      <div class="ct-panel__overlay"></div>
+      {% if block.settings.label != blank %}
+        <span class="ct-panel__label">{{ block.settings.label }}</span>
+      {% endif %}
+    </div>
+  {% endfor %}
+</section>
+
+<script src="{{ 'chalttok-sarang.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "CT · Three Panels",
+  "tag": "div",
+  "class": "chalttok-section",
+  "max_blocks": 3,
+  "blocks": [
+    {
+      "type": "panel",
+      "name": "Panel",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Hover label"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "CT · Three Panels",
+      "blocks": [
+        {
+          "type": "panel",
+          "settings": { "label": "skin meets serum" }
+        },
+        {
+          "type": "panel",
+          "settings": { "label": "pomegranate extract" }
+        },
+        {
+          "type": "panel",
+          "settings": { "label": "crafted with clarity" }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,632 @@
+/* CHALTTOK · Sarang — Brand Story Sections */
+
+:root {
+  --ct-ivory: #F8F4EE;
+  --ct-blush: #EDD5C8;
+  --ct-blush-mid: #D9A99A;
+  --ct-petal: #F2E4DC;
+  --ct-beige: #E8DDD3;
+  --ct-taupe: #B8A49A;
+  --ct-ink: #2C2420;
+  --ct-ink-mid: #5A4D48;
+  --ct-ink-light: rgba(44, 36, 32, 0.55);
+}
+
+/* ── Reveal animation ── */
+.ct-reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1s cubic-bezier(0.2, 0, 0, 1),
+              transform 1s cubic-bezier(0.2, 0, 0, 1);
+}
+.ct-reveal.ct-in { opacity: 1; transform: translateY(0); }
+.ct-reveal--d1 { transition-delay: 0.15s; }
+.ct-reveal--d2 { transition-delay: 0.30s; }
+.ct-reveal--d3 { transition-delay: 0.45s; }
+
+@keyframes ct-fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Hero (S0) ── */
+.ct-hero {
+  position: relative;
+  height: 100vh;
+  min-height: 700px;
+  overflow: hidden;
+  background: #C2A89E;
+}
+.ct-hero__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  transform: scale(1.04);
+  animation: ct-heroBreath 8s ease-in-out infinite;
+}
+.ct-hero__bg.placeholder-svg { fill: #C2A89E; }
+
+@keyframes ct-heroBreath {
+  0%, 100% { transform: scale(1.04) translateY(0); }
+  50%       { transform: scale(1.06) translateY(-8px); }
+}
+
+.ct-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(194, 168, 158, 0.15) 0%,
+    rgba(194, 168, 158, 0)    35%,
+    rgba(44, 36, 32, 0.18)   100%
+  );
+}
+.ct-hero__vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 80% 80% at 50% 50%,
+    transparent 50%,
+    rgba(44, 36, 32, 0.12) 100%
+  );
+}
+.ct-hero__svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+.ct-hero__words {
+  position: absolute;
+  bottom: 64px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index: 10;
+}
+.ct-hero__name {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(72px, 11vw, 140px);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--ct-ivory);
+  line-height: 0.9;
+  letter-spacing: -0.01em;
+  text-shadow: 0 4px 60px rgba(44, 36, 32, 0.15);
+  animation: ct-fadeUp 1.4s cubic-bezier(0.2, 0, 0, 1) 0.3s both;
+}
+.ct-hero__kr {
+  font-family: 'Noto Serif KR', 'Nanum Myeongjo', serif;
+  font-size: 12px;
+  font-weight: 200;
+  letter-spacing: 0.45em;
+  color: rgba(248, 244, 238, 0.6);
+  margin-top: 14px;
+  animation: ct-fadeUp 1.4s cubic-bezier(0.2, 0, 0, 1) 0.6s both;
+}
+.ct-hero__sub {
+  font-size: 10px;
+  font-weight: 200;
+  letter-spacing: 0.35em;
+  color: rgba(248, 244, 238, 0.45);
+  margin-top: 8px;
+  text-transform: uppercase;
+  animation: ct-fadeUp 1.4s cubic-bezier(0.2, 0, 0, 1) 0.8s both;
+}
+.ct-scroll-cue {
+  position: absolute;
+  bottom: 32px;
+  right: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  z-index: 10;
+  animation: ct-fadeUp 1.4s ease 1.2s both;
+}
+.ct-scroll-cue span {
+  font-size: 8px;
+  letter-spacing: 0.35em;
+  color: rgba(248, 244, 238, 0.35);
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+}
+.ct-scroll-line {
+  width: 1px;
+  height: 48px;
+  background: linear-gradient(180deg, rgba(248, 244, 238, 0.4), transparent);
+  animation: ct-scrollPulse 2.2s ease-in-out infinite;
+}
+@keyframes ct-scrollPulse {
+  0%, 100% { opacity: 0.4; transform: scaleY(1); }
+  50%       { opacity: 1;   transform: scaleY(1.15); }
+}
+
+/* ── Overload (S1) ── */
+.ct-overload {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+.ct-overload__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.85);
+  transition: transform 8s ease;
+}
+.ct-overload:hover .ct-overload__img { transform: scale(1.03); }
+.ct-overload__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 30%, rgba(44, 36, 32, 0.55) 100%);
+}
+.ct-overload__text {
+  position: absolute;
+  bottom: 72px;
+  left: 64px;
+  max-width: 480px;
+  z-index: 5;
+}
+.ct-label-micro {
+  font-size: 9px;
+  font-weight: 300;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: rgba(248, 244, 238, 0.5);
+  margin-bottom: 20px;
+}
+.ct-statement-lg {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--ct-ivory);
+  line-height: 1.25;
+}
+.ct-caption-sm {
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(248, 244, 238, 0.6);
+  line-height: 1.8;
+  margin-top: 20px;
+  max-width: 360px;
+}
+
+/* ── Manifesto (S2) ── */
+.ct-manifesto {
+  background: var(--ct-ivory);
+  padding: 140px 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
+}
+.ct-manifesto__inner {
+  text-align: center;
+  max-width: 640px;
+}
+.ct-manifesto__quote {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(28px, 4vw, 50px);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--ct-ink);
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+}
+.ct-manifesto__rule {
+  width: 36px;
+  height: 1px;
+  background: var(--ct-blush-mid);
+  margin: 40px auto;
+  opacity: 0.6;
+}
+.ct-manifesto__sub {
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: 0.3em;
+  color: var(--ct-taupe);
+  text-transform: uppercase;
+}
+
+/* ── Split (S3) ── */
+.ct-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 90vh;
+}
+.ct-split--reversed { direction: rtl; }
+.ct-split--reversed > * { direction: ltr; }
+
+.ct-split__img-wrap {
+  position: relative;
+  overflow: hidden;
+}
+.ct-split__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.2s cubic-bezier(0.2, 0, 0, 1);
+}
+.ct-split__img-wrap:hover .ct-split__img { transform: scale(1.04); }
+.ct-split__text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px 72px;
+  background: var(--ct-petal);
+}
+.ct-split__label {
+  font-size: 9px;
+  font-weight: 300;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: var(--ct-taupe);
+  margin-bottom: 32px;
+}
+.ct-split__heading {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(30px, 3.5vw, 46px);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.25;
+  color: var(--ct-ink);
+  margin-bottom: 28px;
+}
+.ct-split__body {
+  font-size: 13.5px;
+  font-weight: 300;
+  line-height: 1.9;
+  color: var(--ct-ink-mid);
+  max-width: 340px;
+}
+
+/* ── Drop (S4) ── */
+.ct-drop {
+  position: relative;
+  height: 80vh;
+  overflow: hidden;
+}
+.ct-drop__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 10s ease;
+}
+.ct-drop:hover .ct-drop__img { transform: scale(1.05); }
+.ct-drop__caption {
+  position: absolute;
+  top: 50%;
+  right: 80px;
+  transform: translateY(-50%);
+  text-align: right;
+  z-index: 5;
+}
+.ct-drop__word {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(48px, 7vw, 96px);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--ct-ink);
+  line-height: 0.9;
+  opacity: 0.88;
+}
+.ct-drop__sub {
+  font-size: 10px;
+  letter-spacing: 0.4em;
+  color: var(--ct-ink-light);
+  text-transform: uppercase;
+  margin-top: 16px;
+}
+
+/* ── Birth / Product Reveal (S5) ── */
+.ct-birth {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+}
+.ct-birth__text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 100px 80px 100px 64px;
+  background: var(--ct-ivory);
+}
+.ct-birth__number {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 120px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--ct-blush);
+  line-height: 1;
+  margin-bottom: -20px;
+}
+.ct-birth__heading {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(32px, 3.5vw, 48px);
+  font-weight: 300;
+  line-height: 1.2;
+  color: var(--ct-ink);
+  margin-bottom: 28px;
+}
+.ct-birth__body {
+  font-size: 13.5px;
+  font-weight: 300;
+  line-height: 1.9;
+  color: var(--ct-ink-mid);
+  max-width: 360px;
+}
+.ct-birth__cta {
+  display: inline-block;
+  margin-top: 40px;
+  font-size: 10px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--ct-ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--ct-blush-mid);
+  padding-bottom: 4px;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+.ct-birth__cta:hover {
+  color: var(--ct-blush-mid);
+}
+.ct-birth__img-wrap {
+  position: relative;
+  overflow: hidden;
+  background: var(--ct-beige);
+}
+.ct-birth__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.2s cubic-bezier(0.2, 0, 0, 1);
+}
+.ct-birth__img-wrap:hover .ct-birth__img { transform: scale(1.03); }
+
+/* ── Panels (S6) ── */
+.ct-panels {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  height: 70vh;
+}
+.ct-panel {
+  position: relative;
+  overflow: hidden;
+}
+.ct-panel__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.9s cubic-bezier(0.2, 0, 0, 1);
+  filter: saturate(0.9);
+}
+.ct-panel:hover .ct-panel__img {
+  transform: scale(1.06);
+  filter: saturate(1.05);
+}
+.ct-panel__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(44, 36, 32, 0.35), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.ct-panel:hover .ct-panel__overlay { opacity: 1; }
+.ct-panel__label {
+  position: absolute;
+  bottom: 28px;
+  left: 28px;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 18px;
+  font-style: italic;
+  font-weight: 300;
+  color: rgba(248, 244, 238, 0);
+  transition: color 0.4s ease, transform 0.4s ease;
+  transform: translateY(8px);
+  z-index: 2;
+}
+.ct-panel:hover .ct-panel__label {
+  color: rgba(248, 244, 238, 0.85);
+  transform: translateY(0);
+}
+
+/* ── Ingredients (S7) ── */
+.ct-ingredients {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 80vh;
+  align-items: stretch;
+}
+.ct-ingredients__img-wrap {
+  position: relative;
+  overflow: hidden;
+}
+.ct-ingredients__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.2s ease;
+}
+.ct-ingredients__img-wrap:hover .ct-ingredients__img { transform: scale(1.04); }
+.ct-ingredients__text {
+  background: var(--ct-ink);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px 72px;
+}
+.ct-ingredients__section-label {
+  font-size: 9px;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: rgba(237, 213, 200, 0.4);
+  margin-bottom: 48px;
+}
+.ct-ing-row {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+.ct-ing-item {
+  border-top: 1px solid rgba(237, 213, 200, 0.1);
+  padding-top: 24px;
+}
+.ct-ing-name {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 22px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--ct-blush);
+  margin-bottom: 8px;
+}
+.ct-ing-desc {
+  font-size: 12px;
+  font-weight: 300;
+  color: rgba(248, 244, 238, 0.45);
+  letter-spacing: 0.05em;
+  line-height: 1.7;
+}
+
+/* ── Meaning (S8) ── */
+.ct-meaning {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ct-meaning__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 12s ease;
+}
+.ct-meaning:hover .ct-meaning__img { transform: scale(1.04); }
+.ct-meaning__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(44, 36, 32, 0.42);
+}
+.ct-meaning__center {
+  position: relative;
+  z-index: 5;
+  text-align: center;
+  padding: 0 48px;
+}
+.ct-meaning__kr-bg {
+  font-family: 'Noto Serif KR', 'Nanum Myeongjo', serif;
+  font-size: clamp(80px, 15vw, 200px);
+  font-weight: 200;
+  color: rgba(248, 244, 238, 0.07);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  pointer-events: none;
+  letter-spacing: 0.05em;
+  z-index: 1;
+}
+.ct-meaning__quote {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(28px, 4vw, 52px);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--ct-ivory);
+  line-height: 1.3;
+  position: relative;
+  z-index: 2;
+}
+.ct-meaning__rule {
+  width: 32px;
+  height: 1px;
+  background: rgba(237, 213, 200, 0.5);
+  margin: 32px auto;
+}
+.ct-meaning__kr {
+  font-family: 'Noto Serif KR', 'Nanum Myeongjo', serif;
+  font-size: 11px;
+  font-weight: 200;
+  letter-spacing: 0.4em;
+  color: rgba(237, 213, 200, 0.6);
+  position: relative;
+  z-index: 2;
+}
+
+/* ── Future (S9) ── */
+.ct-future {
+  background: var(--ct-ivory);
+  padding: 160px 48px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.ct-future__line {
+  width: 1px;
+  height: 64px;
+  background: linear-gradient(180deg, transparent, var(--ct-blush-mid));
+  margin-bottom: 64px;
+}
+.ct-future__heading {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(28px, 3.5vw, 44px);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--ct-ink);
+  max-width: 480px;
+  line-height: 1.35;
+  margin-bottom: 32px;
+}
+.ct-future__caption {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--ct-ink-light);
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  max-width: 380px;
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  .ct-split,
+  .ct-birth,
+  .ct-ingredients {
+    grid-template-columns: 1fr;
+  }
+  .ct-split--reversed { direction: ltr; }
+
+  .ct-split__img-wrap,
+  .ct-birth__img-wrap,
+  .ct-ingredients__img-wrap { height: 60vw; }
+
+  .ct-panels {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+  .ct-panel { height: 50vw; }
+
+  .ct-split__text,
+  .ct-birth__text,
+  .ct-ingredients__text { padding: 64px 32px; }
+
+  .ct-overload__text { left: 32px; bottom: 56px; }
+  .ct-drop__caption  { right: 32px; }
+
+  .ct-manifesto { padding: 100px 32px; }
+  .ct-future    { padding: 100px 32px; }
+
+  .ct-scroll-cue { right: 24px; }
+}

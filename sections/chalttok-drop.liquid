@@ -1,0 +1,60 @@
+{{ 'chalttok-sarang.css' | asset_url | stylesheet_tag }}
+
+<section class="ct-drop ct-reveal">
+
+  {% if section.settings.image != blank %}
+    {{
+      section.settings.image
+      | image_url: width: 2000
+      | image_tag:
+        class: 'ct-drop__img',
+        loading: 'lazy',
+        alt: section.settings.image.alt
+    }}
+  {% else %}
+    {{ 'product-1' | placeholder_svg_tag: 'ct-drop__img placeholder-svg' }}
+  {% endif %}
+
+  <div class="ct-drop__caption ct-reveal ct-reveal--d1">
+    <div class="ct-drop__word">{{ section.settings.word | newline_to_br }}</div>
+    {% if section.settings.sub_text != blank %}
+      <div class="ct-drop__sub">{{ section.settings.sub_text }}</div>
+    {% endif %}
+  </div>
+
+</section>
+
+<script src="{{ 'chalttok-sarang.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "CT · Full Bleed Drop",
+  "tag": "div",
+  "class": "chalttok-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Full-bleed image",
+      "info": "Close-up serum / product shot works best"
+    },
+    {
+      "type": "textarea",
+      "id": "word",
+      "label": "Large overlay word",
+      "default": "One\ndrop."
+    },
+    {
+      "type": "text",
+      "id": "sub_text",
+      "label": "Sub-label below word",
+      "default": "Blush pink · Bouncy · Weightless"
+    }
+  ],
+  "presets": [
+    {
+      "name": "CT · Full Bleed Drop"
+    }
+  ]
+}
+{% endschema %}
