@@ -38,7 +38,6 @@
     },
     "header": {
       "type": "header",
-      "disabled": true,
       "custom_css": [
         ".header__icon--account,.header__icon--search,.header__icon--cart {display: none !important;}"
       ],
@@ -47,7 +46,7 @@
         "mobile_logo_position": "center",
         "menu": "",
         "menu_type_desktop": "dropdown",
-        "sticky_header_type": "on-scroll-up",
+        "sticky_header_type": "always",
         "show_line_separator": false,
         "color_scheme": "scheme-1",
         "menu_color_scheme": "scheme-1",
@@ -61,11 +60,12 @@
     },
     "chalttok_header_4NVTtG": {
       "type": "chalttok-header",
+      "disabled": true,
       "name": "CT · Brand Nav",
       "settings": {
         "logo_text": "찰떡 · CHALTTOK",
         "tag_text": "사랑 · Sarang",
-        "solid_on_scroll": true
+        "solid_on_scroll": false
       }
     }
   },
