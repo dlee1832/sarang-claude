@@ -1,11 +1,47 @@
 {{ 'chalttok-sarang.css' | asset_url | stylesheet_tag }}
 
-<section class="ct-manifesto">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,300&family=Noto+Serif+KR:wght@200&display=swap" rel="stylesheet">
+
+<style>
+  .ct-manifesto__quote {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(32px, 4.5vw, 52px);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ct-ink);
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    text-align: center;
+    margin: 0;
+  }
+  .ct-manifesto__rule {
+    width: 36px;
+    height: 1px;
+    background: var(--ct-blush-mid);
+    margin: 40px auto;
+    opacity: 0.7;
+    border: none;
+  }
+  .ct-manifesto__sub {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 11px;
+    font-weight: 200;
+    letter-spacing: 0.35em;
+    color: var(--ct-taupe);
+    text-align: center;
+    text-transform: uppercase;
+    margin: 0;
+  }
+</style>
+
+<section class="ct-manifesto" id="ct-manifesto-{{ section.id }}">
   <div class="ct-manifesto__inner ct-reveal">
     <blockquote class="ct-manifesto__quote">
-      {{ section.settings.quote | newline_to_br }}
+      {{- section.settings.quote | newline_to_br -}}
     </blockquote>
-    <div class="ct-manifesto__rule"></div>
+    <div class="ct-manifesto__rule" role="separator"></div>
     {% if section.settings.brand_tag != blank %}
       <p class="ct-manifesto__sub">{{ section.settings.brand_tag }}</p>
     {% endif %}
@@ -23,14 +59,38 @@
     {
       "type": "textarea",
       "id": "quote",
-      "label": "Quote",
+      "label": "인용문",
       "default": "\"Skin does not need more.\nIt needs balance.\""
     },
     {
       "type": "text",
       "id": "brand_tag",
-      "label": "Brand tag below rule",
+      "label": "하단 브랜드 태그",
       "default": "찰떡 · CHALTTOK"
+    },
+    {
+      "type": "header",
+      "content": "레이아웃"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "상단 여백",
+      "min": 60,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 140
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "하단 여백",
+      "min": 60,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 140
     }
   ],
   "presets": [
@@ -40,3 +100,10 @@
   ]
 }
 {% endschema %}
+
+<style>
+  #ct-manifesto-{{ section.id }}.ct-manifesto {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+</style>
