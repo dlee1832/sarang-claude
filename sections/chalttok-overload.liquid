@@ -1,6 +1,9 @@
 {{ 'chalttok-sarang.css' | asset_url | stylesheet_tag }}
 
-<section class="ct-overload">
+{%- assign heading_font = section.settings.heading_font -%}
+{%- assign overlay_opacity = section.settings.overlay_opacity | divided_by: 100.0 -%}
+
+<section class="ct-overload" id="ct-overload-{{ section.id }}">
 
   {% if section.settings.image != blank %}
     {{
@@ -15,19 +18,46 @@
     {{ 'lifestyle-2' | placeholder_svg_tag: 'ct-overload__img placeholder-svg' }}
   {% endif %}
 
-  <div class="ct-overload__overlay"></div>
+  <div
+    class="ct-overload__overlay"
+    style="background: linear-gradient(to bottom, transparent 30%, rgba(44,36,32,{{ overlay_opacity }}) 100%);"
+  ></div>
 
   <div class="ct-overload__text">
     {% if section.settings.label != blank %}
       <p class="ct-label-micro ct-reveal">{{ section.settings.label }}</p>
     {% endif %}
-    <h2 class="ct-statement-lg ct-reveal ct-reveal--d1">{{ section.settings.heading }}</h2>
+    <h2
+      class="ct-statement-lg ct-reveal ct-reveal--d1 ct-overload__heading--{{ heading_font }}"
+      style="font-size: clamp({{ section.settings.heading_size_min }}px, 4vw, {{ section.settings.heading_size_max }}px);"
+    >
+      {{- section.settings.heading | newline_to_br -}}
+    </h2>
     {% if section.settings.caption != blank %}
       <p class="ct-caption-sm ct-reveal ct-reveal--d2">{{ section.settings.caption }}</p>
     {% endif %}
   </div>
 
 </section>
+
+<style>
+  #ct-overload-{{ section.id }} .ct-overload__heading--serif {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+  }
+  #ct-overload-{{ section.id }} .ct-overload__heading--sans {
+    font-family: 'DM Sans', 'Helvetica Neue', sans-serif;
+    font-style: normal;
+    font-weight: 200;
+    letter-spacing: 0.02em;
+  }
+  #ct-overload-{{ section.id }} .ct-overload__heading--kr {
+    font-family: 'Noto Serif KR', 'Nanum Myeongjo', serif;
+    font-style: normal;
+    font-weight: 200;
+    letter-spacing: 0.05em;
+  }
+</style>
 
 <script src="{{ 'chalttok-sarang.js' | asset_url }}" defer></script>
 
@@ -38,27 +68,79 @@
   "class": "chalttok-section",
   "settings": [
     {
+      "type": "header",
+      "content": "이미지"
+    },
+    {
       "type": "image_picker",
       "id": "image",
-      "label": "Background image",
-      "info": "Full-bleed. Use a photo with many products for the 'overwhelm' narrative."
+      "label": "배경 이미지",
+      "info": "제품이 많이 담긴 사진을 권장합니다."
+    },
+    {
+      "type": "header",
+      "content": "오버레이"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "오버레이 불투명도",
+      "min": 0,
+      "max": 90,
+      "step": 5,
+      "unit": "%",
+      "default": 55,
+      "info": "값이 높을수록 하단이 어두워져 텍스트가 더 잘 보입니다."
+    },
+    {
+      "type": "header",
+      "content": "텍스트"
     },
     {
       "type": "text",
       "id": "label",
-      "label": "Micro label",
+      "label": "상단 소제목 (Micro label)",
       "default": "The Familiar Fatigue"
     },
     {
       "type": "textarea",
       "id": "heading",
-      "label": "Heading",
+      "label": "헤딩",
       "default": "When did caring\nbecome so heavy?"
+    },
+    {
+      "type": "select",
+      "id": "heading_font",
+      "label": "헤딩 폰트",
+      "options": [
+        { "value": "serif",  "label": "Cormorant (이탤릭 세리프, 기본)" },
+        { "value": "sans",   "label": "DM Sans (모던 산세리프)" },
+        { "value": "kr",     "label": "Noto Serif KR (한글 세리프)" }
+      ],
+      "default": "serif"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_min",
+      "label": "헤딩 최소 크기 (px)",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "heading_size_max",
+      "label": "헤딩 최대 크기 (px)",
+      "min": 36,
+      "max": 100,
+      "step": 2,
+      "default": 52
     },
     {
       "type": "textarea",
       "id": "caption",
-      "label": "Caption",
+      "label": "캡션",
       "default": "Twelve steps. Twenty products. Skin exhausted by the very things meant to help it."
     }
   ],
