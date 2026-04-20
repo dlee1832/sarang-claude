@@ -642,71 +642,6 @@
         "show_text_below": true
       }
     },
-    "multicolumn_dW4Cjz": {
-      "type": "multicolumn",
-      "blocks": {
-        "column_D6ayTe": {
-          "type": "column",
-          "settings": {
-            "title": "Balanced daily care",
-            "text": "",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "column_9jW6PV": {
-          "type": "column",
-          "settings": {
-            "title": "Lightweight comfort",
-            "text": "",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "column_REfGyb": {
-          "type": "column",
-          "settings": {
-            "title": "Clean absorption",
-            "text": "",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "column_YyniAL": {
-          "type": "column",
-          "settings": {
-            "title": "Thoughtfully formulated",
-            "text": "",
-            "link_label": "",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "column_D6ayTe",
-        "column_9jW6PV",
-        "column_REfGyb",
-        "column_YyniAL"
-      ],
-      "disabled": true,
-      "name": "t:sections.multicolumn.presets.name",
-      "settings": {
-        "title": "Why skin prefers Sarang",
-        "heading_size": "h1",
-        "image_width": "full",
-        "image_ratio": "adapt",
-        "button_label": "",
-        "button_link": "",
-        "columns_desktop": 4,
-        "column_alignment": "center",
-        "background_style": "primary",
-        "color_scheme": "",
-        "columns_mobile": "1",
-        "swipe_on_mobile": false,
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
     "image_banner_htdK9p": {
       "type": "image-banner",
       "custom_css": [],
@@ -840,7 +775,6 @@
     "featured_product_QNJXqL",
     "rich_text_a9hzrL",
     "image_banner_HfTBjT",
-    "multicolumn_dW4Cjz",
     "image_banner_htdK9p",
     "image_banner_dVMgcT",
     "rich_text_7DJ8Uq"
