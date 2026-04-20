@@ -1,6 +1,6 @@
 {{ 'chalttok-sarang.css' | asset_url | stylesheet_tag }}
 
-<section class="ct-overload ct-reveal">
+<section class="ct-overload">
 
   {% if section.settings.image != blank %}
     {{
@@ -19,7 +19,7 @@
 
   <div class="ct-overload__text">
     {% if section.settings.label != blank %}
-      <p class="ct-label-micro ct-reveal ct-reveal--d1">{{ section.settings.label }}</p>
+      <p class="ct-label-micro ct-reveal">{{ section.settings.label }}</p>
     {% endif %}
     <h2 class="ct-statement-lg ct-reveal ct-reveal--d1">{{ section.settings.heading }}</h2>
     {% if section.settings.caption != blank %}

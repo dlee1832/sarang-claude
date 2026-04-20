@@ -1,0 +1,96 @@
+{{ 'chalttok-sarang.css' | asset_url | stylesheet_tag }}
+
+<footer class="ct-footer" role="contentinfo">
+
+  <div class="ct-footer__left">
+    <a href="{{ routes.root_url }}" class="ct-footer__logo">
+      {{ section.settings.logo_text }}
+    </a>
+    {% if section.settings.tagline != blank %}
+      <p class="ct-footer__tagline">{{ section.settings.tagline }}</p>
+    {% endif %}
+  </div>
+
+  <div class="ct-footer__links">
+    {% for block in section.blocks %}
+      {% if block.type == 'link' %}
+        <a
+          href="{{ block.settings.url }}"
+          class="ct-footer__link"
+          {{ block.shopify_attributes }}
+        >
+          {{ block.settings.label }}
+        </a>
+      {% endif %}
+    {% endfor %}
+    <p class="ct-footer__copy">{{ section.settings.copyright }}</p>
+  </div>
+
+</footer>
+
+{% schema %}
+{
+  "name": "CT · Brand Footer",
+  "tag": "div",
+  "class": "chalttok-section",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "로고 텍스트",
+      "default": "찰떡 CHALTTOK"
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "태그라인 (이탤릭)",
+      "default": "\"Formulated with care, not excess.\""
+    },
+    {
+      "type": "text",
+      "id": "copyright",
+      "label": "저작권 텍스트",
+      "default": "© 2025 CHALTTOK"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "link",
+      "name": "링크",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "링크 텍스트",
+          "default": "Privacy Policy"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "링크 URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "CT · Brand Footer",
+      "blocks": [
+        {
+          "type": "link",
+          "settings": {
+            "label": "Privacy Policy"
+          }
+        },
+        {
+          "type": "link",
+          "settings": {
+            "label": "Contact"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,62 @@
+{{ 'chalttok-sarang.css' | asset_url | stylesheet_tag }}
+
+<nav class="ct-nav" id="ct-nav-{{ section.id }}" role="navigation" aria-label="Brand navigation">
+  <a href="{{ routes.root_url }}" class="ct-nav__logo">
+    {{ section.settings.logo_text }}
+  </a>
+  <span class="ct-nav__tag">{{ section.settings.tag_text }}</span>
+</nav>
+
+{% if section.settings.solid_on_scroll %}
+<script>
+(function () {
+  var nav = document.getElementById('ct-nav-{{ section.id }}');
+  if (!nav) return;
+  window.addEventListener('scroll', function () {
+    if (window.scrollY > 80) {
+      nav.classList.add('ct-nav--solid');
+    } else {
+      nav.classList.remove('ct-nav--solid');
+    }
+  }, { passive: true });
+})();
+</script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "CT · Brand Nav",
+  "tag": "div",
+  "class": "chalttok-section chalttok-nav-wrapper",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "이 네비게이션은 position: fixed로 페이지 최상단에 고정됩니다. 기존 테마 헤더를 숨기려면 테마 설정 > Custom CSS에 아래 코드를 추가하세요: .shopify-section-group-header-group { display: none; }"
+    },
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "로고 텍스트",
+      "default": "찰떡 · CHALTTOK"
+    },
+    {
+      "type": "text",
+      "id": "tag_text",
+      "label": "우측 태그",
+      "default": "사랑 · Sarang"
+    },
+    {
+      "type": "checkbox",
+      "id": "solid_on_scroll",
+      "label": "스크롤 시 배경 채우기",
+      "default": true,
+      "info": "80px 이상 스크롤하면 아이보리 배경이 나타납니다"
+    }
+  ],
+  "presets": [
+    {
+      "name": "CT · Brand Nav"
+    }
+  ]
+}
+{% endschema %}
