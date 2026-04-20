@@ -36,6 +36,13 @@
 
 <script src="{{ 'chalttok-sarang.js' | asset_url }}" defer></script>
 
+
+
+<style>
+  #shopify-section-{{ section.id }} .ct-birth__heading,
+  #shopify-section-{{ section.id }} .ct-birth__number { font-weight: {{ section.settings.font_weight_heading }}; }
+  #shopify-section-{{ section.id }} .ct-birth__body { font-weight: {{ section.settings.font_weight_body }}; }
+</style>
 {% schema %}
 {
   "name": "CT · Product Reveal",

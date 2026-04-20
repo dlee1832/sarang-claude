@@ -26,6 +26,11 @@
 
 <script src="{{ 'chalttok-sarang.js' | asset_url }}" defer></script>
 
+
+
+<style>
+  #shopify-section-{{ section.id }} .ct-panel__label { font-weight: {{ section.settings.font_weight_heading }}; }
+</style>
 {% schema %}
 {
   "name": "CT · Three Panels",

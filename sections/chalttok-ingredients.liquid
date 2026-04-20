@@ -33,6 +33,13 @@
 
 <script src="{{ 'chalttok-sarang.js' | asset_url }}" defer></script>
 
+
+
+<style>
+  #shopify-section-{{ section.id }} .ct-ing-name { font-weight: {{ section.settings.font_weight_heading }}; }
+  #shopify-section-{{ section.id }} .ct-ing-desc,
+  #shopify-section-{{ section.id }} .ct-ingredients__section-label { font-weight: {{ section.settings.font_weight_body }}; }
+</style>
 {% schema %}
 {
   "name": "CT · Ingredients",

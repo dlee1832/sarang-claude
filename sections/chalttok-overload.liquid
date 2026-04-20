@@ -115,6 +115,13 @@
 
 <script src="{{ 'chalttok-sarang.js' | asset_url }}" defer></script>
 
+
+
+<style>
+  #shopify-section-{{ section.id }} .ct-statement-lg { font-weight: {{ section.settings.font_weight_heading }}; }
+  #shopify-section-{{ section.id }} .ct-label-micro,
+  #shopify-section-{{ section.id }} .ct-caption-sm { font-weight: {{ section.settings.font_weight_body }}; }
+</style>
 {% schema %}
 {
   "name": "CT · Overwhelm",

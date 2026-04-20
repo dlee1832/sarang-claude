@@ -14,6 +14,12 @@
 
 <script src="{{ 'chalttok-sarang.js' | asset_url }}" defer></script>
 
+
+
+<style>
+  #shopify-section-{{ section.id }} .ct-future__heading { font-weight: {{ section.settings.font_weight_heading }}; }
+  #shopify-section-{{ section.id }} .ct-future__caption { font-weight: {{ section.settings.font_weight_body }}; }
+</style>
 {% schema %}
 {
   "name": "CT · Future Close",
