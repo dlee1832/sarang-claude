@@ -586,10 +586,10 @@
       "settings": {
         "desktop_content_position": "center",
         "content_alignment": "center",
-        "color_scheme": "",
+        "color_scheme": "scheme-1",
         "full_width": true,
-        "padding_top": 68,
-        "padding_bottom": 76
+        "padding_top": 100,
+        "padding_bottom": 100
       }
     },
     "image_banner_HfTBjT": {
