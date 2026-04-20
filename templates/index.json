@@ -26,6 +26,14 @@
         "caption": "Twelve steps. Twenty products. Skin exhausted by the very things meant to help it."
       }
     },
+    "chalttok_manifesto_iQMJLf": {
+      "type": "chalttok-manifesto",
+      "name": "CT · Manifesto",
+      "settings": {
+        "quote": "\"Skin does not need more.\nIt needs balance.\"",
+        "brand_tag": "찰떡 · CHALTTOK"
+      }
+    },
     "slideshow_nWeGFc": {
       "type": "slideshow",
       "blocks": {
@@ -392,6 +400,7 @@
         "slide_M6yJim",
         "slide_XVjfQB"
       ],
+      "disabled": true,
       "custom_css": [
         "@media {.slideshow {position: relative; } .slideshow__controls {position: absolute !important; left: 50%; bottom: 2px !important; transform: translateX(-50%); z-index: 9; background: transparent !important; padding: 0 !important; border: 0 !important; box-shadow: none !important; margin: 0; } .slideshow__controls .slider-button {display: none !important; } .slideshow__controls .slider-counter__link {opacity: 0.22; transform: scale(0.7); } .slideshow__controls .slider-counter__link--active {opacity: 0.45; }}"
       ],
@@ -840,6 +849,7 @@
   },
   "order": [
     "chalttok_overload_YNd7it",
+    "chalttok_manifesto_iQMJLf",
     "slideshow_nWeGFc",
     "custom_liquid_UhVq6M",
     "rich_text_tnPcKU",
