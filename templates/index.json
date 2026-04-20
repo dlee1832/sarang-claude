@@ -46,6 +46,7 @@
       "type": "chalttok-split",
       "name": "CT · Philosophy Split",
       "settings": {
+        "image": "shopify://shop_images/sarang-theme-img-01.png",
         "image_position": "left",
         "label": "A Different Beginning",
         "heading": "One step.\nDone with care.",
