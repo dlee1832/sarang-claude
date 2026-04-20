@@ -15,9 +15,10 @@
       "settings": {
         "image": "shopify://shop_images/Gemini_Generated_Image_2ifcjn2ifcjn2ifc.jpg",
         "overlay_opacity": 45,
-        "text_bg_enabled": false,
+        "text_bg_enabled": true,
         "text_bg_style": "frosted",
-        "text_bg_opacity": 20,
+        "text_bg_opacity": 10,
+        "text_color": "ink",
         "label": "",
         "heading": "When did caring\nbecome so heavy?",
         "heading_font": "serif",
