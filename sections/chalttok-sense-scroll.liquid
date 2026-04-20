@@ -1,0 +1,144 @@
+{% comment %}
+  CT · Sense Header Scroll
+  — Injects scroll-based background behavior into the Sense theme's
+    existing .header-wrapper without modifying header.liquid.
+  — Add this section to the Header group (or any page template).
+    It renders no visible HTML.
+{% endcomment %}
+
+{%- assign behavior  = section.settings.scroll_behavior -%}
+{%- assign threshold = section.settings.scroll_threshold -%}
+{%- assign bg_color  = section.settings.bg_color | default: 'rgba(248,244,238,0.96)' -%}
+{%- assign blur      = section.settings.enable_blur -%}
+
+<style>
+  /* ── Smooth transition on the Sense header ── */
+  .header-wrapper {
+    transition:
+      background-color 0.45s ease,
+      border-color     0.45s ease,
+      backdrop-filter  0.45s ease,
+      -webkit-backdrop-filter 0.45s ease !important;
+  }
+
+  /* Solid state — scrolled into */
+  .header-wrapper.ct-hw--solid {
+    background-color: {{ bg_color }} !important;
+    {% if blur %}
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    {% endif %}
+    border-bottom-color: rgba(184,164,154,0.2) !important;
+  }
+
+  /* Transparent state — scrolled into */
+  .header-wrapper.ct-hw--transparent {
+    background-color: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border-bottom-color: transparent !important;
+  }
+</style>
+
+{% unless behavior == 'none' %}
+<script>
+(function () {
+  var threshold = {{ threshold }};
+  var behavior  = '{{ behavior }}';
+
+  function getWrapper() {
+    return document.querySelector('.header-wrapper');
+  }
+
+  function update() {
+    var wrapper = getWrapper();
+    if (!wrapper) return;
+    var past = window.scrollY > threshold;
+
+    if (behavior === 'fill') {
+      wrapper.classList.toggle('ct-hw--solid',        past);
+      wrapper.classList.toggle('ct-hw--transparent', false);
+    } else if (behavior === 'clear') {
+      wrapper.classList.toggle('ct-hw--transparent',  past);
+      wrapper.classList.toggle('ct-hw--solid',        !past);
+    }
+  }
+
+  /* Wait for DOM, then watch scroll */
+  function init() {
+    /* Set initial state before any scroll */
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+{% endunless %}
+
+{% schema %}
+{
+  "name": "CT · Sense 헤더 스크롤",
+  "tag": "div",
+  "class": "chalttok-sense-scroll",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Sense 테마 기본 헤더(.header-wrapper)에 스크롤 배경 동작을 추가합니다. Header 그룹이나 페이지 템플릿 어디에나 추가하면 됩니다. 화면에 표시되는 요소는 없습니다."
+    },
+    {
+      "type": "header",
+      "content": "스크롤 동작"
+    },
+    {
+      "type": "select",
+      "id": "scroll_behavior",
+      "label": "배경 동작",
+      "options": [
+        { "value": "none",  "label": "없음 — 테마 기본값 유지" },
+        { "value": "fill",  "label": "스크롤 시 배경 채우기 (투명 → 불투명)" },
+        { "value": "clear", "label": "스크롤 시 배경 지우기 (불투명 → 투명)" }
+      ],
+      "default": "fill"
+    },
+    {
+      "type": "range",
+      "id": "scroll_threshold",
+      "label": "동작 발동 스크롤 위치",
+      "min": 10,
+      "max": 300,
+      "step": 10,
+      "unit": "px",
+      "default": 80,
+      "info": "이 값만큼 스크롤됐을 때 배경이 전환됩니다."
+    },
+    {
+      "type": "header",
+      "content": "배경 스타일"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "채우기 배경색",
+      "default": "#F8F4EE",
+      "info": "스크롤 시 배경 채우기 모드에서 사용되는 색상입니다."
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_blur",
+      "label": "배경 블러 효과",
+      "default": true,
+      "info": "불투명 배경에 blur 처리를 추가해 유리 느낌을 줍니다."
+    }
+  ],
+  "presets": [
+    {
+      "name": "CT · Sense 헤더 스크롤"
+    }
+  ]
+}
+{% endschema %}
