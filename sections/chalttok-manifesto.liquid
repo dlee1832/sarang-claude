@@ -2,7 +2,7 @@
 {% render 'chalttok-fonts' %}
 
 <style>
-  /* Reset browser/theme blockquote defaults that add a left border or indent */
+  /* Reset browser/theme blockquote defaults */
   #ct-manifesto-{{ section.id }} blockquote {
     margin: 0;
     padding: 0;
@@ -15,9 +15,28 @@
     content: none;
   }
 
+  /* Section padding */
   #ct-manifesto-{{ section.id }}.ct-manifesto {
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  /* Gap: quote → rule */
+  #ct-manifesto-{{ section.id }} .ct-manifesto__quote {
+    margin-bottom: {{ section.settings.gap_quote_rule }}px;
+  }
+
+  /* Rule appearance */
+  #ct-manifesto-{{ section.id }} .ct-manifesto__rule {
+    width: {{ section.settings.rule_width }}px;
+    background: {{ section.settings.rule_color }};
+    opacity: 1;
+    margin-bottom: {{ section.settings.gap_rule_tag }}px;
+  }
+
+  /* Gap: rule → brand tag  (margin-top already 0, gap set via rule margin-bottom above) */
+  #ct-manifesto-{{ section.id }} .ct-manifesto__sub {
+    margin-top: 0;
   }
 </style>
 
@@ -46,6 +65,10 @@
   "class": "chalttok-section",
   "settings": [
     {
+      "type": "header",
+      "content": "텍스트"
+    },
+    {
       "type": "textarea",
       "id": "quote",
       "label": "인용문",
@@ -54,12 +77,56 @@
     {
       "type": "text",
       "id": "brand_tag",
-      "label": "하단 브랜드 태그",
+      "label": "브랜드 태그",
       "default": "찰떡 · CHALTTOK"
     },
     {
       "type": "header",
-      "content": "레이아웃"
+      "content": "구분선"
+    },
+    {
+      "type": "range",
+      "id": "rule_width",
+      "label": "구분선 길이",
+      "min": 16,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "color",
+      "id": "rule_color",
+      "label": "구분선 색상",
+      "default": "#D9A99A"
+    },
+    {
+      "type": "header",
+      "content": "간격"
+    },
+    {
+      "type": "range",
+      "id": "gap_quote_rule",
+      "label": "인용구 → 구분선",
+      "min": 12,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "gap_rule_tag",
+      "label": "구분선 → 브랜드 태그",
+      "min": 12,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "header",
+      "content": "섹션 여백"
     },
     {
       "type": "range",
