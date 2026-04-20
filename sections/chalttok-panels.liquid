@@ -30,6 +30,16 @@
 
 <style>
   #shopify-section-{{ section.id }} .ct-panel__label { font-weight: {{ section.settings.font_weight_heading }}; }
+
+  {%- if section.settings.heading_font == 'cormorant' -%}
+  #shopify-section-{{ section.id }} .ct-panel__label { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; }
+  {%- elsif section.settings.heading_font == 'dm-sans' -%}
+  #shopify-section-{{ section.id }} .ct-panel__label { font-family: 'DM Sans', 'Helvetica Neue', sans-serif; font-style: normal; }
+  {%- elsif section.settings.heading_font == 'noto-kr' -%}
+  #shopify-section-{{ section.id }} .ct-panel__label { font-family: 'Noto Serif KR', 'Nanum Myeongjo', serif; font-style: normal; }
+  {%- elsif section.settings.heading_font == 'ny' -%}
+  #shopify-section-{{ section.id }} .ct-panel__label { font-family: 'New York', ui-serif, Georgia, serif; font-style: normal; }
+  {%- endif -%}
 </style>
 {% schema %}
 {
@@ -37,6 +47,25 @@
   "tag": "div",
   "class": "chalttok-section",
   "max_blocks": 3,
+  "settings": [,
+    {
+      "type": "header",
+      "content": "폰트"
+    },
+    {
+      "type": "select",
+      "id": "heading_font",
+      "label": "헤딩 폰트",
+      "options": [
+        { "value": "default",   "label": "기본 (현재 폰트 유지)" },
+        { "value": "cormorant", "label": "Cormorant (이탤릭 세리프)" },
+        { "value": "dm-sans",   "label": "DM Sans (모던 산세리프)" },
+        { "value": "noto-kr",   "label": "Noto Serif KR (한글 세리프)" },
+        { "value": "ny",        "label": "New York (애플 세리프)" }
+      ],
+      "default": "default"
+    }
+  ],
   "blocks": [
     {
       "type": "panel",
