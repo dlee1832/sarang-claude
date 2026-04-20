@@ -1,27 +1,46 @@
 {{ 'chalttok-sarang.css' | asset_url | stylesheet_tag }}
+{% render 'chalttok-fonts' %}
 
-<nav class="ct-nav" id="ct-nav-{{ section.id }}" role="navigation" aria-label="Brand navigation">
+{%- assign behavior  = section.settings.scroll_behavior -%}
+{%- assign threshold = section.settings.scroll_threshold -%}
+
+<nav
+  class="ct-nav{% if behavior == 'clear' %} ct-nav--solid{% endif %}"
+  id="ct-nav-{{ section.id }}"
+  role="navigation"
+  aria-label="Brand navigation"
+>
   <a href="{{ routes.root_url }}" class="ct-nav__logo">
     {{ section.settings.logo_text }}
   </a>
   <span class="ct-nav__tag">{{ section.settings.tag_text }}</span>
 </nav>
 
-{% if section.settings.solid_on_scroll %}
+{% unless behavior == 'none' %}
 <script>
 (function () {
-  var nav = document.getElementById('ct-nav-{{ section.id }}');
+  var nav       = document.getElementById('ct-nav-{{ section.id }}');
+  var threshold = {{ threshold }};
+  var behavior  = '{{ behavior }}';
   if (!nav) return;
-  window.addEventListener('scroll', function () {
-    if (window.scrollY > 80) {
-      nav.classList.add('ct-nav--solid');
-    } else {
-      nav.classList.remove('ct-nav--solid');
+
+  function update() {
+    var past = window.scrollY > threshold;
+    if (behavior === 'fill') {
+      /* transparent → solid */
+      nav.classList.toggle('ct-nav--solid', past);
+    } else if (behavior === 'clear') {
+      /* solid → transparent */
+      nav.classList.toggle('ct-nav--solid', !past);
+      nav.classList.toggle('ct-nav--transparent', past);
     }
-  }, { passive: true });
+  }
+
+  window.addEventListener('scroll', update, { passive: true });
+  update(); /* run once on load to set correct initial state */
 })();
 </script>
-{% endif %}
+{% endunless %}
 
 {% schema %}
 {
@@ -31,7 +50,11 @@
   "settings": [
     {
       "type": "paragraph",
-      "content": "이 네비게이션은 position: fixed로 페이지 최상단에 고정됩니다. 기존 테마 헤더를 숨기려면 테마 설정 > Custom CSS에 아래 코드를 추가하세요: .shopify-section-group-header-group { display: none; }"
+      "content": "이 네비게이션은 position: fixed로 페이지 최상단에 고정됩니다. 기존 테마 헤더를 숨기려면 테마 설정 > Custom CSS에 .shopify-section-group-header-group { display: none; } 를 추가하세요."
+    },
+    {
+      "type": "header",
+      "content": "브랜드 텍스트"
     },
     {
       "type": "text",
@@ -46,11 +69,31 @@
       "default": "사랑 · Sarang"
     },
     {
-      "type": "checkbox",
-      "id": "solid_on_scroll",
-      "label": "스크롤 시 배경 채우기",
-      "default": true,
-      "info": "80px 이상 스크롤하면 아이보리 배경이 나타납니다"
+      "type": "header",
+      "content": "스크롤 동작"
+    },
+    {
+      "type": "select",
+      "id": "scroll_behavior",
+      "label": "배경 동작",
+      "options": [
+        { "value": "none",  "label": "없음 — 항상 투명 (blend 모드)" },
+        { "value": "fill",  "label": "스크롤 시 배경 채우기 (투명 → 아이보리)" },
+        { "value": "clear", "label": "스크롤 시 배경 지우기 (아이보리 → 투명)" }
+      ],
+      "default": "fill",
+      "info": "'배경 채우기'는 어두운 히어로 위에 올릴 때, '배경 지우기'는 밝은 배경 페이지에 올릴 때 적합합니다."
+    },
+    {
+      "type": "range",
+      "id": "scroll_threshold",
+      "label": "동작 발동 스크롤 위치",
+      "min": 20,
+      "max": 300,
+      "step": 10,
+      "unit": "px",
+      "default": 80,
+      "info": "이 값(px)만큼 스크롤했을 때 배경이 변경됩니다."
     }
   ],
   "presets": [
