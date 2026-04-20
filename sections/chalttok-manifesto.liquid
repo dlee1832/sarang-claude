@@ -26,15 +26,20 @@
     margin-bottom: {{ section.settings.gap_quote_rule }}px;
   }
 
-  /* Rule appearance */
+  /* Rule — fully explicit so base-CSS shorthand can't override */
   #ct-manifesto-{{ section.id }} .ct-manifesto__rule {
+    display: block;
     width: {{ section.settings.rule_width }}px;
-    background: {{ section.settings.rule_color }};
+    height: 1px;
+    background-color: {{ section.settings.rule_color | default: '#D9A99A' }};
     opacity: 1;
+    margin-top: 0;
     margin-bottom: {{ section.settings.gap_rule_tag }}px;
+    margin-left: 0;
+    margin-right: 0;
+    border: none;
   }
 
-  /* Gap: rule → brand tag  (margin-top already 0, gap set via rule margin-bottom above) */
   #ct-manifesto-{{ section.id }} .ct-manifesto__sub {
     margin-top: 0;
   }
