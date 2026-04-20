@@ -15,7 +15,7 @@
       "settings": {
         "image": "shopify://shop_images/Gemini_Generated_Image_2ifcjn2ifcjn2ifc.jpg",
         "overlay_opacity": 45,
-        "text_bg_enabled": true,
+        "text_bg_enabled": false,
         "text_bg_style": "frosted",
         "text_bg_opacity": 10,
         "text_color": "ink",
@@ -40,6 +40,16 @@
         "gap_rule_tag": 40,
         "padding_top": 140,
         "padding_bottom": 140
+      }
+    },
+    "chalttok_split_wtKLDj": {
+      "type": "chalttok-split",
+      "name": "CT · Philosophy Split",
+      "settings": {
+        "image_position": "left",
+        "label": "A Different Beginning",
+        "heading": "One step.\nDone with care.",
+        "body_text": "We asked what skin truly needs — not what the industry decided. The answer was simple: moisture, rest, and a gentle beginning every day."
       }
     },
     "slideshow_nWeGFc": {
@@ -858,6 +868,7 @@
   "order": [
     "chalttok_overload_YNd7it",
     "chalttok_manifesto_iQMJLf",
+    "chalttok_split_wtKLDj",
     "slideshow_nWeGFc",
     "custom_liquid_UhVq6M",
     "rich_text_tnPcKU",
