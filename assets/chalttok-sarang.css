@@ -150,7 +150,9 @@
 .ct-overload {
   position: relative;
   height: 100vh;
+  min-height: 600px;
   overflow: hidden;
+  background: var(--ct-beige);
 }
 .ct-overload__img {
   position: absolute;
@@ -158,45 +160,67 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: saturate(0.85);
-  transition: transform 8s ease;
+  filter: saturate(0.72) contrast(0.96);
+  transition: transform 16s cubic-bezier(0.2, 0, 0, 1);
 }
-.ct-overload:hover .ct-overload__img { transform: scale(1.03); }
+/* subtle ambient drift — no aggressive hover zoom */
+.ct-overload:hover .ct-overload__img { transform: scale(1.015); }
 .ct-overload__overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, transparent 30%, rgba(44, 36, 32, 0.55) 100%);
+  /* base gradient — overridden per-section via ID selector */
+  background: linear-gradient(
+    to bottom,
+    transparent 30%,
+    rgba(44, 36, 32, 0.55) 100%
+  );
 }
 .ct-overload__text {
   position: absolute;
   bottom: 72px;
   left: 64px;
-  max-width: 480px;
+  max-width: 460px;
   z-index: 5;
 }
+/* Thin accent rule above the label — editorial marker */
+.ct-overload__accent {
+  display: block;
+  width: 28px;
+  height: 1px;
+  background: rgba(248, 244, 238, 0.38);
+  margin-bottom: 22px;
+  border: none;
+}
 .ct-label-micro {
+  font-family: 'DM Sans', 'Helvetica Neue', sans-serif;
   font-size: 9px;
   font-weight: 300;
-  letter-spacing: 0.45em;
+  letter-spacing: 0.52em;
   text-transform: uppercase;
   color: rgba(248, 244, 238, 0.5);
-  margin-bottom: 20px;
+  margin: 0 0 18px;
+  -webkit-font-smoothing: antialiased;
 }
 .ct-statement-lg {
   font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: clamp(32px, 4vw, 52px);
+  font-size: clamp(36px, 4.5vw, 62px);
   font-weight: 300;
   font-style: italic;
   color: var(--ct-ivory);
-  line-height: 1.25;
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
 }
 .ct-caption-sm {
-  font-size: 13px;
+  font-family: 'DM Sans', 'Helvetica Neue', sans-serif;
+  font-size: 12px;
   font-weight: 300;
-  color: rgba(248, 244, 238, 0.6);
-  line-height: 1.8;
-  margin-top: 20px;
-  max-width: 360px;
+  color: rgba(248, 244, 238, 0.55);
+  line-height: 1.9;
+  letter-spacing: 0.025em;
+  margin: 22px 0 0;
+  max-width: 340px;
+  -webkit-font-smoothing: antialiased;
 }
 
 /* ── Manifesto (S2) ── */
@@ -755,7 +779,8 @@
   .ct-birth__text,
   .ct-ingredients__text { padding: 64px 32px; }
 
-  .ct-overload__text { left: 32px; bottom: 56px; }
+  .ct-overload__text { left: 28px; right: 28px; bottom: 48px; max-width: unset; }
+  .ct-overload__text .ct-caption-sm { max-width: 100%; }
   .ct-drop__caption  { right: 32px; }
 
   .ct-manifesto { padding: 100px 32px; }
