@@ -14,7 +14,7 @@
       "name": "CT · Overwhelm",
       "settings": {
         "image": "shopify://shop_images/Gemini_Generated_Image_2ifcjn2ifcjn2ifc.jpg",
-        "overlay_opacity": 45,
+        "overlay_opacity": 10,
         "text_bg_enabled": false,
         "text_bg_style": "frosted",
         "text_bg_opacity": 10,
@@ -25,8 +25,8 @@
         "heading_size_min": 32,
         "heading_size_max": 52,
         "caption": "Twelve steps. Twenty products. Skin exhausted by the very things meant to help it.",
-        "font_weight_heading": "700",
-        "font_weight_body": "400"
+        "font_weight_heading": "300",
+        "font_weight_body": "300"
       }
     },
     "chalttok_manifesto_iQMJLf": {
@@ -42,7 +42,7 @@
         "gap_rule_tag": 40,
         "padding_top": 140,
         "padding_bottom": 140,
-        "font_weight_heading": "300",
+        "font_weight_heading": "600",
         "font_weight_body": "300"
       }
     },
