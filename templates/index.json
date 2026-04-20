@@ -603,7 +603,7 @@
         "body_text": "Named for love. Formulated with restraint. A blush-pink serum that absorbs in silence and asks for nothing more.",
         "cta_label": "Shop now",
         "cta_url": "",
-        "image": "shopify://shop_images/sarang-theme-img-03.png",
+        "image": "shopify://shop_images/sarang-theme-img-05.png",
         "heading_font": "default",
         "font_weight_heading": "300",
         "font_weight_body": "300"
@@ -830,6 +830,19 @@
         "section_label": "What's inside"
       }
     },
+    "chalttok_meaning_cJyCeQ": {
+      "type": "chalttok-meaning",
+      "name": "CT · Meaning",
+      "settings": {
+        "image": "shopify://shop_images/Gemini_Generated_Image_6t5z7v6t5z7v6t5z.jpg",
+        "kr_bg_text": "사랑",
+        "quote": "Love, as an act.\nNot a promise.",
+        "kr_sub_text": "사랑 · To care without condition",
+        "heading_font": "default",
+        "font_weight_heading": "300",
+        "font_weight_body": "300"
+      }
+    },
     "chalttok_future_EC8wf7": {
       "type": "chalttok-future",
       "name": "CT · Future Close",
@@ -856,6 +869,7 @@
     "image_banner_htdK9p",
     "image_banner_dVMgcT",
     "rich_text_7DJ8Uq",
+    "chalttok_meaning_cJyCeQ",
     "chalttok_ingredients_JN9bRr",
     "chalttok_future_EC8wf7"
   ]
