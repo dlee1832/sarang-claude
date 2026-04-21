@@ -801,9 +801,9 @@
       "type": "chalttok-meaning",
       "name": "CT · Meaning",
       "settings": {
-        "image": "shopify://shop_images/Gemini_Generated_Image_6t5z7v6t5z7v6t5z.jpg",
+        "image": "shopify://shop_images/beauty-natural-2.jpg",
         "overlay_opacity": 30,
-        "kr_bg_text": "사랑",
+        "kr_bg_text": "",
         "quote": "Love, as an act.\nNot a promise.",
         "kr_sub_text": "SARANG (n.) the Korean word for love and care",
         "text_color": "ink",
@@ -861,7 +861,11 @@
       "name": "CT · Ingredients",
       "settings": {
         "image": "shopify://shop_images/sarang-theme-img-02.png",
-        "section_label": "What's inside"
+        "section_label": "What's inside",
+        "ing_name_font": "default",
+        "font_weight_ing_name": "300",
+        "ing_desc_font": "default",
+        "font_weight_ing_desc": "300"
       }
     },
     "chalttok_future_EC8wf7": {
