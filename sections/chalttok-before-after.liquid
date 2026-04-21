@@ -1,0 +1,1032 @@
+{{ 'chalttok-sarang.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign _split_default = 50
+
+  comment — layout direction
+  endcomment
+  assign _layout = section.settings.layout_direction
+
+  comment — eyebrow font
+  endcomment
+  case section.settings.eyebrow_font
+    when 'cormorant'
+      assign _eyebrow_family = "'Cormorant Garamond', Georgia, serif"
+      assign _eyebrow_style  = 'italic'
+    when 'dm-sans'
+      assign _eyebrow_family = "'DM Sans', 'Helvetica Neue', sans-serif"
+      assign _eyebrow_style  = 'normal'
+    when 'noto-kr'
+      assign _eyebrow_family = "'Noto Serif KR', 'Nanum Myeongjo', serif"
+      assign _eyebrow_style  = 'normal'
+    when 'ny'
+      assign _eyebrow_family = "'New York', ui-serif, Georgia, serif"
+      assign _eyebrow_style  = 'normal'
+    else
+      assign _eyebrow_family = 'inherit'
+      assign _eyebrow_style  = 'normal'
+  endcase
+
+  comment — heading font
+  endcomment
+  case section.settings.heading_font
+    when 'cormorant'
+      assign _heading_family = "'Cormorant Garamond', Georgia, serif"
+      assign _heading_style  = 'italic'
+    when 'dm-sans'
+      assign _heading_family = "'DM Sans', 'Helvetica Neue', sans-serif"
+      assign _heading_style  = 'normal'
+    when 'noto-kr'
+      assign _heading_family = "'Noto Serif KR', 'Nanum Myeongjo', serif"
+      assign _heading_style  = 'normal'
+    when 'ny'
+      assign _heading_family = "'New York', ui-serif, Georgia, serif"
+      assign _heading_style  = 'normal'
+    else
+      assign _heading_family = 'inherit'
+      assign _heading_style  = 'normal'
+  endcase
+
+  comment — description font
+  endcomment
+  case section.settings.desc_font
+    when 'cormorant'
+      assign _desc_family = "'Cormorant Garamond', Georgia, serif"
+      assign _desc_style  = 'italic'
+    when 'dm-sans'
+      assign _desc_family = "'DM Sans', 'Helvetica Neue', sans-serif"
+      assign _desc_style  = 'normal'
+    when 'noto-kr'
+      assign _desc_family = "'Noto Serif KR', 'Nanum Myeongjo', serif"
+      assign _desc_style  = 'normal'
+    when 'ny'
+      assign _desc_family = "'New York', ui-serif, Georgia, serif"
+      assign _desc_style  = 'normal'
+    else
+      assign _desc_family = 'inherit'
+      assign _desc_style  = 'normal'
+  endcase
+
+  comment — note font
+  endcomment
+  case section.settings.note_font
+    when 'cormorant'
+      assign _note_family = "'Cormorant Garamond', Georgia, serif"
+      assign _note_style  = 'italic'
+    when 'dm-sans'
+      assign _note_family = "'DM Sans', 'Helvetica Neue', sans-serif"
+      assign _note_style  = 'normal'
+    when 'noto-kr'
+      assign _note_family = "'Noto Serif KR', 'Nanum Myeongjo', serif"
+      assign _note_style  = 'normal'
+    when 'ny'
+      assign _note_family = "'New York', ui-serif, Georgia, serif"
+      assign _note_style  = 'normal'
+    else
+      assign _note_family = 'inherit'
+      assign _note_style  = 'normal'
+  endcase
+
+  comment — letter-spacing: stored as integer 0-30, output as em
+  endcomment
+  assign _eyebrow_ls = section.settings.eyebrow_letter_spacing | times: 1.0 | divided_by: 100
+  assign _heading_ls = section.settings.heading_letter_spacing | times: 1.0 | divided_by: 100
+  assign _desc_ls    = section.settings.desc_letter_spacing    | times: 1.0 | divided_by: 100
+  assign _label_ls   = section.settings.label_letter_spacing   | times: 1.0 | divided_by: 100
+  assign _note_ls    = section.settings.note_letter_spacing    | times: 1.0 | divided_by: 100
+
+  comment — line-height: stored as integer 100-220, output as decimal
+  endcomment
+  assign _eyebrow_lh = section.settings.eyebrow_line_height | times: 1.0 | divided_by: 100
+  assign _heading_lh = section.settings.heading_line_height | times: 1.0 | divided_by: 100
+  assign _desc_lh    = section.settings.desc_line_height    | times: 1.0 | divided_by: 100
+  assign _label_lh   = section.settings.label_line_height   | times: 1.0 | divided_by: 100
+  assign _note_lh    = section.settings.note_line_height    | times: 1.0 | divided_by: 100
+
+  comment — overlay alpha
+  endcomment
+  assign _overlay_alpha = section.settings.overlay_opacity | times: 1.0 | divided_by: 100 | round: 2
+-%}
+
+{%- style -%}
+  /* ── Section wrapper ── */
+  #shopify-section-{{ section.id }} .ct-ba {
+    background-color: {{ section.settings.bg_color }};
+    padding-top: {{ section.settings.padding_v }}px;
+    padding-bottom: {{ section.settings.padding_v }}px;
+  }
+
+  #shopify-section-{{ section.id }} .ct-ba__inner {
+    max-width: {{ section.settings.section_max_width }}px;
+    margin-inline: auto;
+    padding-inline: 24px;
+    display: flex;
+    gap: {{ section.settings.content_gap }}px;
+    align-items: center;
+    {%- if _layout == 'image-right' -%}
+    flex-direction: row-reverse;
+    {%- elsif _layout == 'image-top' -%}
+    flex-direction: column;
+    {%- else -%}
+    flex-direction: row;
+    {%- endif -%}
+  }
+
+  /* ── Text block ── */
+  #shopify-section-{{ section.id }} .ct-ba__text {
+    flex: 1 1 0;
+    min-width: 0;
+    text-align: {{ section.settings.text_align }};
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  /* ── Slider block ── */
+  #shopify-section-{{ section.id }} .ct-ba__slider-wrap {
+    flex: 1.2 1 0;
+    min-width: 0;
+  }
+
+  {%- if _layout == 'image-top' -%}
+  #shopify-section-{{ section.id }} .ct-ba__text,
+  #shopify-section-{{ section.id }} .ct-ba__slider-wrap {
+    flex: unset;
+    width: 100%;
+    max-width: 720px;
+    margin-inline: auto;
+  }
+  {%- endif -%}
+
+  /* ── Slider container ── */
+  #shopify-section-{{ section.id }} .ct-ba__slider {
+    position: relative;
+    overflow: hidden;
+    border-radius: {{ section.settings.img_radius }}px;
+    user-select: none;
+    touch-action: pan-y;
+    cursor: col-resize;
+  }
+
+  /* ── After image (base layer, full width) ── */
+  #shopify-section-{{ section.id }} .ct-ba__after-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  /* ── Before image (clipped layer on top) ── */
+  #shopify-section-{{ section.id }} .ct-ba__before-wrap {
+    position: absolute;
+    inset: 0;
+    width: 50%;
+    overflow: hidden;
+    transition: none;
+  }
+
+  #shopify-section-{{ section.id }} .ct-ba__before-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: left center;
+    min-width: var(--ct-ba-slider-width, 100%);
+  }
+
+  /* ── Overlay tint ── */
+  {%- if _overlay_alpha > 0 -%}
+  #shopify-section-{{ section.id }} .ct-ba__before-wrap::after,
+  #shopify-section-{{ section.id }} .ct-ba__after-img-wrap::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(44, 36, 32, {{ _overlay_alpha }});
+    pointer-events: none;
+  }
+  {%- endif -%}
+
+  /* ── Handle ── */
+  #shopify-section-{{ section.id }} .ct-ba__handle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  #shopify-section-{{ section.id }} .ct-ba__handle-line {
+    position: absolute;
+    inset: 0;
+    width: 1.5px;
+    background: {{ section.settings.handle_color }};
+    opacity: 0.85;
+    margin-inline: auto;
+  }
+
+  #shopify-section-{{ section.id }} .ct-ba__handle-knob {
+    position: relative;
+    z-index: 1;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: {{ section.settings.handle_color }};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
+    flex-shrink: 0;
+  }
+
+  #shopify-section-{{ section.id }} .ct-ba__handle-knob svg {
+    display: block;
+    width: 18px;
+    height: 18px;
+    opacity: 0.85;
+  }
+
+  /* ── Labels ── */
+  #shopify-section-{{ section.id }} .ct-ba__label {
+    position: absolute;
+    bottom: 18px;
+    font-size: {{ section.settings.label_size }}px;
+    font-weight: {{ section.settings.label_weight }};
+    line-height: {{ _label_lh }};
+    letter-spacing: {{ _label_ls }}em;
+    color: {{ section.settings.label_color }};
+    font-family: inherit;
+    pointer-events: none;
+    z-index: 8;
+    padding: 4px 12px;
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 2px;
+  }
+
+  #shopify-section-{{ section.id }} .ct-ba__label--before {
+    left: 16px;
+  }
+
+  #shopify-section-{{ section.id }} .ct-ba__label--after {
+    right: 16px;
+  }
+
+  /* ── Eyebrow ── */
+  #shopify-section-{{ section.id }} .ct-ba__eyebrow {
+    font-family: {{ _eyebrow_family }};
+    font-style: {{ _eyebrow_style }};
+    font-size: {{ section.settings.eyebrow_size }}px;
+    font-weight: {{ section.settings.eyebrow_weight }};
+    line-height: {{ _eyebrow_lh }};
+    letter-spacing: {{ _eyebrow_ls }}em;
+    color: {{ section.settings.eyebrow_color }};
+    margin: 0 0 16px;
+    text-transform: uppercase;
+  }
+
+  /* ── Heading ── */
+  #shopify-section-{{ section.id }} .ct-ba__heading {
+    font-family: {{ _heading_family }};
+    font-style: {{ _heading_style }};
+    font-size: {{ section.settings.heading_size }}px;
+    font-weight: {{ section.settings.heading_weight }};
+    line-height: {{ _heading_lh }};
+    letter-spacing: {{ _heading_ls }}em;
+    color: {{ section.settings.heading_color }};
+    margin: 0 0 24px;
+  }
+
+  /* ── Description ── */
+  #shopify-section-{{ section.id }} .ct-ba__desc {
+    font-family: {{ _desc_family }};
+    font-style: {{ _desc_style }};
+    font-size: {{ section.settings.desc_size }}px;
+    font-weight: {{ section.settings.desc_weight }};
+    line-height: {{ _desc_lh }};
+    letter-spacing: {{ _desc_ls }}em;
+    color: {{ section.settings.desc_color }};
+    margin: 0;
+  }
+
+  /* ── Notes ── */
+  #shopify-section-{{ section.id }} .ct-ba__notes {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  #shopify-section-{{ section.id }} .ct-ba__note {
+    font-family: {{ _note_family }};
+    font-style: {{ _note_style }};
+    font-size: {{ section.settings.note_size }}px;
+    font-weight: {{ section.settings.note_weight }};
+    line-height: {{ _note_lh }};
+    letter-spacing: {{ _note_ls }}em;
+    color: {{ section.settings.note_color }};
+    margin: 0;
+    padding-left: 14px;
+    border-left: 1px solid {{ section.settings.note_color | color_modify: 'alpha', 0.3 }};
+  }
+
+  /* ── Mobile ── */
+  @media (max-width: 768px) {
+    #shopify-section-{{ section.id }} .ct-ba__inner {
+      flex-direction: column;
+      gap: {{ section.settings.content_gap | times: 0.7 | round: 0 }}px;
+    }
+
+    #shopify-section-{{ section.id }} .ct-ba__text,
+    #shopify-section-{{ section.id }} .ct-ba__slider-wrap {
+      flex: unset;
+      width: 100%;
+    }
+
+    #shopify-section-{{ section.id }} .ct-ba__heading {
+      font-size: {{ section.settings.heading_size_mobile }}px;
+    }
+
+    #shopify-section-{{ section.id }} .ct-ba__eyebrow {
+      font-size: {{ section.settings.eyebrow_size_mobile }}px;
+    }
+
+    #shopify-section-{{ section.id }} .ct-ba__desc {
+      font-size: {{ section.settings.desc_size_mobile }}px;
+    }
+
+    #shopify-section-{{ section.id }} .ct-ba {
+      padding-top: {{ section.settings.padding_v | times: 0.65 | round: 0 }}px;
+      padding-bottom: {{ section.settings.padding_v | times: 0.65 | round: 0 }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="ct-ba" id="ct-ba-section-{{ section.id }}">
+  <div class="ct-ba__inner">
+
+    <div class="ct-ba__text ct-reveal">
+      {%- if section.settings.eyebrow_text != blank -%}
+        <p class="ct-ba__eyebrow">{{ section.settings.eyebrow_text | escape }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.heading != blank -%}
+        <h2 class="ct-ba__heading">{{ section.settings.heading | newline_to_br }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.description != blank -%}
+        <p class="ct-ba__desc">{{ section.settings.description }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.note_1 != blank or section.settings.note_2 != blank -%}
+        <div class="ct-ba__notes">
+          {%- if section.settings.note_1 != blank -%}
+            <p class="ct-ba__note">{{ section.settings.note_1 | escape }}</p>
+          {%- endif -%}
+          {%- if section.settings.note_2 != blank -%}
+            <p class="ct-ba__note">{{ section.settings.note_2 | escape }}</p>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="ct-ba__slider-wrap ct-reveal ct-reveal--d1">
+      <div
+        class="ct-ba__slider"
+        id="ct-ba-slider-{{ section.id }}"
+        data-split="{{ _split_default }}"
+        role="img"
+        aria-label="{{ section.settings.heading | escape }}: before and after comparison"
+      >
+
+        {%- if section.settings.after_image != blank -%}
+          {{
+            section.settings.after_image
+            | image_url: width: 1400
+            | image_tag:
+              class: 'ct-ba__after-img',
+              loading: 'lazy',
+              draggable: 'false',
+              alt: section.settings.after_image.alt
+          }}
+        {%- else -%}
+          {{ 'product-4' | placeholder_svg_tag: 'ct-ba__after-img placeholder-svg' }}
+        {%- endif -%}
+
+        <div class="ct-ba__before-wrap" id="ct-ba-before-{{ section.id }}">
+          {%- if section.settings.before_image != blank -%}
+            {{
+              section.settings.before_image
+              | image_url: width: 1400
+              | image_tag:
+                class: 'ct-ba__before-img',
+                loading: 'lazy',
+                draggable: 'false',
+                alt: section.settings.before_image.alt
+            }}
+          {%- else -%}
+            {{ 'product-3' | placeholder_svg_tag: 'ct-ba__before-img placeholder-svg' }}
+          {%- endif -%}
+          {%- if section.settings.before_label != blank -%}
+            <span class="ct-ba__label ct-ba__label--before">{{ section.settings.before_label | escape }}</span>
+          {%- endif -%}
+        </div>
+
+        {%- if section.settings.after_label != blank -%}
+          <span class="ct-ba__label ct-ba__label--after">{{ section.settings.after_label | escape }}</span>
+        {%- endif -%}
+
+        <div class="ct-ba__handle" id="ct-ba-handle-{{ section.id }}" aria-hidden="true">
+          <div class="ct-ba__handle-line"></div>
+          <div class="ct-ba__handle-knob">
+            <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 4L2 9L6 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M12 4L16 9L12 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+(function () {
+  var slider   = document.getElementById('ct-ba-slider-{{ section.id }}');
+  var before   = document.getElementById('ct-ba-before-{{ section.id }}');
+  var handle   = document.getElementById('ct-ba-handle-{{ section.id }}');
+  if (!slider || !before || !handle) return;
+
+  var split    = parseFloat(slider.dataset.split) || 50;
+  var dragging = false;
+
+  function clamp(v, lo, hi) { return Math.min(hi, Math.max(lo, v)); }
+
+  function setPosition(pct) {
+    split = clamp(pct, 1, 99);
+    before.style.width  = split + '%';
+    handle.style.left   = split + '%';
+    slider.style.setProperty('--ct-ba-slider-width', (100 / split * 100) + '%');
+  }
+
+  function posFromEvent(e) {
+    var rect = slider.getBoundingClientRect();
+    var clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    return clamp((clientX - rect.left) / rect.width * 100, 1, 99);
+  }
+
+  setPosition(split);
+
+  slider.addEventListener('mousedown', function (e) {
+    e.preventDefault();
+    dragging = true;
+    setPosition(posFromEvent(e));
+  });
+
+  slider.addEventListener('touchstart', function (e) {
+    dragging = true;
+    setPosition(posFromEvent(e));
+  }, { passive: true });
+
+  window.addEventListener('mousemove', function (e) {
+    if (!dragging) return;
+    e.preventDefault();
+    setPosition(posFromEvent(e));
+  });
+
+  window.addEventListener('touchmove', function (e) {
+    if (!dragging) return;
+    setPosition(posFromEvent(e));
+  }, { passive: true });
+
+  window.addEventListener('mouseup',   function () { dragging = false; });
+  window.addEventListener('touchend',  function () { dragging = false; });
+
+  slider.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowLeft')  setPosition(split - 2);
+    if (e.key === 'ArrowRight') setPosition(split + 2);
+  });
+})();
+</script>
+
+<script src="{{ 'chalttok-sarang.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "CT · Before / After",
+  "tag": "div",
+  "class": "chalttok-section",
+  "settings": [
+
+    {
+      "type": "header",
+      "content": "레이아웃"
+    },
+    {
+      "type": "select",
+      "id": "layout_direction",
+      "label": "이미지 위치",
+      "options": [
+        { "value": "image-left",  "label": "이미지 왼쪽 / 텍스트 오른쪽" },
+        { "value": "image-right", "label": "이미지 오른쪽 / 텍스트 왼쪽" },
+        { "value": "image-top",   "label": "이미지 위 / 텍스트 아래 (풀 스택)" }
+      ],
+      "default": "image-left"
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "텍스트 정렬",
+      "options": [
+        { "value": "left",   "label": "왼쪽" },
+        { "value": "center", "label": "가운데" },
+        { "value": "right",  "label": "오른쪽" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "section_max_width",
+      "label": "섹션 최대 너비",
+      "min": 800,
+      "max": 1600,
+      "step": 40,
+      "unit": "px",
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "content_gap",
+      "label": "이미지 ↔ 텍스트 간격",
+      "min": 24,
+      "max": 120,
+      "step": 8,
+      "unit": "px",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_v",
+      "label": "상하 여백",
+      "min": 40,
+      "max": 200,
+      "step": 8,
+      "unit": "px",
+      "default": 100
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "배경 색상",
+      "default": "#F8F4EE"
+    },
+
+    {
+      "type": "header",
+      "content": "텍스트 내용"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow_text",
+      "label": "Eyebrow 소제목",
+      "default": "Clinically Tested"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Visible change.\nIn 4 weeks."
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Formulated with Niacinamide, Panthenol, and Centella, our serum works with your skin's rhythm — not against it. These are real results from real people.</p>"
+    },
+    {
+      "type": "text",
+      "id": "note_1",
+      "label": "Result note 1",
+      "default": "94% reported improved skin texture"
+    },
+    {
+      "type": "text",
+      "id": "note_2",
+      "label": "Result note 2",
+      "default": "88% saw a visible reduction in redness"
+    },
+
+    {
+      "type": "header",
+      "content": "이미지"
+    },
+    {
+      "type": "image_picker",
+      "id": "before_image",
+      "label": "Before 이미지"
+    },
+    {
+      "type": "image_picker",
+      "id": "after_image",
+      "label": "After 이미지"
+    },
+    {
+      "type": "text",
+      "id": "before_label",
+      "label": "Before 레이블",
+      "default": "Before"
+    },
+    {
+      "type": "text",
+      "id": "after_label",
+      "label": "After 레이블",
+      "default": "After"
+    },
+    {
+      "type": "range",
+      "id": "img_radius",
+      "label": "이미지 모서리 둥글기",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "color",
+      "id": "handle_color",
+      "label": "슬라이더 핸들 색상",
+      "default": "#F8F4EE"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "이미지 오버레이 강도",
+      "min": 0,
+      "max": 40,
+      "step": 5,
+      "unit": "%",
+      "default": 0,
+      "info": "양쪽 이미지에 동일하게 적용되는 어두운 오버레이입니다."
+    },
+
+    {
+      "type": "header",
+      "content": "Eyebrow 폰트"
+    },
+    {
+      "type": "select",
+      "id": "eyebrow_font",
+      "label": "폰트 종류",
+      "options": [
+        { "value": "default",   "label": "기본 (테마 폰트)" },
+        { "value": "cormorant", "label": "Cormorant (이탤릭 세리프)" },
+        { "value": "dm-sans",   "label": "DM Sans (모던 산세리프)" },
+        { "value": "noto-kr",   "label": "Noto Serif KR (한글 세리프)" },
+        { "value": "ny",        "label": "New York (애플 세리프)" }
+      ],
+      "default": "dm-sans"
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_size",
+      "label": "크기 (데스크탑)",
+      "min": 9,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 11
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_size_mobile",
+      "label": "크기 (모바일)",
+      "min": 9,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "select",
+      "id": "eyebrow_weight",
+      "label": "두께",
+      "options": [
+        { "value": "200", "label": "200 — Thin" },
+        { "value": "300", "label": "300 — Light" },
+        { "value": "400", "label": "400 — Regular" },
+        { "value": "500", "label": "500 — Medium" },
+        { "value": "600", "label": "600 — SemiBold" }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_line_height",
+      "label": "행간 (×100)",
+      "min": 100,
+      "max": 200,
+      "step": 5,
+      "default": 140,
+      "info": "140 = line-height: 1.4"
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_letter_spacing",
+      "label": "자간 (×100 em)",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "default": 18,
+      "info": "18 = letter-spacing: 0.18em"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "색상",
+      "default": "#9C8576"
+    },
+
+    {
+      "type": "header",
+      "content": "Heading 폰트"
+    },
+    {
+      "type": "select",
+      "id": "heading_font",
+      "label": "폰트 종류",
+      "options": [
+        { "value": "default",   "label": "기본 (테마 폰트)" },
+        { "value": "cormorant", "label": "Cormorant (이탤릭 세리프)" },
+        { "value": "dm-sans",   "label": "DM Sans (모던 산세리프)" },
+        { "value": "noto-kr",   "label": "Noto Serif KR (한글 세리프)" },
+        { "value": "ny",        "label": "New York (애플 세리프)" }
+      ],
+      "default": "cormorant"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "크기 (데스크탑)",
+      "min": 24,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "label": "크기 (모바일)",
+      "min": 22,
+      "max": 56,
+      "step": 2,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "select",
+      "id": "heading_weight",
+      "label": "두께",
+      "options": [
+        { "value": "200", "label": "200 — Thin" },
+        { "value": "300", "label": "300 — Light" },
+        { "value": "400", "label": "400 — Regular" },
+        { "value": "500", "label": "500 — Medium" },
+        { "value": "600", "label": "600 — SemiBold" },
+        { "value": "700", "label": "700 — Bold" }
+      ],
+      "default": "300"
+    },
+    {
+      "type": "range",
+      "id": "heading_line_height",
+      "label": "행간 (×100)",
+      "min": 100,
+      "max": 160,
+      "step": 5,
+      "default": 115,
+      "info": "115 = line-height: 1.15"
+    },
+    {
+      "type": "range",
+      "id": "heading_letter_spacing",
+      "label": "자간 (×100 em)",
+      "min": -5,
+      "max": 15,
+      "step": 1,
+      "default": -1,
+      "info": "-1 = letter-spacing: -0.01em"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "색상",
+      "default": "#2C2420"
+    },
+
+    {
+      "type": "header",
+      "content": "Description 폰트"
+    },
+    {
+      "type": "select",
+      "id": "desc_font",
+      "label": "폰트 종류",
+      "options": [
+        { "value": "default",   "label": "기본 (테마 폰트)" },
+        { "value": "cormorant", "label": "Cormorant (이탤릭 세리프)" },
+        { "value": "dm-sans",   "label": "DM Sans (모던 산세리프)" },
+        { "value": "noto-kr",   "label": "Noto Serif KR (한글 세리프)" },
+        { "value": "ny",        "label": "New York (애플 세리프)" }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "range",
+      "id": "desc_size",
+      "label": "크기 (데스크탑)",
+      "min": 13,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "desc_size_mobile",
+      "label": "크기 (모바일)",
+      "min": 13,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "select",
+      "id": "desc_weight",
+      "label": "두께",
+      "options": [
+        { "value": "200", "label": "200 — Thin" },
+        { "value": "300", "label": "300 — Light" },
+        { "value": "400", "label": "400 — Regular" }
+      ],
+      "default": "300"
+    },
+    {
+      "type": "range",
+      "id": "desc_line_height",
+      "label": "행간 (×100)",
+      "min": 130,
+      "max": 220,
+      "step": 5,
+      "default": 175,
+      "info": "175 = line-height: 1.75"
+    },
+    {
+      "type": "range",
+      "id": "desc_letter_spacing",
+      "label": "자간 (×100 em)",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "default": 1,
+      "info": "1 = letter-spacing: 0.01em"
+    },
+    {
+      "type": "color",
+      "id": "desc_color",
+      "label": "색상",
+      "default": "#5A4A44"
+    },
+
+    {
+      "type": "header",
+      "content": "Before / After 레이블 폰트"
+    },
+    {
+      "type": "range",
+      "id": "label_size",
+      "label": "크기",
+      "min": 9,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "default": 11
+    },
+    {
+      "type": "select",
+      "id": "label_weight",
+      "label": "두께",
+      "options": [
+        { "value": "300", "label": "300 — Light" },
+        { "value": "400", "label": "400 — Regular" },
+        { "value": "500", "label": "500 — Medium" }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "range",
+      "id": "label_line_height",
+      "label": "행간 (×100)",
+      "min": 100,
+      "max": 180,
+      "step": 5,
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "label_letter_spacing",
+      "label": "자간 (×100 em)",
+      "min": 0,
+      "max": 25,
+      "step": 1,
+      "default": 12
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "색상",
+      "default": "#F8F4EE"
+    },
+
+    {
+      "type": "header",
+      "content": "Result Notes 폰트"
+    },
+    {
+      "type": "select",
+      "id": "note_font",
+      "label": "폰트 종류",
+      "options": [
+        { "value": "default",   "label": "기본 (테마 폰트)" },
+        { "value": "cormorant", "label": "Cormorant (이탤릭 세리프)" },
+        { "value": "dm-sans",   "label": "DM Sans (모던 산세리프)" },
+        { "value": "noto-kr",   "label": "Noto Serif KR (한글 세리프)" },
+        { "value": "ny",        "label": "New York (애플 세리프)" }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "range",
+      "id": "note_size",
+      "label": "크기",
+      "min": 11,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 13
+    },
+    {
+      "type": "select",
+      "id": "note_weight",
+      "label": "두께",
+      "options": [
+        { "value": "200", "label": "200 — Thin" },
+        { "value": "300", "label": "300 — Light" },
+        { "value": "400", "label": "400 — Regular" }
+      ],
+      "default": "300"
+    },
+    {
+      "type": "range",
+      "id": "note_line_height",
+      "label": "행간 (×100)",
+      "min": 120,
+      "max": 200,
+      "step": 5,
+      "default": 155
+    },
+    {
+      "type": "range",
+      "id": "note_letter_spacing",
+      "label": "자간 (×100 em)",
+      "min": 0,
+      "max": 15,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "color",
+      "id": "note_color",
+      "label": "색상",
+      "default": "#9C8576"
+    }
+
+  ],
+  "presets": [
+    {
+      "name": "CT · Before / After"
+    }
+  ]
+}
+{% endschema %}
