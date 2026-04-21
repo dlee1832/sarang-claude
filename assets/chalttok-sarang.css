@@ -596,25 +596,11 @@
 /* ── Future (S9) ── */
 .ct-future {
   background: var(--ct-ivory);
+  padding: 160px 48px;
   text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-.ct-future__bg {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-.ct-future__overlay {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-.ct-future__content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 160px 48px;
 }
 .ct-future__line {
   width: 1px;
@@ -817,7 +803,7 @@
   .ct-meaning__center { padding: 60px 28px; max-width: 100%; }
 
   .ct-manifesto { padding: 100px 32px; }
-  .ct-future__content { padding: 80px 32px; }
+  .ct-future    { padding: 100px 32px; }
 
   .ct-scroll-cue { right: 24px; }
 
