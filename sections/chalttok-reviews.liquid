@@ -150,6 +150,7 @@
                 ></iframe>
               </div>
             {%- else -%}
+              {%- if block.settings.thumbnail != blank or _vurl != blank -%}
               <div class="ct-reviews__thumb-wrap">
                 {%- if block.settings.thumbnail != blank -%}
                   {{
@@ -177,6 +178,7 @@
                   </button>
                 {%- endif -%}
               </div>
+              {%- endif -%}
             {%- endif -%}
 
             {%- if block.settings.title != blank or block.settings.caption != blank -%}
