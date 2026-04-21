@@ -750,7 +750,15 @@
     object-fit: initial;
   }
 
-  .ct-birth__img-wrap,
+  .ct-birth__img-wrap {
+    height: auto;
+    background: var(--ct-beige);
+  }
+  .ct-birth__img-wrap .ct-birth__img {
+    height: auto;
+    object-fit: initial;
+  }
+
   .ct-ingredients__img-wrap { height: 60vw; }
 
   .ct-panels {
