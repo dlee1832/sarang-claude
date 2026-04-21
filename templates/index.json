@@ -13,12 +13,11 @@
       "type": "chalttok-overload",
       "name": "CT · Overwhelm",
       "settings": {
-        "image": "shopify://shop_images/Gemini_Generated_Image_2ifcjn2ifcjn2ifc.jpg",
-        "overlay_opacity": 15,
+        "image": "shopify://shop_images/sarang-theme-img-06v2.png",
         "text_bg_enabled": false,
         "text_bg_style": "frosted",
         "text_bg_opacity": 10,
-        "text_color": "ink",
+        "text_color": "white",
         "label": "",
         "heading": "When did caring\nbecome so heavy?",
         "heading_font": "serif",
@@ -28,7 +27,7 @@
         "section_padding_bottom": 160,
         "text_bottom": 48,
         "image_focus_y": 40,
-        "font_weight_heading": "600",
+        "font_weight_heading": "400",
         "font_weight_body": "400"
       }
     },
@@ -48,7 +47,7 @@
         "padding_bottom": 100,
         "heading_font": "cormorant",
         "font_weight_heading": "400",
-        "font_weight_body": "200"
+        "font_weight_body": "400"
       }
     },
     "chalttok_split_wtKLDj": {
