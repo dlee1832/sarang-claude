@@ -773,7 +773,31 @@
 
   .ct-overload__text { left: 32px; bottom: 56px; }
   .ct-drop__caption  { right: 32px; }
-  .ct-meaning__center { padding: 60px 28px; max-width: 100%; }
+  .ct-meaning {
+    height: auto;
+    display: block;
+  }
+  .ct-meaning__img {
+    position: relative;
+    width: 100%;
+    height: auto;
+    object-fit: initial;
+    display: block;
+  }
+  .ct-meaning__overlay,
+  .ct-meaning__center {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+  .ct-meaning__overlay {
+    bottom: 0;
+  }
+  .ct-meaning__center {
+    padding: 48px 28px;
+    max-width: 100%;
+  }
 
   .ct-manifesto { padding: 100px 32px; }
   .ct-future    { padding: 100px 32px; }
