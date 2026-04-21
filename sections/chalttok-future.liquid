@@ -23,12 +23,6 @@
 -%}
 
 {%- style -%}
-  #shopify-section-{{ section.id }} .ct-future {
-    padding-top: {{ section.settings.padding_top }}px;
-    padding-bottom: {{ section.settings.padding_bottom }}px;
-    justify-content: {{ section.settings.text_v_pos }};
-  }
-
   {%- if _has_image -%}
   #shopify-section-{{ section.id }} .ct-future {
     position: relative;
@@ -151,41 +145,6 @@
       "unit": "px",
       "default": 500,
       "info": "배경 이미지 사용 시 섹션 높이를 조절합니다."
-    },
-    {
-      "type": "header",
-      "content": "레이아웃"
-    },
-    {
-      "type": "select",
-      "id": "text_v_pos",
-      "label": "텍스트 세로 위치",
-      "options": [
-        { "value": "flex-start", "label": "상단" },
-        { "value": "center",     "label": "중앙 (기본)" },
-        { "value": "flex-end",   "label": "하단" }
-      ],
-      "default": "center"
-    },
-    {
-      "type": "range",
-      "id": "padding_top",
-      "label": "상단 여백",
-      "min": 24,
-      "max": 240,
-      "step": 8,
-      "unit": "px",
-      "default": 160
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom",
-      "label": "하단 여백",
-      "min": 24,
-      "max": 240,
-      "step": 8,
-      "unit": "px",
-      "default": 160
     },
     {
       "type": "header",
