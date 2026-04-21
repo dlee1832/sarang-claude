@@ -962,6 +962,60 @@
         "note_color": "#9c8576"
       }
     },
+    "chalttok_reviews_4k96zR": {
+      "type": "chalttok-reviews",
+      "blocks": {
+        "video_7zC6rY": {
+          "type": "video",
+          "settings": {
+            "video_url": "https://www.youtube.com/embed/zpnJReMLZMA",
+            "title": "Verified Purchase",
+            "caption": "4 weeks of consistent use"
+          }
+        },
+        "video_jnz6Ge": {
+          "type": "video",
+          "settings": {
+            "video_url": "https://www.youtube.com/embed/fyKjCUMyBas",
+            "title": "Sensitive Skin",
+            "caption": "Finally a serum that works"
+          }
+        },
+        "video_Riw789": {
+          "type": "video",
+          "settings": {
+            "video_url": "",
+            "title": "Morning Routine",
+            "caption": "My new everyday essential"
+          }
+        }
+      },
+      "block_order": [
+        "video_7zC6rY",
+        "video_jnz6Ge",
+        "video_Riw789"
+      ],
+      "name": "CT · Reviews",
+      "settings": {
+        "bg_color": "#F8F4EE",
+        "padding_v": 96,
+        "max_width": 1200,
+        "eyebrow": "REAL REVIEWS",
+        "heading": "See How Sarang Fits Into Real Routines",
+        "description": "Watch real customer review videos and shop Sarang directly on Amazon.",
+        "heading_font": "cormorant",
+        "heading_size": 42,
+        "heading_weight": "300",
+        "eyebrow_letter_spacing": 18,
+        "eyebrow_color": "#9C8576",
+        "heading_color": "#2C2420",
+        "desc_color": "#5A4A44",
+        "video_ratio": "9 / 16",
+        "card_radius": 8,
+        "amazon_url": "https://www.amazon.com/dp/B0GV9RKMKP",
+        "cta_prefix": "Buy on"
+      }
+    },
     "custom_liquid_UhVq6M": {
       "type": "custom-liquid",
       "disabled": true,
@@ -1055,6 +1109,7 @@
     "chalttok_meaning_cJyCeQ",
     "multirow_UNRxBc",
     "chalttok_before_after_pcgHbP",
+    "chalttok_reviews_4k96zR",
     "custom_liquid_UhVq6M",
     "chalttok_ingredients_JN9bRr",
     "chalttok_future_EC8wf7"
