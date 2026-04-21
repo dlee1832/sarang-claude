@@ -14,11 +14,11 @@
       "name": "CT · Overwhelm",
       "settings": {
         "image": "shopify://shop_images/Gemini_Generated_Image_2ifcjn2ifcjn2ifc.jpg",
-        "overlay_opacity": 15,
+        "overlay_opacity": 30,
         "text_bg_enabled": false,
         "text_bg_style": "frosted",
         "text_bg_opacity": 10,
-        "text_color": "ink",
+        "text_color": "white",
         "label": "",
         "heading": "When did caring\nbecome so heavy?",
         "heading_font": "serif",
@@ -28,8 +28,8 @@
         "section_padding_bottom": 160,
         "text_bottom": 48,
         "image_focus_y": 40,
-        "font_weight_heading": "400",
-        "font_weight_body": "300"
+        "font_weight_heading": "600",
+        "font_weight_body": "400"
       }
     },
     "chalttok_manifesto_iQMJLf": {
@@ -795,7 +795,7 @@
         "quote": "Love, as an act.\nNot a promise.",
         "kr_sub_text": "사랑 · To care without condition",
         "heading_font": "default",
-        "font_weight_heading": "300",
+        "font_weight_heading": "600",
         "font_weight_body": "300"
       }
     },
