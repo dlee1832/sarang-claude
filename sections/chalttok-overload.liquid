@@ -2,11 +2,6 @@
 
 {%- liquid
   comment
-    Overlay opacity: convert 0-90 integer → 0.00-0.90 float for rgba()
-  endcomment
-  assign _overlay_alpha = section.settings.overlay_opacity | times: 1.0 | divided_by: 100 | round: 2
-
-  comment
     Text background color + opacity
   endcomment
   if section.settings.text_bg_enabled
@@ -64,12 +59,12 @@
     object-position: center {{ section.settings.image_focus_y }}%;
   }
 
-  /* ── Overlay gradient — rgba() for universal browser support ── */
+  /* ── Overlay gradient ── */
   #ct-overload-{{ section.id }} .ct-overload__overlay {
     background: linear-gradient(
       to bottom,
       transparent 30%,
-      rgba(44, 36, 32, {{ _overlay_alpha }}) 100%
+      rgba(44, 36, 32, 0.55) 100%
     );
   }
 
@@ -194,21 +189,6 @@
     },
     {
       "type": "header",
-      "content": "오버레이 (이미지 위 어두운 그라데이션)"
-    },
-    {
-      "type": "range",
-      "id": "overlay_opacity",
-      "label": "오버레이 불투명도",
-      "min": 0,
-      "max": 90,
-      "step": 5,
-      "unit": "%",
-      "default": 55,
-      "info": "높을수록 이미지 하단이 어두워져 텍스트 가독성이 올라갑니다."
-    },
-    {
-      "type": "header",
       "content": "텍스트 배경 박스"
     },
     {
@@ -216,7 +196,7 @@
       "id": "text_bg_enabled",
       "label": "텍스트 배경 박스 사용",
       "default": false,
-      "info": "글자 뒤에 반투명 박스를 표시합니다. 오버레이 불투명도가 낮을 때 효과적입니다."
+      "info": "글자 뒤에 반투명 박스를 표시합니다."
     },
     {
       "type": "select",
