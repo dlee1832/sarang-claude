@@ -2,7 +2,7 @@
 
 {%- liquid
   comment
-    Text color palette (shared across desktop + mobile)
+    Text color palette
   endcomment
   if section.settings.text_color == 'black'
     assign _quote_color = '#000000'
@@ -18,6 +18,9 @@
     assign _rule_color  = 'rgba(248,244,238,0.35)'
   endif
 
+  comment
+    Horizontal position → align-items
+  endcomment
   if section.settings.text_h_pos == 'center'
     assign _align_items = 'center'
   elsif section.settings.text_h_pos == 'right'
@@ -26,6 +29,9 @@
     assign _align_items = 'flex-start'
   endif
 
+  comment
+    Vertical position → justify-content
+  endcomment
   if section.settings.text_v_pos == 'center'
     assign _justify = 'center'
   elsif section.settings.text_v_pos == 'bottom'
@@ -34,27 +40,42 @@
     assign _justify = 'flex-start'
   endif
 
+  comment
+    Overlay alpha
+  endcomment
   assign _overlay_alpha = section.settings.overlay_opacity | times: 1.0 | divided_by: 100 | round: 2
 -%}
 
 {%- style -%}
-  /* ── Section layout ── */
+  /* ── Layout: position ── */
   #shopify-section-{{ section.id }} .ct-meaning {
     align-items: {{ _align_items }};
     justify-content: {{ _justify }};
   }
+
+  /* ── Text block ── */
+  #shopify-section-{{ section.id }} .ct-meaning__center {
+    text-align: {{ section.settings.text_align }};
+    padding: {{ section.settings.padding_v }}px {{ section.settings.padding_h }}px;
+    max-width: {{ section.settings.max_width }}px;
+  }
+
+  /* ── Quote size ── */
+  #shopify-section-{{ section.id }} .ct-meaning__quote {
+    font-size: clamp({{ section.settings.quote_size_min }}px, 3.5vw, {{ section.settings.quote_size_max }}px);
+  }
+
+  /* ── Colors ── */
+  #shopify-section-{{ section.id }} .ct-meaning__quote { color: {{ _quote_color }}; }
+  #shopify-section-{{ section.id }} .ct-meaning__kr    { color: {{ _sub_color }}; }
+  #shopify-section-{{ section.id }} .ct-meaning__rule  { background: {{ _rule_color }}; }
 
   /* ── Overlay ── */
   #shopify-section-{{ section.id }} .ct-meaning__overlay {
     background: rgba(26, 20, 18, {{ _overlay_alpha }});
   }
 
-  /* ── Shared text colors ── */
-  #shopify-section-{{ section.id }} .ct-meaning__quote { color: {{ _quote_color }}; }
-  #shopify-section-{{ section.id }} .ct-meaning__kr    { color: {{ _sub_color }}; }
-  #shopify-section-{{ section.id }} .ct-meaning__rule  { background: {{ _rule_color }}; }
-
-  /* ── Shared font weight ── */
+  /* ── Font weight ── */
   #shopify-section-{{ section.id }} .ct-meaning__quote { font-weight: {{ section.settings.font_weight_heading }}; }
   #shopify-section-{{ section.id }} .ct-meaning__kr    { font-weight: {{ section.settings.font_weight_body }}; }
 
@@ -68,36 +89,6 @@
   {%- elsif section.settings.heading_font == 'ny' -%}
   #shopify-section-{{ section.id }} .ct-meaning__quote { font-family: 'New York', ui-serif, Georgia, serif; font-style: normal; }
   {%- endif -%}
-
-  /* ── Desktop text block ── */
-  #shopify-section-{{ section.id }} .ct-meaning__center--desktop {
-    text-align: {{ section.settings.text_align }};
-    padding: {{ section.settings.padding_v }}px {{ section.settings.padding_h }}px;
-    max-width: {{ section.settings.max_width }}px;
-  }
-  #shopify-section-{{ section.id }} .ct-meaning__center--desktop .ct-meaning__quote {
-    font-size: clamp({{ section.settings.quote_size_min }}px, 3.5vw, {{ section.settings.quote_size_max }}px);
-  }
-
-  /* ── Mobile text block (hidden on desktop) ── */
-  #shopify-section-{{ section.id }} .ct-meaning__center--mobile {
-    display: none;
-  }
-
-  /* ── Mobile overrides ── */
-  @media (max-width: 768px) {
-    #shopify-section-{{ section.id }} .ct-meaning__center--desktop { display: none; }
-
-    #shopify-section-{{ section.id }} .ct-meaning__center--mobile {
-      display: block;
-      text-align: {{ section.settings.text_align_mobile }};
-      padding: {{ section.settings.padding_v_mobile }}px {{ section.settings.padding_h_mobile }}px;
-      max-width: 100%;
-    }
-    #shopify-section-{{ section.id }} .ct-meaning__center--mobile .ct-meaning__quote {
-      font-size: {{ section.settings.quote_size_mobile }}px;
-    }
-  }
 {%- endstyle -%}
 
 <section class="ct-meaning">
@@ -107,29 +98,17 @@
       section.settings.image
       | image_url: width: 2000
       | image_tag:
-        class: 'ct-meaning__img ct-meaning__img--desktop',
+        class: 'ct-meaning__img',
         loading: 'lazy',
         alt: section.settings.image.alt
     }}
   {% else %}
-    {{ 'lifestyle-2' | placeholder_svg_tag: 'ct-meaning__img ct-meaning__img--desktop placeholder-svg' }}
-  {% endif %}
-
-  {% if section.settings.image_mobile != blank %}
-    {{
-      section.settings.image_mobile
-      | image_url: width: 1000
-      | image_tag:
-        class: 'ct-meaning__img ct-meaning__img--mobile',
-        loading: 'lazy',
-        alt: section.settings.image_mobile.alt
-    }}
+    {{ 'lifestyle-2' | placeholder_svg_tag: 'ct-meaning__img placeholder-svg' }}
   {% endif %}
 
   <div class="ct-meaning__overlay"></div>
 
-  <!-- 데스크탑 텍스트 블록 -->
-  <div class="ct-meaning__center ct-meaning__center--desktop ct-reveal">
+  <div class="ct-meaning__center ct-reveal">
     {% if section.settings.kr_bg_text != blank %}
       <div class="ct-meaning__kr-bg" aria-hidden="true">{{ section.settings.kr_bg_text }}</div>
     {% endif %}
@@ -139,20 +118,6 @@
     <div class="ct-meaning__rule"></div>
     {% if section.settings.kr_sub_text != blank %}
       <p class="ct-meaning__kr">{{ section.settings.kr_sub_text }}</p>
-    {% endif %}
-  </div>
-
-  <!-- 모바일 텍스트 블록 -->
-  <div class="ct-meaning__center ct-meaning__center--mobile ct-reveal">
-    {% if section.settings.mobile_kr_bg_text != blank %}
-      <div class="ct-meaning__kr-bg" aria-hidden="true">{{ section.settings.mobile_kr_bg_text }}</div>
-    {% endif %}
-    <blockquote class="ct-meaning__quote">
-      {{ section.settings.mobile_quote | newline_to_br }}
-    </blockquote>
-    <div class="ct-meaning__rule"></div>
-    {% if section.settings.mobile_kr_sub_text != blank %}
-      <p class="ct-meaning__kr">{{ section.settings.mobile_kr_sub_text }}</p>
     {% endif %}
   </div>
 
@@ -168,16 +133,27 @@
   "settings": [
     {
       "type": "header",
-      "content": "데스크탑 — 이미지"
+      "content": "이미지"
     },
     {
       "type": "image_picker",
       "id": "image",
-      "label": "배경 이미지 (데스크탑)"
+      "label": "배경 이미지"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "오버레이 불투명도",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "default": 30,
+      "info": "높을수록 이미지가 어두워집니다."
     },
     {
       "type": "header",
-      "content": "데스크탑 — 텍스트"
+      "content": "텍스트 내용"
     },
     {
       "type": "text",
@@ -200,7 +176,23 @@
     },
     {
       "type": "header",
-      "content": "데스크탑 — 텍스트 위치 & 크기"
+      "content": "글자 색상"
+    },
+    {
+      "type": "select",
+      "id": "text_color",
+      "label": "글자 색상",
+      "options": [
+        { "value": "white", "label": "흰색 / 아이보리 (어두운 배경용)" },
+        { "value": "ink",   "label": "잉크 (따뜻한 검정 #2C2420)" },
+        { "value": "black", "label": "순수 검정 (#000000)" }
+      ],
+      "default": "white",
+      "info": "배경 이미지가 밝을 경우 잉크 또는 검정을 선택하세요."
+    },
+    {
+      "type": "header",
+      "content": "텍스트 위치"
     },
     {
       "type": "select",
@@ -238,7 +230,7 @@
     {
       "type": "range",
       "id": "padding_h",
-      "label": "가로 여백",
+      "label": "가로 여백 (좌우 패딩)",
       "min": 16,
       "max": 120,
       "step": 8,
@@ -248,7 +240,7 @@
     {
       "type": "range",
       "id": "padding_v",
-      "label": "세로 여백",
+      "label": "세로 여백 (상하 패딩)",
       "min": 24,
       "max": 160,
       "step": 8,
@@ -266,9 +258,13 @@
       "default": 560
     },
     {
+      "type": "header",
+      "content": "헤딩 크기"
+    },
+    {
       "type": "range",
       "id": "quote_size_min",
-      "label": "Quote 최소 크기",
+      "label": "Quote 최소 크기 (모바일)",
       "min": 18,
       "max": 56,
       "step": 2,
@@ -278,115 +274,12 @@
     {
       "type": "range",
       "id": "quote_size_max",
-      "label": "Quote 최대 크기",
+      "label": "Quote 최대 크기 (데스크탑)",
       "min": 28,
       "max": 100,
       "step": 2,
       "unit": "px",
       "default": 52
-    },
-    {
-      "type": "header",
-      "content": "모바일 — 이미지"
-    },
-    {
-      "type": "image_picker",
-      "id": "image_mobile",
-      "label": "배경 이미지 (모바일)",
-      "info": "설정하지 않으면 데스크탑 이미지가 모바일에도 사용됩니다."
-    },
-    {
-      "type": "header",
-      "content": "모바일 — 텍스트"
-    },
-    {
-      "type": "text",
-      "id": "mobile_kr_bg_text",
-      "label": "장식용 대형 한글 텍스트 (모바일)",
-      "default": "사랑"
-    },
-    {
-      "type": "textarea",
-      "id": "mobile_quote",
-      "label": "Quote (모바일)",
-      "default": "Love, as an act.\nNot a promise."
-    },
-    {
-      "type": "text",
-      "id": "mobile_kr_sub_text",
-      "label": "하단 서브 레이블 (모바일)",
-      "default": "사랑 · To care without condition"
-    },
-    {
-      "type": "header",
-      "content": "모바일 — 텍스트 위치 & 크기"
-    },
-    {
-      "type": "select",
-      "id": "text_align_mobile",
-      "label": "텍스트 정렬 (모바일)",
-      "options": [
-        { "value": "left",   "label": "왼쪽 정렬" },
-        { "value": "center", "label": "가운데 정렬" },
-        { "value": "right",  "label": "오른쪽 정렬" }
-      ],
-      "default": "left"
-    },
-    {
-      "type": "range",
-      "id": "padding_h_mobile",
-      "label": "가로 여백 (모바일)",
-      "min": 12,
-      "max": 60,
-      "step": 4,
-      "unit": "px",
-      "default": 28
-    },
-    {
-      "type": "range",
-      "id": "padding_v_mobile",
-      "label": "세로 여백 (모바일)",
-      "min": 24,
-      "max": 120,
-      "step": 8,
-      "unit": "px",
-      "default": 48
-    },
-    {
-      "type": "range",
-      "id": "quote_size_mobile",
-      "label": "Quote 크기 (모바일)",
-      "min": 14,
-      "max": 52,
-      "step": 1,
-      "unit": "px",
-      "default": 24
-    },
-    {
-      "type": "header",
-      "content": "공통 설정"
-    },
-    {
-      "type": "range",
-      "id": "overlay_opacity",
-      "label": "오버레이 불투명도",
-      "min": 0,
-      "max": 80,
-      "step": 5,
-      "unit": "%",
-      "default": 30,
-      "info": "높을수록 이미지가 어두워집니다."
-    },
-    {
-      "type": "select",
-      "id": "text_color",
-      "label": "글자 색상",
-      "options": [
-        { "value": "white", "label": "흰색 / 아이보리 (어두운 배경용)" },
-        { "value": "ink",   "label": "잉크 (따뜻한 검정 #2C2420)" },
-        { "value": "black", "label": "순수 검정 (#000000)" }
-      ],
-      "default": "white"
     },
     {
       "type": "header",
