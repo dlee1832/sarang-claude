@@ -969,16 +969,16 @@
           "type": "video",
           "settings": {
             "video_url": "https://www.youtube.com/embed/zpnJReMLZMA",
-            "title": "Verified Purchase",
-            "caption": "4 weeks of consistent use"
+            "title": "",
+            "caption": "Finally, a Serum That Feels Gentle on Sensitive Skin"
           }
         },
         "video_jnz6Ge": {
           "type": "video",
           "settings": {
             "video_url": "https://www.youtube.com/embed/fyKjCUMyBas",
-            "title": "Sensitive Skin",
-            "caption": "Finally a serum that works"
+            "title": "",
+            "caption": "Beautiful K-Beauty Serum with the Perfect Bouncy Pink Gel Texture"
           }
         },
         "video_Riw789": {
@@ -997,7 +997,7 @@
       ],
       "name": "CT · Reviews",
       "settings": {
-        "bg_color": "#F8F4EE",
+        "bg_color": "#f8f4ee",
         "padding_v": 96,
         "max_width": 1200,
         "eyebrow": "REAL REVIEWS",
@@ -1007,9 +1007,9 @@
         "heading_size": 42,
         "heading_weight": "300",
         "eyebrow_letter_spacing": 18,
-        "eyebrow_color": "#9C8576",
-        "heading_color": "#2C2420",
-        "desc_color": "#5A4A44",
+        "eyebrow_color": "#9c8576",
+        "heading_color": "#2c2420",
+        "desc_color": "#5a4a44",
         "video_ratio": "9 / 16",
         "card_radius": 8,
         "amazon_url": "https://www.amazon.com/dp/B0GV9RKMKP",
