@@ -19,6 +19,42 @@
     else
       assign _ct_bg = ''
   endcase
+
+  case section.settings.heading_font
+    when 'cormorant'
+      assign _heading_family = "'Cormorant Garamond', Georgia, serif"
+      assign _heading_style  = 'italic'
+    when 'dm-sans'
+      assign _heading_family = "'DM Sans', 'Helvetica Neue', sans-serif"
+      assign _heading_style  = 'normal'
+    when 'noto-kr'
+      assign _heading_family = "'Noto Serif KR', 'Nanum Myeongjo', serif"
+      assign _heading_style  = 'normal'
+    when 'ny'
+      assign _heading_family = "'New York', ui-serif, Georgia, serif"
+      assign _heading_style  = 'normal'
+    else
+      assign _heading_family = ''
+      assign _heading_style  = ''
+  endcase
+
+  case section.settings.body_font
+    when 'cormorant'
+      assign _body_family = "'Cormorant Garamond', Georgia, serif"
+      assign _body_style  = 'italic'
+    when 'dm-sans'
+      assign _body_family = "'DM Sans', 'Helvetica Neue', sans-serif"
+      assign _body_style  = 'normal'
+    when 'noto-kr'
+      assign _body_family = "'Noto Serif KR', 'Nanum Myeongjo', serif"
+      assign _body_style  = 'normal'
+    when 'ny'
+      assign _body_family = "'New York', ui-serif, Georgia, serif"
+      assign _body_style  = 'normal'
+    else
+      assign _body_family = ''
+      assign _body_style  = ''
+  endcase
 -%}
 
 {%- style -%}
@@ -39,6 +75,28 @@
     background: {{ _ct_bg }};
   }
   {%- endif -%}
+
+  {%- if _heading_family != '' -%}
+  #shopify-section-{{ section.id }} .rich-text__heading {
+    font-family: {{ _heading_family }};
+    font-style: {{ _heading_style }};
+  }
+  {%- endif -%}
+  #shopify-section-{{ section.id }} .rich-text__heading {
+    font-weight: {{ section.settings.font_weight_heading }};
+  }
+
+  {%- if _body_family != '' -%}
+  #shopify-section-{{ section.id }} .rich-text__caption,
+  #shopify-section-{{ section.id }} .rich-text__text {
+    font-family: {{ _body_family }};
+    font-style: {{ _body_style }};
+  }
+  {%- endif -%}
+  #shopify-section-{{ section.id }} .rich-text__caption,
+  #shopify-section-{{ section.id }} .rich-text__text {
+    font-weight: {{ section.settings.font_weight_body }};
+  }
 {%- endstyle -%}
 
 <div class="isolate{% unless section.settings.full_width %} page-width{% endunless %}">
@@ -205,6 +263,61 @@
     },
     {
       "type": "header",
+      "content": "폰트 — CHALTTOK"
+    },
+    {
+      "type": "select",
+      "id": "heading_font",
+      "label": "헤딩 폰트",
+      "options": [
+        { "value": "default",   "label": "기본 (테마 폰트 유지)" },
+        { "value": "cormorant", "label": "Cormorant (이탤릭 세리프)" },
+        { "value": "dm-sans",   "label": "DM Sans (모던 산세리프)" },
+        { "value": "noto-kr",   "label": "Noto Serif KR (한글 세리프)" },
+        { "value": "ny",        "label": "New York (애플 세리프)" }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "select",
+      "id": "font_weight_heading",
+      "label": "헤딩 폰트 두께",
+      "options": [
+        { "value": "200", "label": "200 — Thin" },
+        { "value": "300", "label": "300 — Light" },
+        { "value": "400", "label": "400 — Regular (기본)" },
+        { "value": "600", "label": "600 — SemiBold" },
+        { "value": "700", "label": "700 — Bold" }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "select",
+      "id": "body_font",
+      "label": "본문 / 캡션 폰트",
+      "options": [
+        { "value": "default",   "label": "기본 (테마 폰트 유지)" },
+        { "value": "cormorant", "label": "Cormorant (이탤릭 세리프)" },
+        { "value": "dm-sans",   "label": "DM Sans (모던 산세리프)" },
+        { "value": "noto-kr",   "label": "Noto Serif KR (한글 세리프)" },
+        { "value": "ny",        "label": "New York (애플 세리프)" }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "select",
+      "id": "font_weight_body",
+      "label": "본문 폰트 두께",
+      "options": [
+        { "value": "200", "label": "200 — Thin" },
+        { "value": "300", "label": "300 — Light (기본)" },
+        { "value": "400", "label": "400 — Regular" },
+        { "value": "600", "label": "600 — SemiBold" }
+      ],
+      "default": "300"
+    },
+    {
+      "type": "header",
       "content": "t:sections.all.padding.section_padding_heading"
     },
     {
@@ -340,7 +453,7 @@
         {
          "type": "header",
          "content": "t:sections.rich-text.blocks.buttons.settings.header_button1.content"
-        },        
+        },
         {
           "type": "text",
           "id": "button_label",
@@ -362,7 +475,7 @@
         {
          "type": "header",
          "content": "t:sections.rich-text.blocks.buttons.settings.header_button2.content"
-        },          
+        },
         {
           "type": "text",
           "id": "button_label_2",
