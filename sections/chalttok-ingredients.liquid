@@ -1,5 +1,40 @@
 {{ 'chalttok-sarang.css' | asset_url | stylesheet_tag }}
 
+{%- style -%}
+  /* ── Ingredient name font ── */
+  #shopify-section-{{ section.id }} .ct-ing-name {
+    font-weight: {{ section.settings.font_weight_ing_name }};
+  }
+  {%- if section.settings.ing_name_font == 'cormorant' -%}
+  #shopify-section-{{ section.id }} .ct-ing-name { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; }
+  {%- elsif section.settings.ing_name_font == 'dm-sans' -%}
+  #shopify-section-{{ section.id }} .ct-ing-name { font-family: 'DM Sans', 'Helvetica Neue', sans-serif; font-style: normal; }
+  {%- elsif section.settings.ing_name_font == 'noto-kr' -%}
+  #shopify-section-{{ section.id }} .ct-ing-name { font-family: 'Noto Serif KR', 'Nanum Myeongjo', serif; font-style: normal; }
+  {%- elsif section.settings.ing_name_font == 'ny' -%}
+  #shopify-section-{{ section.id }} .ct-ing-name { font-family: 'New York', ui-serif, Georgia, serif; font-style: normal; }
+  {%- endif -%}
+
+  /* ── Ingredient description + section label font ── */
+  #shopify-section-{{ section.id }} .ct-ing-desc,
+  #shopify-section-{{ section.id }} .ct-ingredients__section-label {
+    font-weight: {{ section.settings.font_weight_ing_desc }};
+  }
+  {%- if section.settings.ing_desc_font == 'cormorant' -%}
+  #shopify-section-{{ section.id }} .ct-ing-desc,
+  #shopify-section-{{ section.id }} .ct-ingredients__section-label { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; }
+  {%- elsif section.settings.ing_desc_font == 'dm-sans' -%}
+  #shopify-section-{{ section.id }} .ct-ing-desc,
+  #shopify-section-{{ section.id }} .ct-ingredients__section-label { font-family: 'DM Sans', 'Helvetica Neue', sans-serif; font-style: normal; }
+  {%- elsif section.settings.ing_desc_font == 'noto-kr' -%}
+  #shopify-section-{{ section.id }} .ct-ing-desc,
+  #shopify-section-{{ section.id }} .ct-ingredients__section-label { font-family: 'Noto Serif KR', 'Nanum Myeongjo', serif; font-style: normal; }
+  {%- elsif section.settings.ing_desc_font == 'ny' -%}
+  #shopify-section-{{ section.id }} .ct-ing-desc,
+  #shopify-section-{{ section.id }} .ct-ingredients__section-label { font-family: 'New York', ui-serif, Georgia, serif; font-style: normal; }
+  {%- endif -%}
+{%- endstyle -%}
+
 <section class="ct-ingredients">
 
   <div class="ct-ingredients__img-wrap ct-reveal">
@@ -33,23 +68,6 @@
 
 <script src="{{ 'chalttok-sarang.js' | asset_url }}" defer></script>
 
-
-
-<style>
-  #shopify-section-{{ section.id }} .ct-ing-name { font-weight: {{ section.settings.font_weight_heading }}; }
-  #shopify-section-{{ section.id }} .ct-ing-desc,
-  #shopify-section-{{ section.id }} .ct-ingredients__section-label { font-weight: {{ section.settings.font_weight_body }}; }
-
-  {%- if section.settings.heading_font == 'cormorant' -%}
-  #shopify-section-{{ section.id }} .ct-ing-name { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; }
-  {%- elsif section.settings.heading_font == 'dm-sans' -%}
-  #shopify-section-{{ section.id }} .ct-ing-name { font-family: 'DM Sans', 'Helvetica Neue', sans-serif; font-style: normal; }
-  {%- elsif section.settings.heading_font == 'noto-kr' -%}
-  #shopify-section-{{ section.id }} .ct-ing-name { font-family: 'Noto Serif KR', 'Nanum Myeongjo', serif; font-style: normal; }
-  {%- elsif section.settings.heading_font == 'ny' -%}
-  #shopify-section-{{ section.id }} .ct-ing-name { font-family: 'New York', ui-serif, Georgia, serif; font-style: normal; }
-  {%- endif -%}
-</style>
 {% schema %}
 {
   "name": "CT · Ingredients",
@@ -58,26 +76,29 @@
   "max_blocks": 8,
   "settings": [
     {
+      "type": "header",
+      "content": "이미지 & 레이블"
+    },
+    {
       "type": "image_picker",
       "id": "image",
-      "label": "Image",
-      "info": "Close-up of ingredients or annotated drop shot"
+      "label": "이미지",
+      "info": "성분 클로즈업 또는 주석 드롭 샷"
     },
     {
       "type": "text",
       "id": "section_label",
-      "label": "Section label",
+      "label": "섹션 레이블",
       "default": "What's inside"
-    }
-,
+    },
     {
       "type": "header",
-      "content": "폰트"
+      "content": "성분명 폰트 (Ingredient Name)"
     },
     {
       "type": "select",
-      "id": "heading_font",
-      "label": "헤딩 폰트",
+      "id": "ing_name_font",
+      "label": "성분명 폰트 종류",
       "options": [
         { "value": "default",   "label": "기본 (현재 폰트 유지)" },
         { "value": "cormorant", "label": "Cormorant (이탤릭 세리프)" },
@@ -86,35 +107,11 @@
         { "value": "ny",        "label": "New York (애플 세리프)" }
       ],
       "default": "default"
-    }
-  ],
-  "blocks": [
-    {
-      "type": "ingredient",
-      "name": "Ingredient",
-      "settings": [
-        {
-          "type": "text",
-          "id": "name",
-          "label": "Ingredient name",
-          "default": "Niacinamide"
-        },
-        {
-          "type": "text",
-          "id": "description",
-          "label": "Benefit",
-          "default": "Calms, evens tone, restores barrier"
-        }
-      ]
-    },
-    {
-      "type": "header",
-      "content": "폰트 두께"
     },
     {
       "type": "select",
-      "id": "font_weight_heading",
-      "label": "헤딩 폰트 두께",
+      "id": "font_weight_ing_name",
+      "label": "성분명 폰트 두께",
       "options": [
         { "value": "200", "label": "200 — Thin" },
         { "value": "300", "label": "300 — Light (기본)" },
@@ -125,9 +122,26 @@
       "default": "300"
     },
     {
+      "type": "header",
+      "content": "설명 폰트 (Description & Label)"
+    },
+    {
       "type": "select",
-      "id": "font_weight_body",
-      "label": "본문 폰트 두께",
+      "id": "ing_desc_font",
+      "label": "설명 폰트 종류",
+      "options": [
+        { "value": "default",   "label": "기본 (현재 폰트 유지)" },
+        { "value": "cormorant", "label": "Cormorant (이탤릭 세리프)" },
+        { "value": "dm-sans",   "label": "DM Sans (모던 산세리프)" },
+        { "value": "noto-kr",   "label": "Noto Serif KR (한글 세리프)" },
+        { "value": "ny",        "label": "New York (애플 세리프)" }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "select",
+      "id": "font_weight_ing_desc",
+      "label": "설명 폰트 두께",
       "options": [
         { "value": "200", "label": "200 — Thin" },
         { "value": "300", "label": "300 — Light (기본)" },
@@ -135,6 +149,26 @@
         { "value": "600", "label": "600 — SemiBold" }
       ],
       "default": "300"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "ingredient",
+      "name": "Ingredient",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "성분명",
+          "default": "Niacinamide"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "효능 설명",
+          "default": "Calms, evens tone, restores barrier"
+        }
+      ]
     }
   ],
   "presets": [
