@@ -14,11 +14,10 @@
       "name": "CT · Overwhelm",
       "settings": {
         "image": "shopify://shop_images/Gemini_Generated_Image_2ifcjn2ifcjn2ifc.jpg",
-        "overlay_opacity": 15,
         "text_bg_enabled": false,
         "text_bg_style": "frosted",
         "text_bg_opacity": 10,
-        "text_color": "ink",
+        "text_color": "white",
         "label": "",
         "heading": "When did caring\nbecome so heavy?",
         "heading_font": "serif",
