@@ -13,7 +13,6 @@
       "type": "chalttok-overload",
       "name": "CT · Overwhelm",
       "settings": {
-        "image": "shopify://shop_images/Gemini_Generated_Image_2ifcjn2ifcjn2ifc.jpg",
         "text_bg_enabled": false,
         "text_bg_style": "frosted",
         "text_bg_opacity": 10,
