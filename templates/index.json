@@ -805,19 +805,19 @@
         "overlay_opacity": 30,
         "kr_bg_text": "사랑",
         "quote": "Love, as an act.\nNot a promise.",
-        "kr_sub_text": "사랑 · To care without condition",
+        "kr_sub_text": "SARANG (n.) the Korean word for love and care",
         "text_color": "ink",
         "text_h_pos": "left",
         "text_v_pos": "top",
         "text_align": "left",
         "padding_h": 32,
-        "padding_v": 40,
+        "padding_v": 24,
         "max_width": 560,
         "quote_size_min": 28,
         "quote_size_max": 52,
         "heading_font": "default",
-        "font_weight_heading": "600",
-        "font_weight_body": "300"
+        "font_weight_heading": "400",
+        "font_weight_body": "400"
       }
     },
     "chalttok_ingredients_JN9bRr": {
