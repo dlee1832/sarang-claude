@@ -1,6 +1,608 @@
+{% doc %}
+  @prompt
+    A magazine-style editorial layout for before and after image slider.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-editorial-slider-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    margin: 0 auto;
+    font-family: {{ block.settings.body_font.family }}, sans-serif;
+  }
+
+  .ai-editorial-slider__container-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: {{ block.settings.grid_gap }}px;
+    align-items: center;
+  }
+
+  .ai-editorial-slider__content-{{ ai_gen_id }} {
+    padding: {{ block.settings.content_padding }}px;
+  }
+
+  .ai-editorial-slider__eyebrow-{{ ai_gen_id }} {
+    font-size: {{ block.settings.eyebrow_size }}px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: {{ block.settings.eyebrow_color }};
+    margin-bottom: 16px;
+    font-weight: 400;
+  }
+
+  .ai-editorial-slider__heading-{{ ai_gen_id }} {
+    font-family: {{ block.settings.heading_font.family }}, serif;
+    font-size: {{ block.settings.heading_size }}px;
+    line-height: 1.2;
+    color: {{ block.settings.heading_color }};
+    margin: 0 0 24px;
+    font-weight: {{ block.settings.heading_font.weight }};
+  }
+
+  .ai-editorial-slider__description-{{ ai_gen_id }} {
+    font-size: {{ block.settings.description_size }}px;
+    line-height: 1.6;
+    color: {{ block.settings.description_color }};
+    margin-bottom: 32px;
+  }
+
+  .ai-editorial-slider__slider-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: {{ block.settings.image_border_radius }}px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  .ai-editorial-slider__image-container-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    aspect-ratio: {{ block.settings.image_aspect_ratio }};
+    overflow: hidden;
+  }
+
+  .ai-editorial-slider__image-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-editorial-slider__image-placeholder-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-editorial-slider__image-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    max-width: 200px;
+    max-height: 200px;
+    opacity: 0.3;
+  }
+
+  .ai-editorial-slider__after-image-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    clip-path: inset(0 0 0 var(--ai-slider-position-{{ ai_gen_id }}));
+  }
+
+  .ai-editorial-slider__divider-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: var(--ai-slider-position-{{ ai_gen_id }});
+    width: 3px;
+    height: 100%;
+    background-color: {{ block.settings.divider_color }};
+    cursor: ew-resize;
+    z-index: 10;
+    transform: translateX(-50%);
+  }
+
+  .ai-editorial-slider__divider-{{ ai_gen_id }}::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 48px;
+    height: 48px;
+    background-color: {{ block.settings.handle_color }};
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .ai-editorial-slider__divider-{{ ai_gen_id }}::after {
+    content: '⟷';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: {{ block.settings.handle_icon_color }};
+    font-size: 20px;
+    font-weight: bold;
+    pointer-events: none;
+  }
+
+  .ai-editorial-slider__labels-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    z-index: 5;
+    pointer-events: none;
+  }
+
+  .ai-editorial-slider__label-{{ ai_gen_id }} {
+    background-color: {{ block.settings.label_bg_color }};
+    color: {{ block.settings.label_text_color }};
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .ai-editorial-slider__empty-state-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 20px;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-editorial-slider__container-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    .ai-editorial-slider__content-{{ ai_gen_id }} {
+      order: {{ block.settings.mobile_content_order }};
+      padding: 20px;
+    }
+
+    .ai-editorial-slider__heading-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.heading_size }}px * 0.7);
+    }
+
+    .ai-editorial-slider__description-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.description_size }}px * 0.9);
+    }
+  }
+{% endstyle %}
+
+<editorial-slider-{{ ai_gen_id }}
+  class="ai-editorial-slider-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-editorial-slider__container-{{ ai_gen_id }}">
+    <div class="ai-editorial-slider__content-{{ ai_gen_id }}">
+      {% if block.settings.eyebrow != blank %}
+        <div class="ai-editorial-slider__eyebrow-{{ ai_gen_id }}">
+          {{ block.settings.eyebrow }}
+        </div>
+      {% endif %}
+
+      {% if block.settings.heading != blank %}
+        <h2 class="ai-editorial-slider__heading-{{ ai_gen_id }}">
+          {{ block.settings.heading }}
+        </h2>
+      {% endif %}
+
+      {% if block.settings.description != blank %}
+        <div class="ai-editorial-slider__description-{{ ai_gen_id }}">
+          {{ block.settings.description }}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="ai-editorial-slider__slider-wrapper-{{ ai_gen_id }}">
+      <div class="ai-editorial-slider__image-container-{{ ai_gen_id }}">
+        {% if block.settings.before_image %}
+          <img
+            src="{{ block.settings.before_image | image_url: width: 1200 }}"
+            alt="{{ block.settings.before_image.alt | escape }}"
+            loading="lazy"
+            width="{{ block.settings.before_image.width }}"
+            height="{{ block.settings.before_image.height }}"
+            class="ai-editorial-slider__image-{{ ai_gen_id }}"
+          >
+        {% else %}
+          <div class="ai-editorial-slider__image-placeholder-{{ ai_gen_id }}">
+            {{ 'image' | placeholder_svg_tag }}
+          </div>
+        {% endif %}
+
+        <div
+          class="ai-editorial-slider__after-image-{{ ai_gen_id }}"
+          style="--ai-slider-position-{{ ai_gen_id }}: 50%;"
+        >
+          {% if block.settings.after_image %}
+            <img
+              src="{{ block.settings.after_image | image_url: width: 1200 }}"
+              alt="{{ block.settings.after_image.alt | escape }}"
+              loading="lazy"
+              width="{{ block.settings.after_image.width }}"
+              height="{{ block.settings.after_image.height }}"
+              class="ai-editorial-slider__image-{{ ai_gen_id }}"
+            >
+          {% else %}
+            <div class="ai-editorial-slider__image-placeholder-{{ ai_gen_id }}">
+              {{ 'image' | placeholder_svg_tag }}
+            </div>
+          {% endif %}
+        </div>
+
+        <div
+          class="ai-editorial-slider__divider-{{ ai_gen_id }}"
+          style="--ai-slider-position-{{ ai_gen_id }}: 50%;"
+          data-divider
+        ></div>
+
+        {% if block.settings.show_labels %}
+          <div class="ai-editorial-slider__labels-{{ ai_gen_id }}">
+            {% if block.settings.before_label != blank %}
+              <span class="ai-editorial-slider__label-{{ ai_gen_id }}">
+                {{ block.settings.before_label }}
+              </span>
+            {% endif %}
+            {% if block.settings.after_label != blank %}
+              <span class="ai-editorial-slider__label-{{ ai_gen_id }}">
+                {{ block.settings.after_label }}
+              </span>
+            {% endif %}
+          </div>
+        {% endif %}
+
+        {% if block.settings.before_image == blank or block.settings.after_image == blank %}
+          <div class="ai-editorial-slider__empty-state-{{ ai_gen_id }}">
+            Next, add before and after images
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</editorial-slider-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class EditorialSlider{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.isDragging = false;
+        this.container = null;
+        this.divider = null;
+        this.afterImage = null;
+      }
+
+      connectedCallback() {
+        this.container = this.querySelector('.ai-editorial-slider__image-container-{{ ai_gen_id }}');
+        this.divider = this.querySelector('[data-divider]');
+        this.afterImage = this.querySelector('.ai-editorial-slider__after-image-{{ ai_gen_id }}');
+
+        if (!this.container || !this.divider || !this.afterImage) return;
+
+        this.setupEventListeners();
+      }
+
+      setupEventListeners() {
+        this.divider.addEventListener('mousedown', this.startDrag.bind(this));
+        this.divider.addEventListener('touchstart', this.startDrag.bind(this), { passive: true });
+
+        document.addEventListener('mousemove', this.onDrag.bind(this));
+        document.addEventListener('touchmove', this.onDrag.bind(this), { passive: false });
+
+        document.addEventListener('mouseup', this.endDrag.bind(this));
+        document.addEventListener('touchend', this.endDrag.bind(this));
+      }
+
+      startDrag(e) {
+        this.isDragging = true;
+        this.container.style.cursor = 'ew-resize';
+      }
+
+      onDrag(e) {
+        if (!this.isDragging) return;
+
+        e.preventDefault();
+
+        const rect = this.container.getBoundingClientRect();
+        const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+        let x = clientX - rect.left;
+
+        x = Math.max(0, Math.min(x, rect.width));
+
+        const percentage = (x / rect.width) * 100;
+
+        this.divider.style.setProperty('--ai-slider-position-{{ ai_gen_id }}', percentage + '%');
+        this.afterImage.style.setProperty('--ai-slider-position-{{ ai_gen_id }}', percentage + '%');
+      }
+
+      endDrag() {
+        this.isDragging = false;
+        this.container.style.cursor = '';
+      }
+    }
+
+    customElements.define('editorial-slider-{{ ai_gen_id }}', EditorialSlider{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Editorial before/after",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "Transformation"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "See the Difference"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Discover the remarkable transformation with our innovative solution. Slide to compare the before and after results.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Images"
+    },
+    {
+      "type": "image_picker",
+      "id": "before_image",
+      "label": "Before image"
+    },
+    {
+      "type": "image_picker",
+      "id": "after_image",
+      "label": "After image"
+    },
+    {
+      "type": "select",
+      "id": "image_aspect_ratio",
+      "label": "Image aspect ratio",
+      "options": [
+        {
+          "value": "1 / 1",
+          "label": "Square (1:1)"
+        },
+        {
+          "value": "4 / 3",
+          "label": "Landscape (4:3)"
+        },
+        {
+          "value": "3 / 4",
+          "label": "Portrait (3:4)"
+        },
+        {
+          "value": "16 / 9",
+          "label": "Widescreen (16:9)"
+        }
+      ],
+      "default": "4 / 3"
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "label": "Image border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Labels"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_labels",
+      "label": "Show labels",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "before_label",
+      "label": "Before label",
+      "default": "Before"
+    },
+    {
+      "type": "text",
+      "id": "after_label",
+      "label": "After label",
+      "default": "After"
+    },
+    {
+      "type": "color",
+      "id": "label_bg_color",
+      "label": "Label background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "label_text_color",
+      "label": "Label text",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Slider controls"
+    },
+    {
+      "type": "color",
+      "id": "divider_color",
+      "label": "Divider color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "handle_color",
+      "label": "Handle background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "handle_icon_color",
+      "label": "Handle icon",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "font_picker",
+      "id": "heading_font",
+      "label": "Heading font",
+      "default": "helvetica_n4"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 24,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#000000"
+    },
+    {
+      "type": "font_picker",
+      "id": "body_font",
+      "label": "Body font",
+      "default": "helvetica_n4"
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_size",
+      "label": "Eyebrow size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow color",
+      "default": "#999999"
+    },
+    {
+      "type": "range",
+      "id": "description_size",
+      "label": "Description size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description color",
+      "default": "#666666"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "grid_gap",
+      "label": "Grid gap",
+      "min": 20,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "content_padding",
+      "label": "Content padding",
+      "min": 0,
+      "max": 80,
+      "step": 10,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "select",
+      "id": "mobile_content_order",
+      "label": "Mobile content order",
+      "options": [
+        {
+          "value": "1",
+          "label": "Content first"
+        },
+        {
+          "value": "2",
+          "label": "Image first"
+        }
+      ],
+      "default": "1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Editorial before/after"
+    }
+  ]
+}
 {% endschema %}
