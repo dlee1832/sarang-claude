@@ -831,7 +831,11 @@
             "heading": "Niacinamide",
             "text": "<p>Calms, evens tone, supports barrier</p>",
             "button_label": "",
-            "button_link": ""
+            "button_link": "",
+            "heading_font": "cormorant",
+            "font_weight_heading": "400",
+            "body_font": "cormorant",
+            "font_weight_body": "400"
           }
         },
         "row_e4JCcB": {
@@ -842,7 +846,11 @@
             "heading": "Hyaluronic Acid",
             "text": "<p>Deep hydration, lasting moisture</p>",
             "button_label": "",
-            "button_link": ""
+            "button_link": "",
+            "heading_font": "cormorant",
+            "font_weight_heading": "inherit",
+            "body_font": "cormorant",
+            "font_weight_body": "inherit"
           }
         },
         "row_TiYDWw": {
@@ -853,7 +861,11 @@
             "heading": "Panthenol",
             "text": "<p>Soothes skin, seals in moisture</p>",
             "button_label": "",
-            "button_link": ""
+            "button_link": "",
+            "heading_font": "cormorant",
+            "font_weight_heading": "inherit",
+            "body_font": "cormorant",
+            "font_weight_body": "inherit"
           }
         },
         "row_J3hCiF": {
@@ -864,7 +876,11 @@
             "heading": "Pomegranate Extract",
             "text": "<p>Antioxidant care, revitalizes skin</p>",
             "button_label": "",
-            "button_link": ""
+            "button_link": "",
+            "heading_font": "cormorant",
+            "font_weight_heading": "inherit",
+            "body_font": "cormorant",
+            "font_weight_body": "inherit"
           }
         }
       },
@@ -889,11 +905,57 @@
         "desktop_content_position": "middle",
         "desktop_content_alignment": "left",
         "mobile_content_alignment": "left",
+        "heading_font": "default",
+        "font_weight_heading": "400",
+        "body_font": "default",
+        "font_weight_body": "300",
         "section_color_scheme": "scheme-9cf46636-c9a5-44e3-aa01-85dfc0ff0b2a",
         "row_color_scheme": "scheme-1",
         "padding_top": 36,
         "padding_bottom": 36
       }
+    },
+    "177680590862713d0d": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_772b95d_8kELgk": {
+          "type": "ai_gen_block_772b95d",
+          "settings": {
+            "eyebrow": "VISIBLE RESULTS",
+            "heading": "Gentle Changes, Visible Comfort",
+            "description": "<p>Skin appears smoother, more hydrated, and visibly more comfortable after use.</p>",
+            "before_image": "shopify://shop_images/sarang-theme-img-12-before.png",
+            "after_image": "shopify://shop_images/sarang-theme-img-12-after.png",
+            "image_aspect_ratio": "4 / 3",
+            "image_border_radius": 0,
+            "show_labels": true,
+            "before_label": "Before",
+            "after_label": "After",
+            "label_bg_color": "#000000",
+            "label_text_color": "#ffffff",
+            "divider_color": "#ffffff",
+            "handle_color": "#ffffff",
+            "handle_icon_color": "#000000",
+            "heading_font": "cormorant_i4",
+            "heading_size": 48,
+            "heading_color": "#000000",
+            "body_font": "cormorant_i4",
+            "eyebrow_size": 12,
+            "eyebrow_color": "#999999",
+            "description_size": 16,
+            "description_color": "#666666",
+            "desktop_width_percent": 100,
+            "grid_gap": 60,
+            "content_padding": 40,
+            "mobile_content_order": "1"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_772b95d_8kELgk"
+      ],
+      "settings": {}
     },
     "chalttok_ingredients_JN9bRr": {
       "type": "chalttok-ingredients",
@@ -952,9 +1014,6 @@
         "overlay_opacity": 40,
         "image_focus_y": 50,
         "section_min_height": 500,
-        "text_v_pos": "center",
-        "padding_top": 160,
-        "padding_bottom": 160,
         "heading": "Sarang is only\nthe beginning.",
         "caption": "We grow slowly. Each product we add will ask the same question: does this serve skin, or simply add to it?",
         "text_color": "white",
@@ -980,6 +1039,7 @@
     "rich_text_7DJ8Uq",
     "chalttok_meaning_cJyCeQ",
     "multirow_UNRxBc",
+    "177680590862713d0d",
     "chalttok_ingredients_JN9bRr",
     "chalttok_future_EC8wf7"
   ]
