@@ -22,6 +22,56 @@
     font-size: {{ section.settings.section_title_size }}px;
   }
   {%- endif -%}
+
+  /* ── Section-level font (all rows) ── */
+  #shopify-section-{{ section.id }} .image-with-text__heading {
+    font-weight: {{ section.settings.font_weight_heading }};
+    {%- if section.settings.heading_font == 'cormorant' -%}
+    font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic;
+    {%- elsif section.settings.heading_font == 'dm-sans' -%}
+    font-family: 'DM Sans', 'Helvetica Neue', sans-serif; font-style: normal;
+    {%- elsif section.settings.heading_font == 'noto-kr' -%}
+    font-family: 'Noto Serif KR', 'Nanum Myeongjo', serif; font-style: normal;
+    {%- elsif section.settings.heading_font == 'ny' -%}
+    font-family: 'New York', ui-serif, Georgia, serif; font-style: normal;
+    {%- endif -%}
+  }
+  #shopify-section-{{ section.id }} .image-with-text__text,
+  #shopify-section-{{ section.id }} .image-with-text__text--caption {
+    font-weight: {{ section.settings.font_weight_body }};
+    {%- if section.settings.body_font == 'cormorant' -%}
+    font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic;
+    {%- elsif section.settings.body_font == 'dm-sans' -%}
+    font-family: 'DM Sans', 'Helvetica Neue', sans-serif; font-style: normal;
+    {%- elsif section.settings.body_font == 'noto-kr' -%}
+    font-family: 'Noto Serif KR', 'Nanum Myeongjo', serif; font-style: normal;
+    {%- elsif section.settings.body_font == 'ny' -%}
+    font-family: 'New York', ui-serif, Georgia, serif; font-style: normal;
+    {%- endif -%}
+  }
+
+  /* ── Per-block font overrides ── */
+  {%- for block in section.blocks -%}
+    {%- if block.settings.heading_font != 'default' or block.settings.font_weight_heading != 'inherit' -%}
+    .ct-block-{{ block.id }} .image-with-text__heading {
+      {%- if block.settings.font_weight_heading != 'inherit' -%}font-weight: {{ block.settings.font_weight_heading }};{%- endif -%}
+      {%- if block.settings.heading_font == 'cormorant' -%}font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic;
+      {%- elsif block.settings.heading_font == 'dm-sans' -%}font-family: 'DM Sans', 'Helvetica Neue', sans-serif; font-style: normal;
+      {%- elsif block.settings.heading_font == 'noto-kr' -%}font-family: 'Noto Serif KR', 'Nanum Myeongjo', serif; font-style: normal;
+      {%- elsif block.settings.heading_font == 'ny' -%}font-family: 'New York', ui-serif, Georgia, serif; font-style: normal;{%- endif -%}
+    }
+    {%- endif -%}
+    {%- if block.settings.body_font != 'default' or block.settings.font_weight_body != 'inherit' -%}
+    .ct-block-{{ block.id }} .image-with-text__text,
+    .ct-block-{{ block.id }} .image-with-text__text--caption {
+      {%- if block.settings.font_weight_body != 'inherit' -%}font-weight: {{ block.settings.font_weight_body }};{%- endif -%}
+      {%- if block.settings.body_font == 'cormorant' -%}font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic;
+      {%- elsif block.settings.body_font == 'dm-sans' -%}font-family: 'DM Sans', 'Helvetica Neue', sans-serif; font-style: normal;
+      {%- elsif block.settings.body_font == 'noto-kr' -%}font-family: 'Noto Serif KR', 'Nanum Myeongjo', serif; font-style: normal;
+      {%- elsif block.settings.body_font == 'ny' -%}font-family: 'New York', ui-serif, Georgia, serif; font-style: normal;{%- endif -%}
+    }
+    {%- endif -%}
+  {%- endfor -%}
 {%- endstyle -%}
 
 {%- liquid
@@ -61,7 +111,7 @@
     {%- endif -%}
     {%- for block in section.blocks -%}
       <div
-        class="image-with-text isolate{{ borders_class }}{{ corners_class }}{{ padding_class }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+        class="image-with-text isolate ct-block-{{ block.id }}{{ borders_class }}{{ corners_class }}{{ padding_class }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
         {{ block.shopify_attributes }}
       >
         <div class="image-with-text__grid grid grid--gapless grid--1-col grid--{% if section.settings.desktop_image_width == 'medium' %}2-col-tablet{% else %}3-col-tablet{% endif %}{% if section.settings.image_layout contains 'alternate' %}{% cycle odd_class, even_class %}{% else %}{{ odd_class }}{% endif %}">
@@ -370,6 +420,61 @@
     },
     {
       "type": "header",
+      "content": "폰트 — 전체 Row 공통"
+    },
+    {
+      "type": "select",
+      "id": "heading_font",
+      "label": "헤딩 폰트",
+      "options": [
+        { "value": "default",   "label": "기본 (테마 폰트)" },
+        { "value": "cormorant", "label": "Cormorant (이탤릭 세리프)" },
+        { "value": "dm-sans",   "label": "DM Sans (모던 산세리프)" },
+        { "value": "noto-kr",   "label": "Noto Serif KR (한글 세리프)" },
+        { "value": "ny",        "label": "New York (애플 세리프)" }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "select",
+      "id": "font_weight_heading",
+      "label": "헤딩 폰트 두께",
+      "options": [
+        { "value": "200", "label": "200 — Thin" },
+        { "value": "300", "label": "300 — Light" },
+        { "value": "400", "label": "400 — Regular (기본)" },
+        { "value": "600", "label": "600 — SemiBold" },
+        { "value": "700", "label": "700 — Bold" }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "select",
+      "id": "body_font",
+      "label": "본문 폰트",
+      "options": [
+        { "value": "default",   "label": "기본 (테마 폰트)" },
+        { "value": "cormorant", "label": "Cormorant (이탤릭 세리프)" },
+        { "value": "dm-sans",   "label": "DM Sans (모던 산세리프)" },
+        { "value": "noto-kr",   "label": "Noto Serif KR (한글 세리프)" },
+        { "value": "ny",        "label": "New York (애플 세리프)" }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "select",
+      "id": "font_weight_body",
+      "label": "본문 폰트 두께",
+      "options": [
+        { "value": "200", "label": "200 — Thin" },
+        { "value": "300", "label": "300 — Light (기본)" },
+        { "value": "400", "label": "400 — Regular" },
+        { "value": "600", "label": "600 — SemiBold" }
+      ],
+      "default": "300"
+    },
+    {
+      "type": "header",
       "content": "t:sections.multirow.settings.header_3.content"
     },
     {
@@ -448,6 +553,63 @@
           "type": "url",
           "id": "button_link",
           "label": "t:sections.multirow.blocks.row.settings.button_link.label"
+        },
+        {
+          "type": "header",
+          "content": "폰트 — 이 Row 개별 설정"
+        },
+        {
+          "type": "select",
+          "id": "heading_font",
+          "label": "헤딩 폰트",
+          "options": [
+            { "value": "default",   "label": "기본 (섹션 공통 설정 따름)" },
+            { "value": "cormorant", "label": "Cormorant (이탤릭 세리프)" },
+            { "value": "dm-sans",   "label": "DM Sans (모던 산세리프)" },
+            { "value": "noto-kr",   "label": "Noto Serif KR (한글 세리프)" },
+            { "value": "ny",        "label": "New York (애플 세리프)" }
+          ],
+          "default": "default"
+        },
+        {
+          "type": "select",
+          "id": "font_weight_heading",
+          "label": "헤딩 폰트 두께",
+          "options": [
+            { "value": "inherit", "label": "기본 (섹션 공통 설정 따름)" },
+            { "value": "200", "label": "200 — Thin" },
+            { "value": "300", "label": "300 — Light" },
+            { "value": "400", "label": "400 — Regular" },
+            { "value": "600", "label": "600 — SemiBold" },
+            { "value": "700", "label": "700 — Bold" }
+          ],
+          "default": "inherit"
+        },
+        {
+          "type": "select",
+          "id": "body_font",
+          "label": "본문 폰트",
+          "options": [
+            { "value": "default",   "label": "기본 (섹션 공통 설정 따름)" },
+            { "value": "cormorant", "label": "Cormorant (이탤릭 세리프)" },
+            { "value": "dm-sans",   "label": "DM Sans (모던 산세리프)" },
+            { "value": "noto-kr",   "label": "Noto Serif KR (한글 세리프)" },
+            { "value": "ny",        "label": "New York (애플 세리프)" }
+          ],
+          "default": "default"
+        },
+        {
+          "type": "select",
+          "id": "font_weight_body",
+          "label": "본문 폰트 두께",
+          "options": [
+            { "value": "inherit", "label": "기본 (섹션 공통 설정 따름)" },
+            { "value": "200", "label": "200 — Thin" },
+            { "value": "300", "label": "300 — Light" },
+            { "value": "400", "label": "400 — Regular" },
+            { "value": "600", "label": "600 — SemiBold" }
+          ],
+          "default": "inherit"
         }
       ]
     }
