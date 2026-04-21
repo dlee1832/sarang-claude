@@ -831,7 +831,11 @@
             "heading": "Niacinamide",
             "text": "<p>Calms, evens tone, supports barrier</p>",
             "button_label": "",
-            "button_link": ""
+            "button_link": "",
+            "heading_font": "cormorant",
+            "font_weight_heading": "400",
+            "body_font": "cormorant",
+            "font_weight_body": "400"
           }
         },
         "row_e4JCcB": {
@@ -842,7 +846,11 @@
             "heading": "Hyaluronic Acid",
             "text": "<p>Deep hydration, lasting moisture</p>",
             "button_label": "",
-            "button_link": ""
+            "button_link": "",
+            "heading_font": "cormorant",
+            "font_weight_heading": "inherit",
+            "body_font": "cormorant",
+            "font_weight_body": "inherit"
           }
         },
         "row_TiYDWw": {
@@ -853,7 +861,11 @@
             "heading": "Panthenol",
             "text": "<p>Soothes skin, seals in moisture</p>",
             "button_label": "",
-            "button_link": ""
+            "button_link": "",
+            "heading_font": "cormorant",
+            "font_weight_heading": "inherit",
+            "body_font": "cormorant",
+            "font_weight_body": "inherit"
           }
         },
         "row_J3hCiF": {
@@ -864,7 +876,11 @@
             "heading": "Pomegranate Extract",
             "text": "<p>Antioxidant care, revitalizes skin</p>",
             "button_label": "",
-            "button_link": ""
+            "button_link": "",
+            "heading_font": "cormorant",
+            "font_weight_heading": "inherit",
+            "body_font": "cormorant",
+            "font_weight_body": "inherit"
           }
         }
       },
@@ -889,6 +905,10 @@
         "desktop_content_position": "middle",
         "desktop_content_alignment": "left",
         "mobile_content_alignment": "left",
+        "heading_font": "default",
+        "font_weight_heading": "400",
+        "body_font": "default",
+        "font_weight_body": "300",
         "section_color_scheme": "scheme-9cf46636-c9a5-44e3-aa01-85dfc0ff0b2a",
         "row_color_scheme": "scheme-1",
         "padding_top": 36,
@@ -952,9 +972,6 @@
         "overlay_opacity": 40,
         "image_focus_y": 50,
         "section_min_height": 500,
-        "text_v_pos": "center",
-        "padding_top": 160,
-        "padding_bottom": 160,
         "heading": "Sarang is only\nthe beginning.",
         "caption": "We grow slowly. Each product we add will ask the same question: does this serve skin, or simply add to it?",
         "text_color": "white",
