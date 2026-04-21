@@ -18,6 +18,9 @@
     text-align: {{ section.settings.section_title_alignment }};
     padding-bottom: {{ section.settings.section_title_spacing }}px;
   }
+  .section-{{ section.id }}-title p {
+    font-size: {{ section.settings.section_title_size }}px;
+  }
   {%- endif -%}
 {%- endstyle -%}
 
@@ -148,6 +151,16 @@
         { "value": "right",  "label": "오른쪽" }
       ],
       "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "section_title_size",
+      "label": "타이틀 크기",
+      "min": 10,
+      "max": 48,
+      "step": 1,
+      "unit": "px",
+      "default": 11
     },
     {
       "type": "range",
