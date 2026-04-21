@@ -98,12 +98,23 @@
       section.settings.image
       | image_url: width: 2000
       | image_tag:
-        class: 'ct-meaning__img',
+        class: 'ct-meaning__img ct-meaning__img--desktop',
         loading: 'lazy',
         alt: section.settings.image.alt
     }}
   {% else %}
-    {{ 'lifestyle-2' | placeholder_svg_tag: 'ct-meaning__img placeholder-svg' }}
+    {{ 'lifestyle-2' | placeholder_svg_tag: 'ct-meaning__img ct-meaning__img--desktop placeholder-svg' }}
+  {% endif %}
+
+  {% if section.settings.image_mobile != blank %}
+    {{
+      section.settings.image_mobile
+      | image_url: width: 1000
+      | image_tag:
+        class: 'ct-meaning__img ct-meaning__img--mobile',
+        loading: 'lazy',
+        alt: section.settings.image_mobile.alt
+    }}
   {% endif %}
 
   <div class="ct-meaning__overlay"></div>
@@ -138,7 +149,13 @@
     {
       "type": "image_picker",
       "id": "image",
-      "label": "배경 이미지"
+      "label": "배경 이미지 (데스크탑)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "배경 이미지 (모바일)",
+      "info": "설정하지 않으면 데스크탑 이미지가 모바일에도 사용됩니다."
     },
     {
       "type": "range",
