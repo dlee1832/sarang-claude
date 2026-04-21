@@ -728,6 +728,7 @@
 .ct-reviews__stage--grid .ct-reviews__track {
   display: grid;
   gap: 24px;
+  align-items: start;
 }
 
 /* slider mode */
