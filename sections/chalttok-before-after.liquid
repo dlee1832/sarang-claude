@@ -1,115 +1,74 @@
 {{ 'chalttok-sarang.css' | asset_url | stylesheet_tag }}
 
 {%- liquid
-  assign _split_default = 50
-
-  comment — layout direction
-  endcomment
   assign _layout = section.settings.layout_direction
 
-  comment — eyebrow font
-  endcomment
-  case section.settings.eyebrow_font
-    when 'cormorant'
-      assign _eyebrow_family = "'Cormorant Garamond', Georgia, serif"
-      assign _eyebrow_style  = 'italic'
-    when 'dm-sans'
-      assign _eyebrow_family = "'DM Sans', 'Helvetica Neue', sans-serif"
-      assign _eyebrow_style  = 'normal'
-    when 'noto-kr'
-      assign _eyebrow_family = "'Noto Serif KR', 'Nanum Myeongjo', serif"
-      assign _eyebrow_style  = 'normal'
-    when 'ny'
-      assign _eyebrow_family = "'New York', ui-serif, Georgia, serif"
-      assign _eyebrow_style  = 'normal'
-    else
-      assign _eyebrow_family = 'inherit'
-      assign _eyebrow_style  = 'normal'
-  endcase
+  assign _eyebrow_family = 'inherit'
+  assign _eyebrow_style  = 'normal'
+  if section.settings.eyebrow_font == 'cormorant'
+    assign _eyebrow_family = "'Cormorant Garamond', Georgia, serif"
+    assign _eyebrow_style  = 'italic'
+  elsif section.settings.eyebrow_font == 'dm-sans'
+    assign _eyebrow_family = "'DM Sans', 'Helvetica Neue', sans-serif"
+  elsif section.settings.eyebrow_font == 'noto-kr'
+    assign _eyebrow_family = "'Noto Serif KR', 'Nanum Myeongjo', serif"
+  elsif section.settings.eyebrow_font == 'ny'
+    assign _eyebrow_family = "'New York', ui-serif, Georgia, serif"
+  endif
 
-  comment — heading font
-  endcomment
-  case section.settings.heading_font
-    when 'cormorant'
-      assign _heading_family = "'Cormorant Garamond', Georgia, serif"
-      assign _heading_style  = 'italic'
-    when 'dm-sans'
-      assign _heading_family = "'DM Sans', 'Helvetica Neue', sans-serif"
-      assign _heading_style  = 'normal'
-    when 'noto-kr'
-      assign _heading_family = "'Noto Serif KR', 'Nanum Myeongjo', serif"
-      assign _heading_style  = 'normal'
-    when 'ny'
-      assign _heading_family = "'New York', ui-serif, Georgia, serif"
-      assign _heading_style  = 'normal'
-    else
-      assign _heading_family = 'inherit'
-      assign _heading_style  = 'normal'
-  endcase
+  assign _heading_family = 'inherit'
+  assign _heading_style  = 'normal'
+  if section.settings.heading_font == 'cormorant'
+    assign _heading_family = "'Cormorant Garamond', Georgia, serif"
+    assign _heading_style  = 'italic'
+  elsif section.settings.heading_font == 'dm-sans'
+    assign _heading_family = "'DM Sans', 'Helvetica Neue', sans-serif"
+  elsif section.settings.heading_font == 'noto-kr'
+    assign _heading_family = "'Noto Serif KR', 'Nanum Myeongjo', serif"
+  elsif section.settings.heading_font == 'ny'
+    assign _heading_family = "'New York', ui-serif, Georgia, serif"
+  endif
 
-  comment — description font
-  endcomment
-  case section.settings.desc_font
-    when 'cormorant'
-      assign _desc_family = "'Cormorant Garamond', Georgia, serif"
-      assign _desc_style  = 'italic'
-    when 'dm-sans'
-      assign _desc_family = "'DM Sans', 'Helvetica Neue', sans-serif"
-      assign _desc_style  = 'normal'
-    when 'noto-kr'
-      assign _desc_family = "'Noto Serif KR', 'Nanum Myeongjo', serif"
-      assign _desc_style  = 'normal'
-    when 'ny'
-      assign _desc_family = "'New York', ui-serif, Georgia, serif"
-      assign _desc_style  = 'normal'
-    else
-      assign _desc_family = 'inherit'
-      assign _desc_style  = 'normal'
-  endcase
+  assign _desc_family = 'inherit'
+  assign _desc_style  = 'normal'
+  if section.settings.desc_font == 'cormorant'
+    assign _desc_family = "'Cormorant Garamond', Georgia, serif"
+    assign _desc_style  = 'italic'
+  elsif section.settings.desc_font == 'dm-sans'
+    assign _desc_family = "'DM Sans', 'Helvetica Neue', sans-serif"
+  elsif section.settings.desc_font == 'noto-kr'
+    assign _desc_family = "'Noto Serif KR', 'Nanum Myeongjo', serif"
+  elsif section.settings.desc_font == 'ny'
+    assign _desc_family = "'New York', ui-serif, Georgia, serif"
+  endif
 
-  comment — note font
-  endcomment
-  case section.settings.note_font
-    when 'cormorant'
-      assign _note_family = "'Cormorant Garamond', Georgia, serif"
-      assign _note_style  = 'italic'
-    when 'dm-sans'
-      assign _note_family = "'DM Sans', 'Helvetica Neue', sans-serif"
-      assign _note_style  = 'normal'
-    when 'noto-kr'
-      assign _note_family = "'Noto Serif KR', 'Nanum Myeongjo', serif"
-      assign _note_style  = 'normal'
-    when 'ny'
-      assign _note_family = "'New York', ui-serif, Georgia, serif"
-      assign _note_style  = 'normal'
-    else
-      assign _note_family = 'inherit'
-      assign _note_style  = 'normal'
-  endcase
+  assign _note_family = 'inherit'
+  assign _note_style  = 'normal'
+  if section.settings.note_font == 'cormorant'
+    assign _note_family = "'Cormorant Garamond', Georgia, serif"
+    assign _note_style  = 'italic'
+  elsif section.settings.note_font == 'dm-sans'
+    assign _note_family = "'DM Sans', 'Helvetica Neue', sans-serif"
+  elsif section.settings.note_font == 'noto-kr'
+    assign _note_family = "'Noto Serif KR', 'Nanum Myeongjo', serif"
+  elsif section.settings.note_font == 'ny'
+    assign _note_family = "'New York', ui-serif, Georgia, serif"
+  endif
 
-  comment — letter-spacing: stored as integer 0-30, output as em
-  endcomment
   assign _eyebrow_ls = section.settings.eyebrow_letter_spacing | times: 1.0 | divided_by: 100
   assign _heading_ls = section.settings.heading_letter_spacing | times: 1.0 | divided_by: 100
   assign _desc_ls    = section.settings.desc_letter_spacing    | times: 1.0 | divided_by: 100
   assign _label_ls   = section.settings.label_letter_spacing   | times: 1.0 | divided_by: 100
   assign _note_ls    = section.settings.note_letter_spacing    | times: 1.0 | divided_by: 100
 
-  comment — line-height: stored as integer 100-220, output as decimal
-  endcomment
   assign _eyebrow_lh = section.settings.eyebrow_line_height | times: 1.0 | divided_by: 100
-  assign _heading_lh = section.settings.heading_line_height | times: 1.0 | divided_by: 100
-  assign _desc_lh    = section.settings.desc_line_height    | times: 1.0 | divided_by: 100
-  assign _label_lh   = section.settings.label_line_height   | times: 1.0 | divided_by: 100
-  assign _note_lh    = section.settings.note_line_height    | times: 1.0 | divided_by: 100
-
-  comment — overlay alpha
-  endcomment
-  assign _overlay_alpha = section.settings.overlay_opacity | times: 1.0 | divided_by: 100 | round: 2
+  assign _heading_lh = section.settings.heading_line_height  | times: 1.0 | divided_by: 100
+  assign _desc_lh    = section.settings.desc_line_height     | times: 1.0 | divided_by: 100
+  assign _label_lh   = section.settings.label_line_height    | times: 1.0 | divided_by: 100
+  assign _note_lh    = section.settings.note_line_height     | times: 1.0 | divided_by: 100
 -%}
 
 {%- style -%}
-  /* ── Section wrapper ── */
   #shopify-section-{{ section.id }} .ct-ba {
     background-color: {{ section.settings.bg_color }};
     padding-top: {{ section.settings.padding_v }}px;
@@ -119,7 +78,7 @@
   #shopify-section-{{ section.id }} .ct-ba__inner {
     max-width: {{ section.settings.section_max_width }}px;
     margin-inline: auto;
-    padding-inline: 24px;
+    padding-inline: 32px;
     display: flex;
     gap: {{ section.settings.content_gap }}px;
     align-items: center;
@@ -132,19 +91,16 @@
     {%- endif -%}
   }
 
-  /* ── Text block ── */
   #shopify-section-{{ section.id }} .ct-ba__text {
     flex: 1 1 0;
     min-width: 0;
     text-align: {{ section.settings.text_align }};
     display: flex;
     flex-direction: column;
-    gap: 0;
   }
 
-  /* ── Slider block ── */
   #shopify-section-{{ section.id }} .ct-ba__slider-wrap {
-    flex: 1.2 1 0;
+    flex: 1.3 1 0;
     min-width: 0;
   }
 
@@ -153,58 +109,46 @@
   #shopify-section-{{ section.id }} .ct-ba__slider-wrap {
     flex: unset;
     width: 100%;
-    max-width: 720px;
+    max-width: 760px;
     margin-inline: auto;
   }
   {%- endif -%}
 
-  /* ── Slider container ── */
+  /* ── Slider ── */
   #shopify-section-{{ section.id }} .ct-ba__slider {
     position: relative;
     overflow: hidden;
     border-radius: {{ section.settings.img_radius }}px;
-    user-select: none;
-    touch-action: pan-y;
+    aspect-ratio: {{ section.settings.img_aspect_ratio }};
     cursor: col-resize;
+    user-select: none;
+    touch-action: none;
+    background: #e8e0d8;
   }
 
-  /* ── After image (base layer, full width) ── */
-  #shopify-section-{{ section.id }} .ct-ba__after-img {
-    display: block;
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-  }
-
-  /* ── Before image (clipped layer on top) ── */
-  #shopify-section-{{ section.id }} .ct-ba__before-wrap {
+  #shopify-section-{{ section.id }} .ct-ba__after-img,
+  #shopify-section-{{ section.id }} .ct-ba__before-img {
     position: absolute;
     inset: 0;
-    width: 50%;
-    overflow: hidden;
-    transition: none;
-  }
-
-  #shopify-section-{{ section.id }} .ct-ba__before-img {
-    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: left center;
-    min-width: var(--ct-ba-slider-width, 100%);
-  }
-
-  /* ── Overlay tint ── */
-  {%- if _overlay_alpha > 0 -%}
-  #shopify-section-{{ section.id }} .ct-ba__before-wrap::after,
-  #shopify-section-{{ section.id }} .ct-ba__after-img-wrap::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: rgba(44, 36, 32, {{ _overlay_alpha }});
+    display: block;
     pointer-events: none;
   }
-  {%- endif -%}
+
+  #shopify-section-{{ section.id }} .ct-ba__before-img {
+    clip-path: inset(0 50% 0 0);
+  }
+
+  /* placeholder SVG fill */
+  #shopify-section-{{ section.id }} .ct-ba__slider .placeholder-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 
   /* ── Handle ── */
   #shopify-section-{{ section.id }} .ct-ba__handle {
@@ -227,7 +171,6 @@
     inset: 0;
     width: 1.5px;
     background: {{ section.settings.handle_color }};
-    opacity: 0.85;
     margin-inline: auto;
   }
 
@@ -241,7 +184,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
+    box-shadow: 0 2px 16px rgba(0,0,0,0.22);
     flex-shrink: 0;
   }
 
@@ -249,7 +192,6 @@
     display: block;
     width: 18px;
     height: 18px;
-    opacity: 0.85;
   }
 
   /* ── Labels ── */
@@ -261,23 +203,17 @@
     line-height: {{ _label_lh }};
     letter-spacing: {{ _label_ls }}em;
     color: {{ section.settings.label_color }};
-    font-family: inherit;
     pointer-events: none;
     z-index: 8;
-    padding: 4px 12px;
-    background: rgba(255,255,255,0.12);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
+    padding: 5px 12px;
+    background: rgba(0,0,0,0.25);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
     border-radius: 2px;
   }
 
-  #shopify-section-{{ section.id }} .ct-ba__label--before {
-    left: 16px;
-  }
-
-  #shopify-section-{{ section.id }} .ct-ba__label--after {
-    right: 16px;
-  }
+  #shopify-section-{{ section.id }} .ct-ba__label--before { left: 16px; }
+  #shopify-section-{{ section.id }} .ct-ba__label--after  { right: 16px; }
 
   /* ── Eyebrow ── */
   #shopify-section-{{ section.id }} .ct-ba__eyebrow {
@@ -288,7 +224,7 @@
     line-height: {{ _eyebrow_lh }};
     letter-spacing: {{ _eyebrow_ls }}em;
     color: {{ section.settings.eyebrow_color }};
-    margin: 0 0 16px;
+    margin: 0 0 14px;
     text-transform: uppercase;
   }
 
@@ -316,12 +252,14 @@
     margin: 0;
   }
 
+  #shopify-section-{{ section.id }} .ct-ba__desc p { margin: 0; }
+
   /* ── Notes ── */
   #shopify-section-{{ section.id }} .ct-ba__notes {
     margin-top: 32px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
   }
 
   #shopify-section-{{ section.id }} .ct-ba__note {
@@ -334,57 +272,51 @@
     color: {{ section.settings.note_color }};
     margin: 0;
     padding-left: 14px;
-    border-left: 1px solid {{ section.settings.note_color | color_modify: 'alpha', 0.3 }};
+    border-left: 1px solid {{ section.settings.note_color }};
+    opacity: 0.75;
   }
 
   /* ── Mobile ── */
   @media (max-width: 768px) {
     #shopify-section-{{ section.id }} .ct-ba__inner {
       flex-direction: column;
-      gap: {{ section.settings.content_gap | times: 0.7 | round: 0 }}px;
+      padding-inline: 20px;
+      gap: {{ section.settings.content_gap | times: 0.6 | round: 0 }}px;
     }
-
     #shopify-section-{{ section.id }} .ct-ba__text,
     #shopify-section-{{ section.id }} .ct-ba__slider-wrap {
       flex: unset;
       width: 100%;
     }
-
     #shopify-section-{{ section.id }} .ct-ba__heading {
       font-size: {{ section.settings.heading_size_mobile }}px;
     }
-
     #shopify-section-{{ section.id }} .ct-ba__eyebrow {
       font-size: {{ section.settings.eyebrow_size_mobile }}px;
     }
-
     #shopify-section-{{ section.id }} .ct-ba__desc {
       font-size: {{ section.settings.desc_size_mobile }}px;
     }
-
     #shopify-section-{{ section.id }} .ct-ba {
-      padding-top: {{ section.settings.padding_v | times: 0.65 | round: 0 }}px;
-      padding-bottom: {{ section.settings.padding_v | times: 0.65 | round: 0 }}px;
+      padding-top: {{ section.settings.padding_v | times: 0.6 | round: 0 }}px;
+      padding-bottom: {{ section.settings.padding_v | times: 0.6 | round: 0 }}px;
     }
   }
 {%- endstyle -%}
 
-<section class="ct-ba" id="ct-ba-section-{{ section.id }}">
+<section class="ct-ba">
   <div class="ct-ba__inner">
 
     <div class="ct-ba__text ct-reveal">
       {%- if section.settings.eyebrow_text != blank -%}
         <p class="ct-ba__eyebrow">{{ section.settings.eyebrow_text | escape }}</p>
       {%- endif -%}
-
       {%- if section.settings.heading != blank -%}
         <h2 class="ct-ba__heading">{{ section.settings.heading | newline_to_br }}</h2>
       {%- endif -%}
-
       {%- if section.settings.description != blank -%}
-        <p class="ct-ba__desc">{{ section.settings.description }}</p>
+        <div class="ct-ba__desc">{{ section.settings.description }}</div>
       {%- endif -%}
-
       {%- if section.settings.note_1 != blank or section.settings.note_2 != blank -%}
         <div class="ct-ba__notes">
           {%- if section.settings.note_1 != blank -%}
@@ -400,10 +332,10 @@
     <div class="ct-ba__slider-wrap ct-reveal ct-reveal--d1">
       <div
         class="ct-ba__slider"
-        id="ct-ba-slider-{{ section.id }}"
-        data-split="{{ _split_default }}"
+        id="ct-ba-{{ section.id }}"
         role="img"
-        aria-label="{{ section.settings.heading | escape }}: before and after comparison"
+        aria-label="Before and after comparison"
+        tabindex="0"
       >
 
         {%- if section.settings.after_image != blank -%}
@@ -420,30 +352,28 @@
           {{ 'product-4' | placeholder_svg_tag: 'ct-ba__after-img placeholder-svg' }}
         {%- endif -%}
 
-        <div class="ct-ba__before-wrap" id="ct-ba-before-{{ section.id }}">
-          {%- if section.settings.before_image != blank -%}
-            {{
-              section.settings.before_image
-              | image_url: width: 1400
-              | image_tag:
-                class: 'ct-ba__before-img',
-                loading: 'lazy',
-                draggable: 'false',
-                alt: section.settings.before_image.alt
-            }}
-          {%- else -%}
-            {{ 'product-3' | placeholder_svg_tag: 'ct-ba__before-img placeholder-svg' }}
-          {%- endif -%}
-          {%- if section.settings.before_label != blank -%}
-            <span class="ct-ba__label ct-ba__label--before">{{ section.settings.before_label | escape }}</span>
-          {%- endif -%}
-        </div>
+        {%- if section.settings.before_image != blank -%}
+          {{
+            section.settings.before_image
+            | image_url: width: 1400
+            | image_tag:
+              class: 'ct-ba__before-img',
+              loading: 'lazy',
+              draggable: 'false',
+              alt: section.settings.before_image.alt
+          }}
+        {%- else -%}
+          {{ 'product-3' | placeholder_svg_tag: 'ct-ba__before-img placeholder-svg' }}
+        {%- endif -%}
 
+        {%- if section.settings.before_label != blank -%}
+          <span class="ct-ba__label ct-ba__label--before">{{ section.settings.before_label | escape }}</span>
+        {%- endif -%}
         {%- if section.settings.after_label != blank -%}
           <span class="ct-ba__label ct-ba__label--after">{{ section.settings.after_label | escape }}</span>
         {%- endif -%}
 
-        <div class="ct-ba__handle" id="ct-ba-handle-{{ section.id }}" aria-hidden="true">
+        <div class="ct-ba__handle" aria-hidden="true">
           <div class="ct-ba__handle-line"></div>
           <div class="ct-ba__handle-knob">
             <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -461,25 +391,26 @@
 
 <script>
 (function () {
-  var slider   = document.getElementById('ct-ba-slider-{{ section.id }}');
-  var before   = document.getElementById('ct-ba-before-{{ section.id }}');
-  var handle   = document.getElementById('ct-ba-handle-{{ section.id }}');
-  if (!slider || !before || !handle) return;
+  var slider = document.getElementById('ct-ba-{{ section.id }}');
+  if (!slider) return;
 
-  var split    = parseFloat(slider.dataset.split) || 50;
+  var beforeImg = slider.querySelector('.ct-ba__before-img');
+  var handle    = slider.querySelector('.ct-ba__handle');
+  if (!beforeImg || !handle) return;
+
+  var split    = 50;
   var dragging = false;
 
   function clamp(v, lo, hi) { return Math.min(hi, Math.max(lo, v)); }
 
   function setPosition(pct) {
     split = clamp(pct, 1, 99);
-    before.style.width  = split + '%';
-    handle.style.left   = split + '%';
-    slider.style.setProperty('--ct-ba-slider-width', (100 / split * 100) + '%');
+    beforeImg.style.clipPath = 'inset(0 ' + (100 - split) + '% 0 0)';
+    handle.style.left = split + '%';
   }
 
-  function posFromEvent(e) {
-    var rect = slider.getBoundingClientRect();
+  function pctFromEvent(e) {
+    var rect    = slider.getBoundingClientRect();
     var clientX = e.touches ? e.touches[0].clientX : e.clientX;
     return clamp((clientX - rect.left) / rect.width * 100, 1, 99);
   }
@@ -489,27 +420,26 @@
   slider.addEventListener('mousedown', function (e) {
     e.preventDefault();
     dragging = true;
-    setPosition(posFromEvent(e));
+    setPosition(pctFromEvent(e));
   });
 
   slider.addEventListener('touchstart', function (e) {
     dragging = true;
-    setPosition(posFromEvent(e));
+    setPosition(pctFromEvent(e));
   }, { passive: true });
 
   window.addEventListener('mousemove', function (e) {
     if (!dragging) return;
-    e.preventDefault();
-    setPosition(posFromEvent(e));
+    setPosition(pctFromEvent(e));
   });
 
   window.addEventListener('touchmove', function (e) {
     if (!dragging) return;
-    setPosition(posFromEvent(e));
+    setPosition(pctFromEvent(e));
   }, { passive: true });
 
-  window.addEventListener('mouseup',   function () { dragging = false; });
-  window.addEventListener('touchend',  function () { dragging = false; });
+  window.addEventListener('mouseup',  function () { dragging = false; });
+  window.addEventListener('touchend', function () { dragging = false; });
 
   slider.addEventListener('keydown', function (e) {
     if (e.key === 'ArrowLeft')  setPosition(split - 2);
@@ -538,7 +468,7 @@
       "options": [
         { "value": "image-left",  "label": "이미지 왼쪽 / 텍스트 오른쪽" },
         { "value": "image-right", "label": "이미지 오른쪽 / 텍스트 왼쪽" },
-        { "value": "image-top",   "label": "이미지 위 / 텍스트 아래 (풀 스택)" }
+        { "value": "image-top",   "label": "이미지 위 / 텍스트 아래" }
       ],
       "default": "image-left"
     },
@@ -581,7 +511,7 @@
       "max": 200,
       "step": 8,
       "unit": "px",
-      "default": 100
+      "default": 96
     },
     {
       "type": "color",
@@ -610,7 +540,7 @@
       "type": "richtext",
       "id": "description",
       "label": "Description",
-      "default": "<p>Formulated with Niacinamide, Panthenol, and Centella, our serum works with your skin's rhythm — not against it. These are real results from real people.</p>"
+      "default": "<p>Formulated with Niacinamide and Centella, our serum works with your skin — not against it.</p>"
     },
     {
       "type": "text",
@@ -627,7 +557,7 @@
 
     {
       "type": "header",
-      "content": "이미지"
+      "content": "이미지 & 슬라이더"
     },
     {
       "type": "image_picker",
@@ -652,6 +582,20 @@
       "default": "After"
     },
     {
+      "type": "select",
+      "id": "img_aspect_ratio",
+      "label": "이미지 비율",
+      "options": [
+        { "value": "4 / 3",  "label": "4:3 (가로형)" },
+        { "value": "1 / 1",  "label": "1:1 (정사각)" },
+        { "value": "3 / 4",  "label": "3:4 (세로형)" },
+        { "value": "16 / 9", "label": "16:9 (와이드)" },
+        { "value": "5 / 6",  "label": "5:6 (세로 약간)" }
+      ],
+      "default": "4 / 3",
+      "info": "Before / After 두 이미지를 같은 비율로 크롭하여 사용하세요."
+    },
+    {
       "type": "range",
       "id": "img_radius",
       "label": "이미지 모서리 둥글기",
@@ -664,19 +608,8 @@
     {
       "type": "color",
       "id": "handle_color",
-      "label": "슬라이더 핸들 색상",
+      "label": "핸들 색상",
       "default": "#F8F4EE"
-    },
-    {
-      "type": "range",
-      "id": "overlay_opacity",
-      "label": "이미지 오버레이 강도",
-      "min": 0,
-      "max": 40,
-      "step": 5,
-      "unit": "%",
-      "default": 0,
-      "info": "양쪽 이미지에 동일하게 적용되는 어두운 오버레이입니다."
     },
 
     {
@@ -732,22 +665,20 @@
     {
       "type": "range",
       "id": "eyebrow_line_height",
-      "label": "행간 (×100)",
+      "label": "행간 (÷100 = 실제값)",
       "min": 100,
       "max": 200,
       "step": 5,
-      "default": 140,
-      "info": "140 = line-height: 1.4"
+      "default": 140
     },
     {
       "type": "range",
       "id": "eyebrow_letter_spacing",
-      "label": "자간 (×100 em)",
+      "label": "자간 (÷100 = em)",
       "min": 0,
       "max": 30,
       "step": 1,
-      "default": 18,
-      "info": "18 = letter-spacing: 0.18em"
+      "default": 18
     },
     {
       "type": "color",
@@ -810,22 +741,20 @@
     {
       "type": "range",
       "id": "heading_line_height",
-      "label": "행간 (×100)",
+      "label": "행간 (÷100 = 실제값)",
       "min": 100,
       "max": 160,
       "step": 5,
-      "default": 115,
-      "info": "115 = line-height: 1.15"
+      "default": 115
     },
     {
       "type": "range",
       "id": "heading_letter_spacing",
-      "label": "자간 (×100 em)",
+      "label": "자간 (÷100 = em, 음수 가능)",
       "min": -5,
       "max": 15,
       "step": 1,
-      "default": -1,
-      "info": "-1 = letter-spacing: -0.01em"
+      "default": -1
     },
     {
       "type": "color",
@@ -885,22 +814,20 @@
     {
       "type": "range",
       "id": "desc_line_height",
-      "label": "행간 (×100)",
+      "label": "행간 (÷100 = 실제값)",
       "min": 130,
       "max": 220,
       "step": 5,
-      "default": 175,
-      "info": "175 = line-height: 1.75"
+      "default": 175
     },
     {
       "type": "range",
       "id": "desc_letter_spacing",
-      "label": "자간 (×100 em)",
+      "label": "자간 (÷100 = em)",
       "min": 0,
       "max": 10,
       "step": 1,
-      "default": 1,
-      "info": "1 = letter-spacing: 0.01em"
+      "default": 1
     },
     {
       "type": "color",
@@ -911,7 +838,7 @@
 
     {
       "type": "header",
-      "content": "Before / After 레이블 폰트"
+      "content": "레이블 폰트 (Before / After)"
     },
     {
       "type": "range",
@@ -937,7 +864,7 @@
     {
       "type": "range",
       "id": "label_line_height",
-      "label": "행간 (×100)",
+      "label": "행간 (÷100 = 실제값)",
       "min": 100,
       "max": 180,
       "step": 5,
@@ -946,7 +873,7 @@
     {
       "type": "range",
       "id": "label_letter_spacing",
-      "label": "자간 (×100 em)",
+      "label": "자간 (÷100 = em)",
       "min": 0,
       "max": 25,
       "step": 1,
@@ -1000,7 +927,7 @@
     {
       "type": "range",
       "id": "note_line_height",
-      "label": "행간 (×100)",
+      "label": "행간 (÷100 = 실제값)",
       "min": 120,
       "max": 200,
       "step": 5,
@@ -1009,7 +936,7 @@
     {
       "type": "range",
       "id": "note_letter_spacing",
-      "label": "자간 (×100 em)",
+      "label": "자간 (÷100 = em)",
       "min": 0,
       "max": 15,
       "step": 1,
