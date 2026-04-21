@@ -1,113 +1,106 @@
 {{ 'chalttok-sarang.css' | asset_url | stylesheet_tag }}
 
-{%- if section.settings.text_bg_enabled -%}
-  {%- if section.settings.text_bg_style == 'frosted' -%}
-    {%- assign _bg_rgb = '255 250 247' -%}
-    {%- assign _bg_extra = 'backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);' -%}
-  {%- elsif section.settings.text_bg_style == 'warm' -%}
-    {%- assign _bg_rgb = '72 52 44' -%}
-    {%- assign _bg_extra = '' -%}
-  {%- else -%}
-    {%- assign _bg_rgb = '26 20 18' -%}
-    {%- assign _bg_extra = '' -%}
-  {%- endif -%}
-{%- endif -%}
+{%- liquid
+  comment
+    Overlay opacity: convert 0-90 integer → 0.00-0.90 float for rgba()
+  endcomment
+  assign _overlay_alpha = section.settings.overlay_opacity | times: 1.0 | divided_by: 100 | round: 2
 
-{%- comment -%}
-  Resolve final text color.
-  Priority: explicit text_color setting > frosted-auto-dark > default (white/ivory)
-{%- endcomment -%}
-{%- if section.settings.text_color == 'black' -%}
-  {%- assign _label_color  = 'rgba(0,0,0,0.55)' -%}
-  {%- assign _heading_color = '#000000' -%}
-  {%- assign _caption_color = 'rgba(0,0,0,0.7)' -%}
-{%- elsif section.settings.text_color == 'ink' -%}
-  {%- assign _label_color  = 'rgba(44,36,32,0.55)' -%}
-  {%- assign _heading_color = '#2C2420' -%}
-  {%- assign _caption_color = 'rgba(44,36,32,0.7)' -%}
-{%- elsif section.settings.text_bg_enabled and section.settings.text_bg_style == 'frosted' -%}
-  {%- assign _label_color  = 'rgba(44,36,32,0.55)' -%}
-  {%- assign _heading_color = '#2C2420' -%}
-  {%- assign _caption_color = 'rgba(44,36,32,0.7)' -%}
-{%- else -%}
-  {%- assign _label_color  = 'rgba(248,244,238,0.5)' -%}
-  {%- assign _heading_color = '#F8F4EE' -%}
-  {%- assign _caption_color = 'rgba(248,244,238,0.6)' -%}
-{%- endif -%}
+  comment
+    Text background color + opacity
+  endcomment
+  if section.settings.text_bg_enabled
+    assign _text_bg_alpha = section.settings.text_bg_opacity | times: 1.0 | divided_by: 100 | round: 2
+    if section.settings.text_bg_style == 'frosted'
+      assign _bg_r = 255
+      assign _bg_g = 250
+      assign _bg_b = 247
+      assign _bg_extra = 'backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);'
+    elsif section.settings.text_bg_style == 'warm'
+      assign _bg_r = 72
+      assign _bg_g = 52
+      assign _bg_b = 44
+      assign _bg_extra = ''
+    else
+      assign _bg_r = 26
+      assign _bg_g = 20
+      assign _bg_b = 18
+      assign _bg_extra = ''
+    endif
+  endif
 
-<style>
-  /* Section-scoped overrides — ID beats class, no !important needed */
-  #ct-overload-{{ section.id }} .ct-overload__overlay {
-    background: linear-gradient(
-      to bottom,
-      transparent 30%,
-      rgb(44 36 32 / {{ section.settings.overlay_opacity }}%) 100%
-    );
-  }
+  comment
+    Text color: explicit setting > frosted-auto-dark > default ivory
+  endcomment
+  if section.settings.text_color == 'black'
+    assign _label_color   = 'rgba(0,0,0,0.55)'
+    assign _heading_color = '#000000'
+    assign _caption_color = 'rgba(0,0,0,0.7)'
+    assign _accent_color  = 'rgba(0,0,0,0.2)'
+  elsif section.settings.text_color == 'ink'
+    assign _label_color   = 'rgba(44,36,32,0.55)'
+    assign _heading_color = '#2C2420'
+    assign _caption_color = 'rgba(44,36,32,0.7)'
+    assign _accent_color  = 'rgba(44,36,32,0.25)'
+  elsif section.settings.text_bg_enabled and section.settings.text_bg_style == 'frosted'
+    assign _label_color   = 'rgba(44,36,32,0.55)'
+    assign _heading_color = '#2C2420'
+    assign _caption_color = 'rgba(44,36,32,0.7)'
+    assign _accent_color  = 'rgba(44,36,32,0.25)'
+  else
+    assign _label_color   = 'rgba(248,244,238,0.5)'
+    assign _heading_color = '#F8F4EE'
+    assign _caption_color = 'rgba(248,244,238,0.55)'
+    assign _accent_color  = 'rgba(248,244,238,0.38)'
+  endif
+-%}
 
-  #ct-overload-{{ section.id }} .ct-label-micro   { color: {{ _label_color }}; }
-  #ct-overload-{{ section.id }} .ct-statement-lg  { color: {{ _heading_color }}; }
-  #ct-overload-{{ section.id }} .ct-caption-sm    { color: {{ _caption_color }}; }
-
+{%- style -%}
+  /* ── Section height & image focus ── */
   #ct-overload-{{ section.id }} {
     height: calc(100vh + {{ section.settings.section_padding_bottom }}px);
   }
-
   #ct-overload-{{ section.id }} .ct-overload__img {
     object-position: center {{ section.settings.image_focus_y }}%;
   }
 
+  /* ── Overlay gradient — rgba() for universal browser support ── */
+  #ct-overload-{{ section.id }} .ct-overload__overlay {
+    background: linear-gradient(
+      to bottom,
+      transparent 30%,
+      rgba(44, 36, 32, {{ _overlay_alpha }}) 100%
+    );
+  }
+
+  /* ── Text colors ── */
+  #ct-overload-{{ section.id }} .ct-label-micro  { color: {{ _label_color }}; }
+  #ct-overload-{{ section.id }} .ct-statement-lg { color: {{ _heading_color }}; }
+  #ct-overload-{{ section.id }} .ct-caption-sm   { color: {{ _caption_color }}; }
+
+  /* ── Accent line color ── */
+  #ct-overload-{{ section.id }} .ct-overload__accent {
+    background: {{ _accent_color }};
+  }
+
+  /* ── Text block position ── */
   #ct-overload-{{ section.id }} .ct-overload__text {
     bottom: {{ section.settings.text_bottom }}px;
   }
 
-  {% if section.settings.text_bg_enabled %}
+  /* ── Text background box (optional) ── */
+  {%- if section.settings.text_bg_enabled -%}
   #ct-overload-{{ section.id }} .ct-overload__text {
     bottom: {{ section.settings.text_bottom }}px;
-    background: rgb({{ _bg_rgb }} / {{ section.settings.text_bg_opacity }}%);
+    background: rgba({{ _bg_r }}, {{ _bg_g }}, {{ _bg_b }}, {{ _text_bg_alpha }});
     padding: 32px 40px;
     border-radius: 2px;
     max-width: 520px;
     {{ _bg_extra }}
   }
-  {% endif %}
-</style>
+  {%- endif -%}
 
-<section class="ct-overload" id="ct-overload-{{ section.id }}">
-
-  {% if section.settings.image != blank %}
-    {{
-      section.settings.image
-      | image_url: width: 2000
-      | image_tag:
-        class: 'ct-overload__img',
-        loading: 'lazy',
-        alt: section.settings.image.alt
-    }}
-  {% else %}
-    {{ 'lifestyle-2' | placeholder_svg_tag: 'ct-overload__img placeholder-svg' }}
-  {% endif %}
-
-  <div class="ct-overload__overlay"></div>
-
-  <div class="ct-overload__text">
-    {% if section.settings.label != blank %}
-      <p class="ct-label-micro ct-reveal">{{ section.settings.label }}</p>
-    {% endif %}
-    <h2
-      class="ct-statement-lg ct-reveal ct-reveal--d1 ct-overload__heading--{{ section.settings.heading_font }}"
-      style="font-size: clamp({{ section.settings.heading_size_min }}px, 4vw, {{ section.settings.heading_size_max }}px);"
-    >
-      {{- section.settings.heading | newline_to_br -}}
-    </h2>
-    {% if section.settings.caption != blank %}
-      <p class="ct-caption-sm ct-reveal ct-reveal--d2">{{ section.settings.caption }}</p>
-    {% endif %}
-  </div>
-
-</section>
-
-<style>
+  /* ── Heading font variants ── */
   #ct-overload-{{ section.id }} .ct-overload__heading--serif {
     font-family: 'Cormorant Garamond', Georgia, serif;
     font-style: italic;
@@ -128,17 +121,61 @@
     font-family: 'New York', ui-serif, Georgia, serif;
     font-style: normal;
   }
-</style>
+
+  /* ── Font weights ── */
+  #shopify-section-{{ section.id }} .ct-statement-lg { font-weight: {{ section.settings.font_weight_heading }}; }
+  #shopify-section-{{ section.id }} .ct-label-micro,
+  #shopify-section-{{ section.id }} .ct-caption-sm   { font-weight: {{ section.settings.font_weight_body }}; }
+
+  /* ── Heading font (heading_font selector) ── */
+  {%- if section.settings.heading_font == 'cormorant' -%}
+  #shopify-section-{{ section.id }} .ct-statement-lg { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; }
+  {%- elsif section.settings.heading_font == 'dm-sans' -%}
+  #shopify-section-{{ section.id }} .ct-statement-lg { font-family: 'DM Sans', 'Helvetica Neue', sans-serif; font-style: normal; }
+  {%- elsif section.settings.heading_font == 'noto-kr' -%}
+  #shopify-section-{{ section.id }} .ct-statement-lg { font-family: 'Noto Serif KR', 'Nanum Myeongjo', serif; font-style: normal; }
+  {%- elsif section.settings.heading_font == 'ny' -%}
+  #shopify-section-{{ section.id }} .ct-statement-lg { font-family: 'New York', ui-serif, Georgia, serif; font-style: normal; }
+  {%- endif -%}
+{%- endstyle -%}
+
+<section class="ct-overload" id="ct-overload-{{ section.id }}">
+
+  {% if section.settings.image != blank %}
+    {{
+      section.settings.image
+      | image_url: width: 2000
+      | image_tag:
+        class: 'ct-overload__img',
+        loading: 'lazy',
+        alt: section.settings.image.alt
+    }}
+  {% else %}
+    {{ 'lifestyle-2' | placeholder_svg_tag: 'ct-overload__img placeholder-svg' }}
+  {% endif %}
+
+  <div class="ct-overload__overlay"></div>
+
+  <div class="ct-overload__text">
+    <span class="ct-overload__accent ct-reveal" aria-hidden="true"></span>
+    {% if section.settings.label != blank %}
+      <p class="ct-label-micro ct-reveal ct-reveal--d1">{{ section.settings.label }}</p>
+    {% endif %}
+    <h2
+      class="ct-statement-lg ct-reveal ct-reveal--d2 ct-overload__heading--{{ section.settings.heading_font }}"
+      style="font-size: clamp({{ section.settings.heading_size_min }}px, 4vw, {{ section.settings.heading_size_max }}px);"
+    >
+      {{- section.settings.heading | newline_to_br -}}
+    </h2>
+    {% if section.settings.caption != blank %}
+      <p class="ct-caption-sm ct-reveal ct-reveal--d3">{{ section.settings.caption }}</p>
+    {% endif %}
+  </div>
+
+</section>
 
 <script src="{{ 'chalttok-sarang.js' | asset_url }}" defer></script>
 
-
-
-<style>
-  #shopify-section-{{ section.id }} .ct-statement-lg { font-weight: {{ section.settings.font_weight_heading }}; }
-  #shopify-section-{{ section.id }} .ct-label-micro,
-  #shopify-section-{{ section.id }} .ct-caption-sm { font-weight: {{ section.settings.font_weight_body }}; }
-</style>
 {% schema %}
 {
   "name": "CT · Overwhelm",
@@ -236,10 +273,10 @@
       "id": "heading_font",
       "label": "헤딩 폰트",
       "options": [
-        { "value": "serif", "label": "Cormorant (이탤릭 세리프, 기본)" },
-        { "value": "sans",  "label": "DM Sans (모던 산세리프)" },
-        { "value": "kr",    "label": "Noto Serif KR (한글 세리프)" },
-        { "value": "ny",    "label": "New York (애플 세리프)" }
+        { "value": "serif",    "label": "Cormorant (이탤릭 세리프, 기본)" },
+        { "value": "sans",     "label": "DM Sans (모던 산세리프)" },
+        { "value": "kr",       "label": "Noto Serif KR (한글 세리프)" },
+        { "value": "ny",       "label": "New York (애플 세리프)" }
       ],
       "default": "serif"
     },
