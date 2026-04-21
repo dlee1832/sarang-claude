@@ -486,6 +486,10 @@
         "color_scheme": "",
         "full_width": true,
         "ct_bg_style": "grad-soft",
+        "heading_font": "default",
+        "font_weight_heading": "400",
+        "body_font": "default",
+        "font_weight_body": "300",
         "padding_top": 40,
         "padding_bottom": 52
       }
@@ -589,6 +593,10 @@
         "color_scheme": "scheme-716e9556-d6d5-4cd0-90da-7d2eff946383",
         "full_width": true,
         "ct_bg_style": "grad-whisper",
+        "heading_font": "cormorant",
+        "font_weight_heading": "400",
+        "body_font": "cormorant",
+        "font_weight_body": "400",
         "padding_top": 100,
         "padding_bottom": 100
       }
@@ -604,8 +612,8 @@
         "cta_url": "",
         "image": "shopify://shop_images/sarang-theme-img-05.png",
         "heading_font": "default",
-        "font_weight_heading": "300",
-        "font_weight_body": "300"
+        "font_weight_heading": "400",
+        "font_weight_body": "400"
       }
     },
     "image_banner_HfTBjT": {
@@ -781,6 +789,10 @@
         "color_scheme": "",
         "full_width": true,
         "ct_bg_style": "grad-soft",
+        "heading_font": "default",
+        "font_weight_heading": "400",
+        "body_font": "default",
+        "font_weight_body": "300",
         "padding_top": 16,
         "padding_bottom": 20
       }
@@ -793,19 +805,19 @@
         "overlay_opacity": 30,
         "kr_bg_text": "사랑",
         "quote": "Love, as an act.\nNot a promise.",
-        "kr_sub_text": "사랑 · To care without condition",
+        "kr_sub_text": "SARANG (n.) the Korean word for love and care",
         "text_color": "ink",
         "text_h_pos": "left",
         "text_v_pos": "top",
         "text_align": "left",
         "padding_h": 32,
-        "padding_v": 40,
+        "padding_v": 24,
         "max_width": 560,
         "quote_size_min": 28,
         "quote_size_max": 52,
         "heading_font": "default",
-        "font_weight_heading": "600",
-        "font_weight_body": "300"
+        "font_weight_heading": "400",
+        "font_weight_body": "400"
       }
     },
     "chalttok_ingredients_JN9bRr": {
@@ -859,8 +871,8 @@
         "heading": "Sarang is only\nthe beginning.",
         "caption": "We grow slowly. Each product we add will ask the same question: does this serve skin, or simply add to it?",
         "heading_font": "default",
-        "font_weight_heading": "300",
-        "font_weight_body": "300"
+        "font_weight_heading": "400",
+        "font_weight_body": "400"
       }
     }
   },
