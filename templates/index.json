@@ -820,6 +820,77 @@
         "font_weight_body": "400"
       }
     },
+    "multirow_UNRxBc": {
+      "type": "multirow",
+      "blocks": {
+        "row_a38PnA": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/sarang-theme-img-02.png",
+            "caption": "Caption",
+            "heading": "Row",
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "button_label": "Button label",
+            "button_link": ""
+          }
+        },
+        "row_e4JCcB": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/sarang-theme-img-08.png",
+            "caption": "Caption",
+            "heading": "Row",
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "button_label": "Button label",
+            "button_link": ""
+          }
+        },
+        "row_TiYDWw": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/sarang-theme-img-09.png",
+            "caption": "Caption",
+            "heading": "Row",
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "button_label": "Button label",
+            "button_link": ""
+          }
+        },
+        "row_J3hCiF": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/sarang-theme-img-10.png",
+            "caption": "Caption",
+            "heading": "Row",
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "button_label": "Button label",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "row_a38PnA",
+        "row_e4JCcB",
+        "row_TiYDWw",
+        "row_J3hCiF"
+      ],
+      "name": "CT · Multirow",
+      "settings": {
+        "image_height": "medium",
+        "desktop_image_width": "medium",
+        "image_layout": "alternate-left",
+        "heading_size": "h1",
+        "text_style": "body",
+        "button_style": "secondary",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "",
+        "row_color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
     "chalttok_ingredients_JN9bRr": {
       "type": "chalttok-ingredients",
       "blocks": {
@@ -895,6 +966,7 @@
     "image_banner_dVMgcT",
     "rich_text_7DJ8Uq",
     "chalttok_meaning_cJyCeQ",
+    "multirow_UNRxBc",
     "chalttok_ingredients_JN9bRr",
     "chalttok_future_EC8wf7"
   ]
