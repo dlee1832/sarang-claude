@@ -35,9 +35,12 @@
       ],
       "name": "CT · Brand Footer",
       "settings": {
+        "bg_color": "#2c2420",
         "logo_text": "CHALTTOK",
         "tagline": "\"Formulated with care, not excess.\"",
-        "copyright": "© 2026 CHALTTOK"
+        "copyright": "© 2026 CHALTTOK",
+        "instagram_url": "https://www.instagram.com/chalttok_global/",
+        "email": "support@chalttok.com"
       }
     },
     "footer": {
