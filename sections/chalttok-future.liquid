@@ -1,22 +1,61 @@
 {{ 'chalttok-sarang.css' | asset_url | stylesheet_tag }}
 
-<section class="ct-future">
-  <div class="ct-future__line ct-reveal" aria-hidden="true"></div>
-  <h2 class="ct-future__heading ct-reveal ct-reveal--d1">
-    {{ section.settings.heading | newline_to_br }}
-  </h2>
-  {% if section.settings.caption != blank %}
-    <p class="ct-future__caption ct-reveal ct-reveal--d2">
-      {{ section.settings.caption }}
-    </p>
-  {% endif %}
-</section>
+{%- liquid
+  assign _has_image = false
+  if section.settings.image != blank
+    assign _has_image = true
+    assign _overlay_alpha = section.settings.overlay_opacity | times: 1.0 | divided_by: 100 | round: 2
+  endif
 
-<script src="{{ 'chalttok-sarang.js' | asset_url }}" defer></script>
+  if section.settings.text_color == 'white'
+    assign _heading_color = '#F8F4EE'
+    assign _caption_color = 'rgba(248,244,238,0.65)'
+    assign _line_color    = 'rgba(217,169,154,0.7)'
+  elsif section.settings.text_color == 'black'
+    assign _heading_color = '#000000'
+    assign _caption_color = 'rgba(0,0,0,0.6)'
+    assign _line_color    = 'rgba(0,0,0,0.25)'
+  else
+    assign _heading_color = ''
+    assign _caption_color = ''
+    assign _line_color    = ''
+  endif
+-%}
 
+{%- style -%}
+  {%- if _has_image -%}
+  #shopify-section-{{ section.id }} .ct-future {
+    position: relative;
+    overflow: hidden;
+    min-height: {{ section.settings.section_min_height }}px;
+  }
+  #shopify-section-{{ section.id }} .ct-future__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center {{ section.settings.image_focus_y }}%;
+  }
+  #shopify-section-{{ section.id }} .ct-future__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(44, 36, 32, {{ _overlay_alpha }});
+  }
+  #shopify-section-{{ section.id }} .ct-future__line,
+  #shopify-section-{{ section.id }} .ct-future__heading,
+  #shopify-section-{{ section.id }} .ct-future__caption {
+    position: relative;
+    z-index: 2;
+  }
+  {%- endif -%}
 
+  {%- if _heading_color != '' -%}
+  #shopify-section-{{ section.id }} .ct-future__heading { color: {{ _heading_color }}; }
+  #shopify-section-{{ section.id }} .ct-future__caption { color: {{ _caption_color }}; }
+  #shopify-section-{{ section.id }} .ct-future__line    { background: linear-gradient(180deg, transparent, {{ _line_color }}); }
+  {%- endif -%}
 
-<style>
   #shopify-section-{{ section.id }} .ct-future__heading { font-weight: {{ section.settings.font_weight_heading }}; }
   #shopify-section-{{ section.id }} .ct-future__caption { font-weight: {{ section.settings.font_weight_body }}; }
 
@@ -29,13 +68,88 @@
   {%- elsif section.settings.heading_font == 'ny' -%}
   #shopify-section-{{ section.id }} .ct-future__heading { font-family: 'New York', ui-serif, Georgia, serif; font-style: normal; }
   {%- endif -%}
-</style>
+{%- endstyle -%}
+
+<section class="ct-future">
+
+  {%- if _has_image -%}
+    {{
+      section.settings.image
+      | image_url: width: 2000
+      | image_tag:
+        class: 'ct-future__bg',
+        loading: 'lazy',
+        alt: section.settings.image.alt
+    }}
+    <div class="ct-future__overlay"></div>
+  {%- endif -%}
+
+  <div class="ct-future__line ct-reveal" aria-hidden="true"></div>
+  <h2 class="ct-future__heading ct-reveal ct-reveal--d1">
+    {{ section.settings.heading | newline_to_br }}
+  </h2>
+  {% if section.settings.caption != blank %}
+    <p class="ct-future__caption ct-reveal ct-reveal--d2">
+      {{ section.settings.caption }}
+    </p>
+  {% endif %}
+
+</section>
+
+<script src="{{ 'chalttok-sarang.js' | asset_url }}" defer></script>
+
 {% schema %}
 {
   "name": "CT · Future Close",
   "tag": "div",
   "class": "chalttok-section",
   "settings": [
+    {
+      "type": "header",
+      "content": "배경 이미지"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "배경 이미지",
+      "info": "설정하지 않으면 기존 아이보리 배경이 유지됩니다."
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "오버레이 불투명도",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "default": 40,
+      "info": "높을수록 이미지가 어두워져 텍스트 가독성이 올라갑니다."
+    },
+    {
+      "type": "range",
+      "id": "image_focus_y",
+      "label": "이미지 세로 초점",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "section_min_height",
+      "label": "섹션 최소 높이",
+      "min": 300,
+      "max": 900,
+      "step": 50,
+      "unit": "px",
+      "default": 500,
+      "info": "배경 이미지 사용 시 섹션 높이를 조절합니다."
+    },
+    {
+      "type": "header",
+      "content": "텍스트"
+    },
     {
       "type": "textarea",
       "id": "heading",
@@ -47,6 +161,18 @@
       "id": "caption",
       "label": "Caption",
       "default": "We grow slowly. Each product we add will ask the same question: does this serve skin, or simply add to it?"
+    },
+    {
+      "type": "select",
+      "id": "text_color",
+      "label": "글자 색상",
+      "options": [
+        { "value": "default", "label": "기본 (테마 색상)" },
+        { "value": "white",   "label": "흰색 / 아이보리 (배경 이미지용)" },
+        { "value": "black",   "label": "순수 검정" }
+      ],
+      "default": "default",
+      "info": "배경 이미지 사용 시 '흰색'을 선택하세요."
     },
     {
       "type": "header",
