@@ -1,0 +1,615 @@
+{{ 'chalttok-sarang.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign _count       = section.blocks.size
+  assign _slider_mode = false
+  if _count >= 4
+    assign _slider_mode = true
+  endif
+
+  assign _heading_family = 'inherit'
+  assign _heading_style  = 'normal'
+  if section.settings.heading_font == 'cormorant'
+    assign _heading_family = "'Cormorant Garamond', Georgia, serif"
+    assign _heading_style  = 'italic'
+  elsif section.settings.heading_font == 'dm-sans'
+    assign _heading_family = "'DM Sans', 'Helvetica Neue', sans-serif"
+  elsif section.settings.heading_font == 'noto-kr'
+    assign _heading_family = "'Noto Serif KR', 'Nanum Myeongjo', serif"
+  elsif section.settings.heading_font == 'ny'
+    assign _heading_family = "'New York', ui-serif, Georgia, serif"
+  endif
+
+  assign _eyebrow_ls = section.settings.eyebrow_letter_spacing | times: 1.0 | divided_by: 100
+-%}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} .ct-reviews {
+    background: {{ section.settings.bg_color }};
+    padding-top: {{ section.settings.padding_v }}px;
+    padding-bottom: {{ section.settings.padding_v }}px;
+  }
+
+  #shopify-section-{{ section.id }} .ct-reviews__inner {
+    max-width: {{ section.settings.max_width }}px;
+  }
+
+  #shopify-section-{{ section.id }} .ct-reviews__eyebrow {
+    color: {{ section.settings.eyebrow_color }};
+    letter-spacing: {{ _eyebrow_ls }}em;
+  }
+
+  #shopify-section-{{ section.id }} .ct-reviews__heading {
+    font-family: {{ _heading_family }};
+    font-style: {{ _heading_style }};
+    font-size: {{ section.settings.heading_size }}px;
+    font-weight: {{ section.settings.heading_weight }};
+    color: {{ section.settings.heading_color }};
+  }
+
+  #shopify-section-{{ section.id }} .ct-reviews__desc {
+    color: {{ section.settings.desc_color }};
+  }
+
+  #shopify-section-{{ section.id }} .ct-reviews__thumb-wrap {
+    border-radius: {{ section.settings.card_radius }}px;
+    aspect-ratio: {{ section.settings.video_ratio }};
+  }
+
+  #shopify-section-{{ section.id }} .ct-reviews__card-title {
+    color: {{ section.settings.heading_color }};
+  }
+
+  #shopify-section-{{ section.id }} .ct-reviews__card-caption {
+    color: {{ section.settings.desc_color }};
+  }
+
+  #shopify-section-{{ section.id }} .ct-reviews__nav {
+    color: {{ section.settings.heading_color }};
+    border-color: {{ section.settings.heading_color | color_modify: 'alpha', 0.15 }};
+  }
+
+  #shopify-section-{{ section.id }} .ct-reviews__cta-prefix {
+    color: {{ section.settings.desc_color }};
+  }
+
+  {%- unless _slider_mode -%}
+  #shopify-section-{{ section.id }} .ct-reviews__track {
+    grid-template-columns: repeat({{ _count }}, 1fr);
+  }
+  @media (max-width: 767px) {
+    #shopify-section-{{ section.id }} .ct-reviews__track {
+      grid-template-columns: 1fr;
+    }
+  }
+  {%- endunless -%}
+{%- endstyle -%}
+
+<section class="ct-reviews">
+  <div class="ct-reviews__inner">
+
+    <div class="ct-reviews__header">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="ct-reviews__eyebrow ct-reveal">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="ct-reviews__heading ct-reveal ct-reveal--d1">{{ section.settings.heading | newline_to_br }}</h2>
+      {%- endif -%}
+      {%- if section.settings.description != blank -%}
+        <p class="ct-reviews__desc ct-reveal ct-reveal--d2">{{ section.settings.description }}</p>
+      {%- endif -%}
+    </div>
+
+    <div
+      class="ct-reviews__stage{% if _slider_mode %} ct-reviews__stage--slider{% else %} ct-reviews__stage--grid{% endif %} ct-reveal"
+      id="ct-rv-stage-{{ section.id }}"
+      data-slider="{{ _slider_mode }}"
+      data-count="{{ _count }}"
+      data-gap="24"
+    >
+      <div class="ct-reviews__track" id="ct-rv-track-{{ section.id }}">
+        {%- for block in section.blocks -%}
+          {%- assign _vurl  = block.settings.video_url | strip -%}
+          {%- assign _vtype = 'direct' -%}
+          {%- if _vurl contains 'youtube.com' or _vurl contains 'youtu.be' -%}
+            {%- assign _vtype = 'youtube' -%}
+          {%- elsif _vurl contains 'vimeo.com' -%}
+            {%- assign _vtype = 'vimeo' -%}
+          {%- endif -%}
+
+          <div
+            class="ct-reviews__card"
+            {{ block.shopify_attributes }}
+            data-video="{{ _vurl }}"
+            data-vtype="{{ _vtype }}"
+          >
+            <div class="ct-reviews__thumb-wrap">
+
+              {%- if block.settings.thumbnail != blank -%}
+                {{
+                  block.settings.thumbnail
+                  | image_url: width: 800
+                  | image_tag:
+                    class: 'ct-reviews__thumb',
+                    loading: 'lazy',
+                    alt: block.settings.title | default: 'Customer review'
+                }}
+              {%- else -%}
+                {{ 'lifestyle-2' | placeholder_svg_tag: 'ct-reviews__thumb ct-reviews__thumb--placeholder placeholder-svg' }}
+              {%- endif -%}
+
+              {%- if _vurl != blank -%}
+                <button
+                  class="ct-reviews__play"
+                  aria-label="{{ block.settings.title | default: 'Play review video' | escape }}"
+                >
+                  <span class="ct-reviews__play-ring">
+                    <svg class="ct-reviews__play-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <path d="M19 15L35 24L19 33V15Z" fill="#2C2420"/>
+                    </svg>
+                  </span>
+                </button>
+              {%- endif -%}
+
+            </div>
+
+            {%- if block.settings.title != blank or block.settings.caption != blank -%}
+              <div class="ct-reviews__card-text">
+                {%- if block.settings.title != blank -%}
+                  <p class="ct-reviews__card-title">{{ block.settings.title | escape }}</p>
+                {%- endif -%}
+                {%- if block.settings.caption != blank -%}
+                  <p class="ct-reviews__card-caption">{{ block.settings.caption | escape }}</p>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+
+      {%- if _slider_mode -%}
+        <button
+          class="ct-reviews__nav ct-reviews__nav--prev"
+          id="ct-rv-prev-{{ section.id }}"
+          aria-label="이전 슬라이드"
+        >
+          <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M13 4L7 10L13 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <button
+          class="ct-reviews__nav ct-reviews__nav--next"
+          id="ct-rv-next-{{ section.id }}"
+          aria-label="다음 슬라이드"
+        >
+          <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M7 4L13 10L7 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div class="ct-reviews__dots" id="ct-rv-dots-{{ section.id }}" role="tablist" aria-label="슬라이드 탐색"></div>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.amazon_url != blank -%}
+      <div class="ct-reviews__cta ct-reveal">
+        {%- if section.settings.cta_prefix != blank -%}
+          <p class="ct-reviews__cta-prefix">{{ section.settings.cta_prefix | escape }}</p>
+        {%- endif -%}
+        <a
+          href="{{ section.settings.amazon_url }}"
+          class="ct-reviews__amazon-btn"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Amazon에서 Sarang 구매하기 (새 탭에서 열림)"
+        >
+          {%- if section.settings.amazon_logo != blank -%}
+            {{
+              section.settings.amazon_logo
+              | image_url: width: 280
+              | image_tag:
+                class: 'ct-reviews__amazon-img',
+                alt: 'Amazon',
+                loading: 'lazy'
+            }}
+          {%- else -%}
+            <svg class="ct-reviews__amazon-svg" viewBox="0 0 136 46" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Amazon">
+              <title>Amazon</title>
+              <text x="2" y="30"
+                font-family="'Arial Black','Helvetica Neue',Arial,sans-serif"
+                font-size="31"
+                font-weight="900"
+                fill="#232F3E"
+                letter-spacing="-1">amazon</text>
+              <path d="M10 39 Q68 54 126 39" stroke="#FF9900" stroke-width="4" fill="none" stroke-linecap="round"/>
+              <polygon points="123,34 131,39 122,43" fill="#FF9900"/>
+            </svg>
+          {%- endif -%}
+        </a>
+      </div>
+    {%- endif -%}
+
+  </div>
+</section>
+
+<script>
+(function () {
+  'use strict';
+
+  var stage = document.getElementById('ct-rv-stage-{{ section.id }}');
+  var track = document.getElementById('ct-rv-track-{{ section.id }}');
+  if (!stage || !track) return;
+
+  /* ── Video play ── */
+  track.addEventListener('click', function (e) {
+    var btn = e.target.closest('.ct-reviews__play');
+    if (!btn) return;
+
+    var card  = btn.closest('.ct-reviews__card');
+    var url   = (card.dataset.video  || '').trim();
+    var vtype = (card.dataset.vtype  || 'direct');
+    var wrap  = card.querySelector('.ct-reviews__thumb-wrap');
+    if (!url || !wrap) return;
+
+    var embedSrc = '';
+
+    if (vtype === 'youtube') {
+      var ym = url.match(/(?:v=|youtu\.be\/)([^&?\s]{11})/);
+      if (ym) embedSrc = 'https://www.youtube.com/embed/' + ym[1] + '?autoplay=1&rel=0&playsinline=1';
+    } else if (vtype === 'vimeo') {
+      var vm = url.match(/vimeo\.com\/(\d+)/);
+      if (vm) embedSrc = 'https://player.vimeo.com/video/' + vm[1] + '?autoplay=1';
+    } else {
+      embedSrc = url;
+    }
+
+    if (!embedSrc) return;
+
+    if (vtype === 'direct') {
+      var vid = document.createElement('video');
+      vid.src       = embedSrc;
+      vid.controls  = true;
+      vid.autoplay  = true;
+      vid.playsInline = true;
+      vid.className = 'ct-reviews__iframe';
+      wrap.innerHTML = '';
+      wrap.appendChild(vid);
+    } else {
+      var iframe = document.createElement('iframe');
+      iframe.src   = embedSrc;
+      iframe.allow = 'autoplay; fullscreen; picture-in-picture';
+      iframe.setAttribute('allowfullscreen', '');
+      iframe.className = 'ct-reviews__iframe';
+      wrap.innerHTML = '';
+      wrap.appendChild(iframe);
+    }
+  });
+
+  /* ── Slider (only when data-slider="true") ── */
+  if (stage.dataset.slider !== 'true') return;
+
+  var GAP     = parseInt(stage.dataset.gap, 10) || 24;
+  var total   = parseInt(stage.dataset.count, 10);
+  var current = 0;
+  var perView = 1;
+
+  function spv() {
+    var w = window.innerWidth;
+    if (w >= 1080) return Math.min(3, total);
+    if (w >= 640)  return Math.min(2, total);
+    return 1;
+  }
+
+  function maxIndex() {
+    return Math.max(0, total - spv());
+  }
+
+  function render(animated) {
+    perView = spv();
+    var stageW = stage.offsetWidth;
+    var cardW  = (stageW - GAP * (perView - 1)) / perView;
+    var max    = maxIndex();
+    if (current > max) current = max;
+
+    var cards  = track.querySelectorAll('.ct-reviews__card');
+    cards.forEach(function (c) {
+      c.style.width      = cardW + 'px';
+      c.style.flexShrink = '0';
+      c.style.minWidth   = '0';
+    });
+
+    track.style.transition = (animated === false)
+      ? 'none'
+      : 'transform 0.48s cubic-bezier(0.4, 0, 0.2, 1)';
+    track.style.transform = 'translateX(-' + (current * (cardW + GAP)) + 'px)';
+
+    buildDots(max);
+    toggleNavState(max);
+  }
+
+  function buildDots(max) {
+    var dotsEl = document.getElementById('ct-rv-dots-{{ section.id }}');
+    if (!dotsEl) return;
+    dotsEl.innerHTML = '';
+    for (var i = 0; i <= max; i++) {
+      var dot = document.createElement('button');
+      dot.className   = 'ct-reviews__dot' + (i === current ? ' is-active' : '');
+      dot.setAttribute('role', 'tab');
+      dot.setAttribute('aria-label', (i + 1) + '번째 슬라이드');
+      dot.setAttribute('aria-selected', i === current ? 'true' : 'false');
+      (function (idx) {
+        dot.addEventListener('click', function () { current = idx; render(true); });
+      }(i));
+      dotsEl.appendChild(dot);
+    }
+  }
+
+  function toggleNavState(max) {
+    var p = document.getElementById('ct-rv-prev-{{ section.id }}');
+    var n = document.getElementById('ct-rv-next-{{ section.id }}');
+    if (p) { p.disabled = current <= 0;   p.setAttribute('aria-disabled', current <= 0); }
+    if (n) { n.disabled = current >= max; n.setAttribute('aria-disabled', current >= max); }
+  }
+
+  var prevBtn = document.getElementById('ct-rv-prev-{{ section.id }}');
+  var nextBtn = document.getElementById('ct-rv-next-{{ section.id }}');
+
+  if (prevBtn) prevBtn.addEventListener('click', function () {
+    if (current > 0) { current--; render(true); }
+  });
+  if (nextBtn) nextBtn.addEventListener('click', function () {
+    if (current < maxIndex()) { current++; render(true); }
+  });
+
+  /* touch swipe */
+  var tx = 0, ty = 0;
+  track.addEventListener('touchstart', function (e) {
+    tx = e.touches[0].clientX;
+    ty = e.touches[0].clientY;
+  }, { passive: true });
+  track.addEventListener('touchend', function (e) {
+    var dx = tx - e.changedTouches[0].clientX;
+    var dy = ty - e.changedTouches[0].clientY;
+    if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy)) return;
+    var max = maxIndex();
+    if (dx > 0 && current < max) { current++; render(true); }
+    else if (dx < 0 && current > 0) { current--; render(true); }
+  }, { passive: true });
+
+  /* keyboard */
+  stage.setAttribute('tabindex', '0');
+  stage.addEventListener('keydown', function (e) {
+    var max = maxIndex();
+    if (e.key === 'ArrowRight' && current < max) { current++; render(true); }
+    if (e.key === 'ArrowLeft'  && current > 0)   { current--; render(true); }
+  });
+
+  var resizeTimer;
+  window.addEventListener('resize', function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function () { render(false); }, 100);
+  });
+
+  render(false);
+}());
+</script>
+
+<script src="{{ 'chalttok-sarang.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "CT · Reviews",
+  "tag": "div",
+  "class": "chalttok-section",
+  "max_blocks": 12,
+  "settings": [
+    {
+      "type": "header",
+      "content": "섹션 레이아웃"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "배경 색상",
+      "default": "#F8F4EE"
+    },
+    {
+      "type": "range",
+      "id": "padding_v",
+      "label": "상하 여백",
+      "min": 48,
+      "max": 200,
+      "step": 8,
+      "unit": "px",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "섹션 최대 너비",
+      "min": 800,
+      "max": 1600,
+      "step": 40,
+      "unit": "px",
+      "default": 1200
+    },
+    {
+      "type": "header",
+      "content": "섹션 텍스트"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "REAL REVIEWS"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "See How Sarang Fits Into Real Routines"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "Description",
+      "default": "Watch real customer review videos and shop Sarang directly on Amazon."
+    },
+    {
+      "type": "header",
+      "content": "텍스트 스타일"
+    },
+    {
+      "type": "select",
+      "id": "heading_font",
+      "label": "헤딩 폰트",
+      "options": [
+        { "value": "default",   "label": "기본 (테마 폰트)" },
+        { "value": "cormorant", "label": "Cormorant (이탤릭 세리프)" },
+        { "value": "dm-sans",   "label": "DM Sans (모던 산세리프)" },
+        { "value": "noto-kr",   "label": "Noto Serif KR (한글 세리프)" },
+        { "value": "ny",        "label": "New York (애플 세리프)" }
+      ],
+      "default": "cormorant"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "헤딩 크기",
+      "min": 24,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 42
+    },
+    {
+      "type": "select",
+      "id": "heading_weight",
+      "label": "헤딩 두께",
+      "options": [
+        { "value": "200", "label": "200 — Thin" },
+        { "value": "300", "label": "300 — Light" },
+        { "value": "400", "label": "400 — Regular" },
+        { "value": "600", "label": "600 — SemiBold" }
+      ],
+      "default": "300"
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_letter_spacing",
+      "label": "Eyebrow 자간 (÷100 = em)",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "default": 18
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow 색상",
+      "default": "#9C8576"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "헤딩 색상",
+      "default": "#2C2420"
+    },
+    {
+      "type": "color",
+      "id": "desc_color",
+      "label": "본문 색상",
+      "default": "#5A4A44"
+    },
+    {
+      "type": "header",
+      "content": "비디오 카드"
+    },
+    {
+      "type": "select",
+      "id": "video_ratio",
+      "label": "비디오 비율",
+      "options": [
+        { "value": "9 / 16", "label": "9:16 (세로형 — 스마트폰 촬영)" },
+        { "value": "3 / 4",  "label": "3:4 (세로 약간)" },
+        { "value": "1 / 1",  "label": "1:1 (정사각)" },
+        { "value": "4 / 3",  "label": "4:3 (가로형)" },
+        { "value": "16 / 9", "label": "16:9 (와이드)" }
+      ],
+      "default": "9 / 16",
+      "info": "모든 비디오에 동일하게 적용됩니다."
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "label": "카드 모서리 둥글기",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Amazon CTA"
+    },
+    {
+      "type": "url",
+      "id": "amazon_url",
+      "label": "Amazon 판매 페이지 URL",
+      "info": "비워두면 CTA 영역 전체가 숨겨집니다."
+    },
+    {
+      "type": "text",
+      "id": "cta_prefix",
+      "label": "CTA 앞 텍스트",
+      "default": "Buy on"
+    },
+    {
+      "type": "image_picker",
+      "id": "amazon_logo",
+      "label": "Amazon 로고 이미지 (선택)",
+      "info": "업로드하지 않으면 내장 SVG 로고가 표시됩니다."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "video",
+      "name": "리뷰 비디오",
+      "settings": [
+        {
+          "type": "text",
+          "id": "video_url",
+          "label": "비디오 URL",
+          "info": "YouTube, Vimeo, 또는 MP4 직접 링크를 붙여넣으세요."
+        },
+        {
+          "type": "image_picker",
+          "id": "thumbnail",
+          "label": "썸네일 이미지",
+          "info": "비디오 재생 전 표시되는 커버 이미지입니다."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "제목 (선택)"
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "짧은 설명 (선택)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "CT · Reviews",
+      "blocks": [
+        { "type": "video", "settings": { "title": "Verified Purchase", "caption": "4 weeks of consistent use" } },
+        { "type": "video", "settings": { "title": "Sensitive Skin", "caption": "Finally a serum that works" } },
+        { "type": "video", "settings": { "title": "Morning Routine", "caption": "My new everyday essential" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

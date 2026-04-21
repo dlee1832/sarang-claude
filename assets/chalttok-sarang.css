@@ -683,6 +683,262 @@
   border-bottom: 1px solid transparent;
 }
 
+/* ── Reviews ── */
+.ct-reviews__inner {
+  margin-inline: auto;
+  padding-inline: 32px;
+}
+
+/* header */
+.ct-reviews__header {
+  text-align: center;
+  max-width: 560px;
+  margin-inline: auto;
+  margin-bottom: 56px;
+}
+.ct-reviews__eyebrow {
+  font-size: 11px;
+  font-weight: 400;
+  text-transform: uppercase;
+  margin: 0 0 16px;
+}
+.ct-reviews__heading {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: 40px;
+  font-weight: 300;
+  line-height: 1.2;
+  color: var(--ct-ink);
+  margin: 0 0 20px;
+}
+.ct-reviews__desc {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--ct-ink-mid);
+  margin: 0;
+}
+
+/* stage */
+.ct-reviews__stage {
+  position: relative;
+}
+
+/* grid mode */
+.ct-reviews__stage--grid .ct-reviews__track {
+  display: grid;
+  gap: 24px;
+}
+
+/* slider mode */
+.ct-reviews__stage--slider {
+  overflow: hidden;
+  padding-bottom: 8px;
+}
+.ct-reviews__stage--slider .ct-reviews__track {
+  display: flex;
+  gap: 24px;
+  will-change: transform;
+}
+
+/* card */
+.ct-reviews__card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.ct-reviews__card-text {
+  padding-inline: 2px;
+}
+.ct-reviews__card-title {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--ct-ink);
+  margin: 0 0 4px;
+  line-height: 1.4;
+}
+.ct-reviews__card-caption {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--ct-ink-light);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* thumbnail */
+.ct-reviews__thumb-wrap {
+  position: relative;
+  overflow: hidden;
+  background: var(--ct-beige);
+  display: block;
+  cursor: pointer;
+}
+.ct-reviews__thumb,
+.ct-reviews__thumb--placeholder {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.2, 0, 0.2, 1);
+}
+.ct-reviews__card:hover .ct-reviews__thumb {
+  transform: scale(1.03);
+}
+.ct-reviews__iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+/* play button */
+.ct-reviews__play {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: opacity 0.3s ease;
+}
+.ct-reviews__play-ring {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(248, 244, 238, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 24px rgba(44, 36, 32, 0.18);
+  transition: transform 0.3s cubic-bezier(0.2, 0, 0.2, 1),
+              box-shadow 0.3s ease;
+  flex-shrink: 0;
+}
+.ct-reviews__play-icon {
+  display: block;
+  width: 48px;
+  height: 48px;
+}
+.ct-reviews__card:hover .ct-reviews__play-ring {
+  transform: scale(1.08);
+  box-shadow: 0 6px 32px rgba(44, 36, 32, 0.24);
+}
+.ct-reviews__play:focus-visible .ct-reviews__play-ring {
+  outline: 2px solid var(--ct-ink);
+  outline-offset: 3px;
+}
+
+/* slider nav buttons */
+.ct-reviews__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(44, 36, 32, 0.15);
+  background: rgba(248, 244, 238, 0.92);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: background 0.25s ease, opacity 0.25s ease, transform 0.25s ease;
+  padding: 0;
+}
+.ct-reviews__nav svg { width: 20px; height: 20px; display: block; }
+.ct-reviews__nav--prev { left: -22px; }
+.ct-reviews__nav--next { right: -22px; }
+.ct-reviews__nav:hover { background: rgba(248, 244, 238, 1); transform: translateY(-50%) scale(1.06); }
+.ct-reviews__nav:disabled { opacity: 0.3; cursor: default; transform: translateY(-50%); }
+.ct-reviews__nav:focus-visible { outline: 2px solid var(--ct-ink); outline-offset: 2px; }
+
+/* dots */
+.ct-reviews__dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 28px;
+}
+.ct-reviews__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(44, 36, 32, 0.18);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+.ct-reviews__dot.is-active {
+  background: var(--ct-ink);
+  transform: scale(1.4);
+}
+.ct-reviews__dot:focus-visible { outline: 2px solid var(--ct-ink); outline-offset: 3px; }
+
+/* Amazon CTA */
+.ct-reviews__cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 64px;
+  padding-top: 48px;
+  border-top: 1px solid rgba(44, 36, 32, 0.08);
+}
+.ct-reviews__cta-prefix {
+  font-size: 11px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--ct-taupe);
+  margin: 0;
+}
+.ct-reviews__amazon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 32px;
+  border-radius: 4px;
+  border: 1px solid rgba(44, 36, 32, 0.1);
+  background: rgba(248, 244, 238, 0);
+  text-decoration: none;
+  transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+}
+.ct-reviews__amazon-btn:hover {
+  background: rgba(248, 244, 238, 1);
+  border-color: rgba(44, 36, 32, 0.18);
+  transform: translateY(-2px);
+}
+.ct-reviews__amazon-btn:focus-visible {
+  outline: 2px solid var(--ct-ink);
+  outline-offset: 3px;
+}
+.ct-reviews__amazon-svg { display: block; width: 130px; height: auto; }
+.ct-reviews__amazon-img { display: block; width: auto; height: 36px; }
+
+/* mobile */
+@media (max-width: 767px) {
+  .ct-reviews__inner { padding-inline: 20px; }
+  .ct-reviews__header { margin-bottom: 40px; }
+  .ct-reviews__heading { font-size: 28px; }
+  .ct-reviews__nav--prev { left: -12px; }
+  .ct-reviews__nav--next { right: -12px; }
+  .ct-reviews__nav { width: 36px; height: 36px; }
+  .ct-reviews__cta { margin-top: 48px; padding-top: 36px; }
+}
+
 /* ── Brand Footer ── */
 .ct-footer {
   background: var(--ct-ink);
