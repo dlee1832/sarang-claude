@@ -896,6 +896,8 @@
         "section_title_alignment": "left",
         "section_title_size": 21,
         "section_title_spacing": 20,
+        "title_font": "cormorant",
+        "font_weight_title": "700",
         "image_height": "medium",
         "desktop_image_width": "medium",
         "image_layout": "alternate-left",
