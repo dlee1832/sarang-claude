@@ -446,17 +446,6 @@
         "accessibility_info": "Slideshow about our brand"
       }
     },
-    "custom_liquid_UhVq6M": {
-      "type": "custom-liquid",
-      "disabled": true,
-      "name": "t:sections.custom-liquid.presets.name",
-      "settings": {
-        "custom_liquid": "<div style=\"text-align:center; margin: 24px 0;\">\n  <p style=\"\n    margin:0 0 0px 0;\n    font-size:25px;\n    letter-spacing:0.02em;\n    color:#000;\nline-height:0.2;\nfont-weight:1000;\nfont-family: ITC Officina Sans Bold;\n  \">\n    Buy on \n  </p>\n  <a href=\"https://www.amazon.com/dp/B0GV9RKMKP\"\n     target=\"_blank\"\n     aria-label=\"Amazon\"\n     style=\"\n       display:inline-flex;\n       align-items:center;\n       justify-content:center;\n       width:180px;\n       height:64px;\n       border-radius:999px;\n       overflow:hidden;\n       text-decoration:none;\n       padding:0;\n     \">\n    <img\n      src=\"https://cdn.shopify.com/s/files/1/0758/7158/4453/files/Amazon-Logo-PNG-Free-Download.png?v=1776166249\"\n      alt=\"Amazon\"\n      style=\"\n        max-width:60%;\n        max-height:60%;\n        width:auto;\n        height:auto;\n        display:block;\n        object-fit:contain;\n      \">\n  </a>\n</div>",
-        "color_scheme": "",
-        "padding_top": 0,
-        "padding_bottom": 0
-      }
-    },
     "rich_text_tnPcKU": {
       "type": "rich-text",
       "blocks": {
@@ -917,47 +906,72 @@
         "padding_bottom": 36
       }
     },
-    "177680590862713d0d": {
-      "type": "_blocks",
-      "blocks": {
-        "ai_gen_block_772b95d_8kELgk": {
-          "type": "ai_gen_block_772b95d",
-          "settings": {
-            "eyebrow": "VISIBLE RESULTS",
-            "heading": "Gentle Changes, Visible Comfort",
-            "description": "<p>Skin appears smoother, more hydrated, and visibly more comfortable after use.</p>",
-            "before_image": "shopify://shop_images/sarang-theme-img-12-before.png",
-            "after_image": "shopify://shop_images/sarang-theme-img-12-after.png",
-            "image_aspect_ratio": "4 / 3",
-            "image_border_radius": 0,
-            "show_labels": true,
-            "before_label": "Before",
-            "after_label": "After",
-            "label_bg_color": "#000000",
-            "label_text_color": "#ffffff",
-            "divider_color": "#ffffff",
-            "handle_color": "#ffffff",
-            "handle_icon_color": "#000000",
-            "heading_font": "cormorant_i4",
-            "heading_size": 48,
-            "heading_color": "#000000",
-            "body_font": "cormorant_i4",
-            "eyebrow_size": 12,
-            "eyebrow_color": "#999999",
-            "description_size": 16,
-            "description_color": "#666666",
-            "desktop_width_percent": 100,
-            "grid_gap": 60,
-            "content_padding": 40,
-            "mobile_content_order": "1"
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "ai_gen_block_772b95d_8kELgk"
-      ],
-      "settings": {}
+    "chalttok_before_after_pcgHbP": {
+      "type": "chalttok-before-after",
+      "name": "CT · Before / After",
+      "settings": {
+        "layout_direction": "image-left",
+        "text_align": "left",
+        "section_max_width": 1200,
+        "content_gap": 72,
+        "padding_v": 96,
+        "bg_color": "#F8F4EE",
+        "eyebrow_text": "Clinically Tested",
+        "heading": "Visible change.\nIn 4 weeks.",
+        "description": "<p>Formulated with Niacinamide and lightweight texture-supporting ingredients to help improve moisture retention and support a more even-looking skin tone.</p>",
+        "note_1": "94% reported improved skin texture",
+        "note_2": "88% saw a visible reduction in redness",
+        "before_image": "shopify://shop_images/sarang-theme-img-12-before.png",
+        "after_image": "shopify://shop_images/sarang-theme-img-12-after.png",
+        "before_label": "Before",
+        "after_label": "After",
+        "img_aspect_ratio": "4 / 3",
+        "img_radius": 4,
+        "handle_color": "#F8F4EE",
+        "eyebrow_font": "dm-sans",
+        "eyebrow_size": 11,
+        "eyebrow_size_mobile": 10,
+        "eyebrow_weight": "400",
+        "eyebrow_line_height": 140,
+        "eyebrow_letter_spacing": 18,
+        "eyebrow_color": "#9C8576",
+        "heading_font": "cormorant",
+        "heading_size": 52,
+        "heading_size_mobile": 36,
+        "heading_weight": "400",
+        "heading_line_height": 115,
+        "heading_letter_spacing": -1,
+        "heading_color": "#2C2420",
+        "desc_font": "default",
+        "desc_size": 15,
+        "desc_size_mobile": 15,
+        "desc_weight": "400",
+        "desc_line_height": 175,
+        "desc_letter_spacing": 1,
+        "desc_color": "#5A4A44",
+        "label_size": 11,
+        "label_weight": "400",
+        "label_line_height": 120,
+        "label_letter_spacing": 12,
+        "label_color": "#F8F4EE",
+        "note_font": "default",
+        "note_size": 13,
+        "note_weight": "300",
+        "note_line_height": 155,
+        "note_letter_spacing": 2,
+        "note_color": "#9C8576"
+      }
+    },
+    "custom_liquid_UhVq6M": {
+      "type": "custom-liquid",
+      "disabled": true,
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<div style=\"text-align:center; margin: 24px 0;\">\n  <p style=\"\n    margin:0 0 0px 0;\n    font-size:25px;\n    letter-spacing:0.02em;\n    color:#000;\nline-height:0.2;\nfont-weight:1000;\nfont-family: ITC Officina Sans Bold;\n  \">\n    Buy on \n  </p>\n  <a href=\"https://www.amazon.com/dp/B0GV9RKMKP\"\n     target=\"_blank\"\n     aria-label=\"Amazon\"\n     style=\"\n       display:inline-flex;\n       align-items:center;\n       justify-content:center;\n       width:180px;\n       height:64px;\n       border-radius:999px;\n       overflow:hidden;\n       text-decoration:none;\n       padding:0;\n     \">\n    <img\n      src=\"https://cdn.shopify.com/s/files/1/0758/7158/4453/files/Amazon-Logo-PNG-Free-Download.png?v=1776166249\"\n      alt=\"Amazon\"\n      style=\"\n        max-width:60%;\n        max-height:60%;\n        width:auto;\n        height:auto;\n        display:block;\n        object-fit:contain;\n      \">\n  </a>\n</div>",
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
     },
     "chalttok_ingredients_JN9bRr": {
       "type": "chalttok-ingredients",
@@ -1030,7 +1044,6 @@
     "chalttok_manifesto_iQMJLf",
     "chalttok_split_wtKLDj",
     "slideshow_nWeGFc",
-    "custom_liquid_UhVq6M",
     "rich_text_tnPcKU",
     "featured_product_QNJXqL",
     "rich_text_a9hzrL",
@@ -1041,7 +1054,8 @@
     "rich_text_7DJ8Uq",
     "chalttok_meaning_cJyCeQ",
     "multirow_UNRxBc",
-    "177680590862713d0d",
+    "chalttok_before_after_pcgHbP",
+    "custom_liquid_UhVq6M",
     "chalttok_ingredients_JN9bRr",
     "chalttok_future_EC8wf7"
   ]
