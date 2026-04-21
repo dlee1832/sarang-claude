@@ -56,6 +56,11 @@
     aspect-ratio: {{ section.settings.video_ratio }};
   }
 
+  #shopify-section-{{ section.id }} .ct-reviews__thumb-wrap--yt {
+    aspect-ratio: 16 / 9;
+    border-radius: {{ section.settings.card_radius }}px;
+  }
+
   #shopify-section-{{ section.id }} .ct-reviews__card-title {
     color: {{ section.settings.heading_color }};
   }
@@ -133,42 +138,46 @@
             data-video="{{ _vurl }}"
             data-vtype="{{ _vtype }}"
           >
-            <div class="ct-reviews__thumb-wrap">
-
-              {%- if block.settings.thumbnail != blank -%}
-                {{
-                  block.settings.thumbnail
-                  | image_url: width: 800
-                  | image_tag:
-                    class: 'ct-reviews__thumb',
-                    loading: 'lazy',
-                    alt: block.settings.title | default: 'Customer review'
-                }}
-              {%- elsif _vtype == 'youtube' and _yt_id != blank -%}
-                <img
-                  src="https://img.youtube.com/vi/{{ _yt_id }}/hqdefault.jpg"
-                  class="ct-reviews__thumb ct-reviews__thumb--yt"
+            {%- if _vtype == 'youtube' and _yt_id != blank -%}
+              <div class="ct-reviews__thumb-wrap ct-reviews__thumb-wrap--yt">
+                <iframe
+                  class="ct-reviews__iframe"
+                  src="https://www.youtube.com/embed/{{ _yt_id }}"
+                  title="{{ block.settings.title | default: 'Review video' | escape }}"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen
                   loading="lazy"
-                  alt="{{ block.settings.title | default: 'YouTube review video' | escape }}"
-                >
-              {%- else -%}
-                {{ 'lifestyle-2' | placeholder_svg_tag: 'ct-reviews__thumb ct-reviews__thumb--placeholder placeholder-svg' }}
-              {%- endif -%}
+                ></iframe>
+              </div>
+            {%- else -%}
+              <div class="ct-reviews__thumb-wrap">
+                {%- if block.settings.thumbnail != blank -%}
+                  {{
+                    block.settings.thumbnail
+                    | image_url: width: 800
+                    | image_tag:
+                      class: 'ct-reviews__thumb',
+                      loading: 'lazy',
+                      alt: block.settings.title | default: 'Customer review'
+                  }}
+                {%- else -%}
+                  {{ 'lifestyle-2' | placeholder_svg_tag: 'ct-reviews__thumb ct-reviews__thumb--placeholder placeholder-svg' }}
+                {%- endif -%}
 
-              {%- if _vurl != blank -%}
-                <button
-                  class="ct-reviews__play"
-                  aria-label="{{ block.settings.title | default: 'Play review video' | escape }}"
-                >
-                  <span class="ct-reviews__play-ring">
-                    <svg class="ct-reviews__play-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                      <path d="M19 15L35 24L19 33V15Z" fill="#2C2420"/>
-                    </svg>
-                  </span>
-                </button>
-              {%- endif -%}
-
-            </div>
+                {%- if _vurl != blank -%}
+                  <button
+                    class="ct-reviews__play"
+                    aria-label="{{ block.settings.title | default: 'Play review video' | escape }}"
+                  >
+                    <span class="ct-reviews__play-ring">
+                      <svg class="ct-reviews__play-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M19 15L35 24L19 33V15Z" fill="#2C2420"/>
+                      </svg>
+                    </span>
+                  </button>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
 
             {%- if block.settings.title != blank or block.settings.caption != blank -%}
               <div class="ct-reviews__card-text">
