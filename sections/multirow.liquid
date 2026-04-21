@@ -20,6 +20,16 @@
   }
   .section-{{ section.id }}-title p {
     font-size: {{ section.settings.section_title_size }}px;
+    font-weight: {{ section.settings.font_weight_title }};
+    {%- if section.settings.title_font == 'cormorant' -%}
+    font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic;
+    {%- elsif section.settings.title_font == 'dm-sans' -%}
+    font-family: 'DM Sans', 'Helvetica Neue', sans-serif; font-style: normal;
+    {%- elsif section.settings.title_font == 'noto-kr' -%}
+    font-family: 'Noto Serif KR', 'Nanum Myeongjo', serif; font-style: normal;
+    {%- elsif section.settings.title_font == 'ny' -%}
+    font-family: 'New York', ui-serif, Georgia, serif; font-style: normal;
+    {%- endif -%}
   }
   {%- endif -%}
 
@@ -221,6 +231,33 @@
       "step": 4,
       "unit": "px",
       "default": 32
+    },
+    {
+      "type": "select",
+      "id": "title_font",
+      "label": "타이틀 폰트",
+      "options": [
+        { "value": "default",   "label": "기본 (테마 폰트)" },
+        { "value": "cormorant", "label": "Cormorant (이탤릭 세리프)" },
+        { "value": "dm-sans",   "label": "DM Sans (모던 산세리프)" },
+        { "value": "noto-kr",   "label": "Noto Serif KR (한글 세리프)" },
+        { "value": "ny",        "label": "New York (애플 세리프)" }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "select",
+      "id": "font_weight_title",
+      "label": "타이틀 폰트 두께",
+      "options": [
+        { "value": "200", "label": "200 — Thin" },
+        { "value": "300", "label": "300 — Light" },
+        { "value": "400", "label": "400 — Regular" },
+        { "value": "500", "label": "500 — Medium" },
+        { "value": "600", "label": "600 — SemiBold" },
+        { "value": "700", "label": "700 — Bold" }
+      ],
+      "default": "400"
     },
     {
       "type": "header",
