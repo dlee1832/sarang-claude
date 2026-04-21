@@ -13,26 +13,6 @@
   "sections": {
     "chalttok_footer_7jKLdr": {
       "type": "chalttok-footer",
-      "blocks": {
-        "link_yKw4kA": {
-          "type": "link",
-          "settings": {
-            "label": "Privacy Policy",
-            "url": ""
-          }
-        },
-        "link_BfxbYe": {
-          "type": "link",
-          "settings": {
-            "label": "Contact",
-            "url": ""
-          }
-        }
-      },
-      "block_order": [
-        "link_yKw4kA",
-        "link_BfxbYe"
-      ],
       "name": "CT · Brand Footer",
       "settings": {
         "bg_color": "#2c2420",
