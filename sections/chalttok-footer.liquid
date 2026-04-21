@@ -1,19 +1,53 @@
 {{ 'chalttok-sarang.css' | asset_url | stylesheet_tag }}
 
+{%- style -%}
+  #shopify-section-{{ section.id }} .ct-footer {
+    background: {{ section.settings.bg_color }};
+  }
+{%- endstyle -%}
+
 <footer class="ct-footer" role="contentinfo">
 
   <div class="ct-footer__left">
     <a href="{{ routes.root_url }}" class="ct-footer__logo">
       {{ section.settings.logo_text }}
     </a>
-    {% if section.settings.tagline != blank %}
+    {%- if section.settings.tagline != blank -%}
       <p class="ct-footer__tagline">{{ section.settings.tagline }}</p>
-    {% endif %}
+    {%- endif -%}
+
+    <div class="ct-footer__social">
+      {%- if section.settings.instagram_url != blank -%}
+        <a
+          href="{{ section.settings.instagram_url }}"
+          class="ct-footer__social-link"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Instagram"
+        >
+          <svg class="ct-footer__social-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="2" y="2" width="20" height="20" rx="5.5" stroke="currentColor" stroke-width="1.5"/>
+            <circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="1.5"/>
+            <circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>
+          </svg>
+        </a>
+      {%- endif -%}
+
+      {%- if section.settings.email != blank -%}
+        <a
+          href="mailto:{{ section.settings.email }}"
+          class="ct-footer__email-link"
+          aria-label="Email us"
+        >
+          {{ section.settings.email }}
+        </a>
+      {%- endif -%}
+    </div>
   </div>
 
   <div class="ct-footer__links">
-    {% for block in section.blocks %}
-      {% if block.type == 'link' %}
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'link' -%}
         <a
           href="{{ block.settings.url }}"
           class="ct-footer__link"
@@ -21,8 +55,8 @@
         >
           {{ block.settings.label }}
         </a>
-      {% endif %}
-    {% endfor %}
+      {%- endif -%}
+    {%- endfor -%}
     <p class="ct-footer__copy">{{ section.settings.copyright }}</p>
   </div>
 
@@ -35,6 +69,20 @@
   "class": "chalttok-section",
   "max_blocks": 6,
   "settings": [
+    {
+      "type": "header",
+      "content": "배경"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "배경 색상",
+      "default": "#2C2420"
+    },
+    {
+      "type": "header",
+      "content": "브랜드 정보"
+    },
     {
       "type": "text",
       "id": "logo_text",
@@ -52,6 +100,22 @@
       "id": "copyright",
       "label": "저작권 텍스트",
       "default": "© 2025 CHALTTOK"
+    },
+    {
+      "type": "header",
+      "content": "소셜 & 연락처"
+    },
+    {
+      "type": "url",
+      "id": "instagram_url",
+      "label": "인스타그램 링크",
+      "info": "예: https://www.instagram.com/chalttok"
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "이메일 주소",
+      "default": "support@chalttok.com"
     }
   ],
   "blocks": [

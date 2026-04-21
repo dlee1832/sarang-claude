@@ -734,6 +734,33 @@
   color: rgba(248, 244, 238, 0.18);
   margin-top: 8px;
 }
+.ct-footer__social {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 24px;
+}
+.ct-footer__social-link {
+  display: flex;
+  align-items: center;
+  color: rgba(248, 244, 238, 0.4);
+  transition: color 0.3s ease;
+}
+.ct-footer__social-link:hover { color: rgba(248, 244, 238, 0.85); }
+.ct-footer__social-icon {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+.ct-footer__email-link {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: rgba(248, 244, 238, 0.35);
+  text-decoration: none;
+  text-transform: lowercase;
+  transition: color 0.3s ease;
+}
+.ct-footer__email-link:hover { color: rgba(248, 244, 238, 0.7); }
 
 /* ── Mobile ── */
 @media (max-width: 768px) {
