@@ -111,8 +111,18 @@
         {%- for block in section.blocks -%}
           {%- assign _vurl  = block.settings.video_url | strip -%}
           {%- assign _vtype = 'direct' -%}
+          {%- assign _yt_id = '' -%}
           {%- if _vurl contains 'youtube.com' or _vurl contains 'youtu.be' -%}
             {%- assign _vtype = 'youtube' -%}
+            {%- if _vurl contains 'youtu.be/' -%}
+              {%- assign _yt_id = _vurl | split: 'youtu.be/' | last | split: '?' | first | split: '&' | first -%}
+            {%- elsif _vurl contains 'shorts/' -%}
+              {%- assign _yt_id = _vurl | split: 'shorts/' | last | split: '?' | first | split: '&' | first -%}
+            {%- elsif _vurl contains 'embed/' -%}
+              {%- assign _yt_id = _vurl | split: 'embed/' | last | split: '?' | first -%}
+            {%- elsif _vurl contains 'v=' -%}
+              {%- assign _yt_id = _vurl | split: 'v=' | last | split: '&' | first | split: '#' | first -%}
+            {%- endif -%}
           {%- elsif _vurl contains 'vimeo.com' -%}
             {%- assign _vtype = 'vimeo' -%}
           {%- endif -%}
@@ -134,6 +144,13 @@
                     loading: 'lazy',
                     alt: block.settings.title | default: 'Customer review'
                 }}
+              {%- elsif _vtype == 'youtube' and _yt_id != blank -%}
+                <img
+                  src="https://img.youtube.com/vi/{{ _yt_id }}/hqdefault.jpg"
+                  class="ct-reviews__thumb ct-reviews__thumb--yt"
+                  loading="lazy"
+                  alt="{{ block.settings.title | default: 'YouTube review video' | escape }}"
+                >
               {%- else -%}
                 {{ 'lifestyle-2' | placeholder_svg_tag: 'ct-reviews__thumb ct-reviews__thumb--placeholder placeholder-svg' }}
               {%- endif -%}
@@ -212,7 +229,7 @@
                 loading: 'lazy'
             }}
           {%- else -%}
-            <svg class="ct-reviews__amazon-svg" viewBox="0 0 136 46" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Amazon">
+            <svg class="ct-reviews__amazon-svg" viewBox="0 0 136 58" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Amazon">
               <title>Amazon</title>
               <text x="2" y="30"
                 font-family="'Arial Black','Helvetica Neue',Arial,sans-serif"
@@ -220,8 +237,8 @@
                 font-weight="900"
                 fill="#232F3E"
                 letter-spacing="-1">amazon</text>
-              <path d="M10 39 Q68 54 126 39" stroke="#FF9900" stroke-width="4" fill="none" stroke-linecap="round"/>
-              <polygon points="123,34 131,39 122,43" fill="#FF9900"/>
+              <path d="M10 40 Q68 56 126 40" stroke="#FF9900" stroke-width="4" fill="none" stroke-linecap="round"/>
+              <polygon points="122,35 131,40 122,45" fill="#FF9900"/>
             </svg>
           {%- endif -%}
         </a>
