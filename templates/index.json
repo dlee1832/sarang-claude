@@ -13,6 +13,7 @@
       "type": "chalttok-overload",
       "name": "CT · Overwhelm",
       "settings": {
+        "image": "shopify://shop_images/sarang-theme-img-06v2.png",
         "text_bg_enabled": false,
         "text_bg_style": "frosted",
         "text_bg_opacity": 10,
